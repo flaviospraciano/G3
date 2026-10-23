@@ -1,6 +1,6 @@
 // Service worker do G3: funcionamento offline e notificações.
-const CACHE = "g3-v1";
-const ARQUIVOS = ["./","index.html","config.js","g3-app-v1.webmanifest","g3-logo.png","g3-icon-192.png","g3-icon-512.png","g3-maskable-512.png","g3-apple-touch.png"];
+const CACHE = "g3-v3";
+const ARQUIVOS = ["./","index.html","config.js","g3-app-v1.webmanifest","g3-logo.png","g3-logo-flat.png","g3-icon-192.png","g3-icon-512.png","g3-maskable-512.png","g3-apple-touch.png"];
 try {
   importScripts("config.js");
   if (self.G3_CONFIG && self.G3_CONFIG.vapidKey && !/COLE/.test(self.G3_CONFIG.firebase.apiKey)) {
@@ -24,7 +24,7 @@ self.addEventListener("fetch", e => {
     return;
   }
   e.respondWith(caches.match(req, { ignoreSearch: true }).then(r => r || fetch(req).then(resp => {
-    if (resp.ok && (u.origin === location.origin || u.hostname === "www.gstatic.com")) { const c = resp.clone(); caches.open(CACHE).then(x => x.put(req, c)); }
+    if (resp.ok && (u.origin === location.origin || u.hostname === "www.gstatic.com" || u.hostname === "cdnjs.cloudflare.com")) { const c = resp.clone(); caches.open(CACHE).then(x => x.put(req, c)); }
     return resp;
   })));
 });
