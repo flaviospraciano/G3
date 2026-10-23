@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>G3 Formatura</title>
+<meta name="description" content="G3 Formatura: agenda, planilhas das escolas e faculdades, notas e missões da equipe. Produzido por Flávio S. Praciano.">
+<meta name="theme-color" content="#09090A">
+<meta name="g3-version" content="1.0.0">
+<link rel="manifest" href="g3-app-v1.webmanifest">
+<link rel="icon" type="image/png" href="g3-icon-192.png">
+<link rel="apple-touch-icon" href="g3-apple-touch.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="G3">
+<style>
+:root{--bg:#09090A;--sf:#141416;--sf2:#1C1C20;--sf3:#25252A;--line:#2C2C31;--ink:#F4F1E8;--soft:#A8A397;--faint:#76726A;--gold:#D9B04C;--gold2:#F2D27A;--goldd:#9C7A25;
+--red:#E5484D;--reds:#3A1618;--org:#F2994A;--orgs:#3B2513;--grn:#2EB872;--grns:#12301F;--blue:#5B8CF6;--r:16px;color-scheme:dark;
+--disp:Georgia,"Times New Roman",serif;--body:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 15px/1.45 var(--body);min-height:100vh;overscroll-behavior-y:none}
+button,input,select,textarea{font:inherit;color:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.hidden{display:none!important}
+.app{max-width:760px;margin:0 auto;padding:0 14px calc(90px + env(safe-area-inset-bottom,0px))}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top,0px)) 14px 10px;margin:0 -14px;background:rgba(9,9,10,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top h1{font:700 1.08rem var(--body);margin:0;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.back{background:var(--sf2);border:1px solid var(--line);width:38px;height:38px;border-radius:12px;font-size:1.2rem;flex:none}
+.ava{width:34px;height:34px;border-radius:10px;object-fit:cover;background:var(--sf3);flex:none;border:1px solid var(--line)}
+.ava.lg{width:72px;height:72px;border-radius:18px}.ava.xl{width:180px;height:180px;border-radius:24px}
+.logo{width:40px;height:40px;flex:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;padding:12px 16px;font-weight:700;background:linear-gradient(180deg,var(--gold2),var(--gold));color:#1A1405}
+.btn.ghost{background:var(--sf2);color:var(--ink);border:1px solid var(--line)}.btn.red{background:var(--red);color:#fff}
+.btn.sm{padding:8px 12px;font-size:.88rem;border-radius:11px}.btn.full{width:100%}.btn:disabled{opacity:.45}
+.link{background:none;border:0;color:var(--gold2);font-weight:700;padding:6px}
+.card{background:var(--sf);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+.lbl{font-size:.74rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin:20px 0 8px;display:flex;align-items:center;gap:8px}
+.row{display:flex;align-items:center;gap:10px}.grow{flex:1;min-width:0}.muted{color:var(--soft)}.small{font-size:.88rem}.tiny{font-size:.76rem}
+.fld{display:block;margin:10px 0}.fld span{display:block;font-size:.8rem;font-weight:700;color:var(--soft);margin-bottom:5px}
+.fld input,.fld select,.fld textarea{width:100%;background:var(--sf2);border:1px solid var(--line);border-radius:12px;padding:11px 12px;outline:none}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--gold)}
+.fld textarea{min-height:90px;resize:vertical}.cnt{font-size:.74rem;color:var(--faint);text-align:right;margin-top:3px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}.seg button{border:1px solid var(--line);background:var(--sf2);border-radius:10px;padding:7px 11px;font-weight:700;font-size:.86rem}
+.seg button[aria-pressed="true"]{border-color:var(--gold);background:rgba(217,176,76,.15);color:var(--gold2)}
+/* status */
+.st{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 10px;font-weight:800;font-size:.76rem;white-space:nowrap}
+.st.r{background:var(--reds);color:#FF8A8D}.st.o{background:var(--orgs);color:#FFB777}.st.g{background:var(--grns);color:#5EE09A}.st.n{background:var(--sf3);color:var(--soft)}
+.st::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+/* home */
+.hero{margin-top:14px;border-radius:22px;padding:18px;background:radial-gradient(420px 220px at 100% 0%,rgba(242,210,122,.22),transparent 70%),linear-gradient(160deg,#17150F,#0B0B0C);border:1px solid #3A3220}
+.hero h2{font:700 1.5rem/1.15 var(--disp);margin:6px 0 0}.hero .q{margin:14px 0 0;font:italic 1.02rem/1.45 var(--disp);color:#EDE3C4}.hero .a{font-size:.82rem;color:var(--gold);margin-top:6px;font-weight:700}
+.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.mi{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;background:var(--sf);border:1px solid var(--line);border-radius:18px;padding:14px;min-height:104px;position:relative}
+.mi .e{font-size:1.5rem}.mi b{font-size:.98rem}.mi span{font-size:.78rem;color:var(--soft)}
+.mi .bd{position:absolute;top:10px;right:10px;background:var(--red);color:#fff;border-radius:999px;font-size:.72rem;font-weight:800;padding:1px 7px}
+.task{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}.task:last-child{border-bottom:0}
+.task .ic{font-size:1.15rem;width:24px;text-align:center}
+.empty{color:var(--faint);font-size:.88rem;padding:6px 0}
+/* listas */
+.item{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--sf);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:8px}
+.item .e{font-size:1.35rem;width:34px;height:34px;border-radius:10px;background:var(--sf2);display:grid;place-items:center;flex:none}
+.item b{display:block}.item .chev{color:var(--faint);font-size:1.2rem}
+.crumbs{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:.84rem;margin:12px 0 4px}.crumbs button{background:none;border:0;color:var(--gold2);padding:2px 4px;font-weight:700}
+.fab{position:fixed;right:18px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:30;width:56px;height:56px;border-radius:18px;border:0;font-size:1.6rem;background:linear-gradient(180deg,var(--gold2),var(--gold));color:#1A1405;box-shadow:0 10px 24px rgba(0,0,0,.5)}
+/* navegação */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:25;background:rgba(14,14,16,.97);border-top:1px solid var(--line);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))}
+.nav .in{max-width:760px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:2px}
+.nav button{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:.68rem;font-weight:700;color:var(--faint);padding:4px 0;position:relative}
+.nav button .i{font-size:1.25rem}.nav button[aria-current="true"]{color:var(--gold2)}
+.nav .bd{position:absolute;top:0;right:22%;background:var(--red);color:#fff;border-radius:99px;font-size:.62rem;padding:0 5px}
+/* folha (modal) */
+.sheet{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.66);display:flex;align-items:flex-end;justify-content:center}
+.sheet .in{background:var(--sf);border:1px solid var(--line);width:100%;max-width:640px;max-height:90vh;overflow:auto;border-radius:22px 22px 0 0;padding:16px 16px calc(20px + env(safe-area-inset-bottom,0px));animation:up .2s ease-out}
+@keyframes up{from{transform:translateY(30px);opacity:.5}}
+.grab{width:42px;height:5px;border-radius:9px;background:var(--line);margin:0 auto 12px}.sheet h2{font:700 1.2rem var(--body);margin:0 0 6px}
+.btns{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+/* agenda */
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.cal .h{font-size:.7rem;color:var(--faint);text-align:center;font-weight:800}
+.cal button{aspect-ratio:1;border:1px solid transparent;background:var(--sf);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-weight:700;font-size:.9rem;padding:0}
+.cal button.out{opacity:.3}.cal button.td{border-color:var(--gold)}.cal button.sel{background:var(--gold);color:#1A1405}
+.cal .dots{display:flex;gap:2px;height:5px}.cal .dots i{width:5px;height:5px;border-radius:50%;background:var(--gold2)}.cal button.sel .dots i{background:#1A1405}
+.ev{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:var(--sf);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+.ev .t{font-weight:800;font-size:.86rem;color:var(--gold2);min-width:46px}
+/* planilha */
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}.sum div:last-child{grid-column:1/-1;display:flex;align-items:center;gap:10px;flex-wrap:wrap}.sum div:last-child b{display:flex;gap:6px}
+.sum div{background:var(--sf);border:1px solid var(--line);border-radius:12px;padding:8px 10px}.sum b{display:block;font-size:1.05rem}.sum span{font-size:.72rem;color:var(--soft)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.tools input{flex:1;min-width:140px;background:var(--sf2);border:1px solid var(--line);border-radius:12px;padding:9px 12px}
+.wrap{overflow:auto;border:1px solid var(--line);border-radius:14px;max-height:68vh;background:var(--sf)}
+table.sh{border-collapse:separate;border-spacing:0;font-size:.86rem;min-width:100%}
+.sh th{position:sticky;top:0;z-index:2;background:#2A2416;color:var(--gold2);font-size:.74rem;text-transform:uppercase;letter-spacing:.03em;text-align:left;padding:9px 10px;white-space:nowrap;border-bottom:1px solid #4A3E20}
+.sh td{padding:0;border-bottom:1px solid var(--line);border-right:1px solid #1F1F23;white-space:nowrap}
+.sh td>button{display:block;width:100%;min-height:42px;text-align:left;background:none;border:0;padding:8px 10px;max-width:260px;overflow:hidden;text-overflow:ellipsis}
+.sh tr:nth-child(even) td{background:#17171A}
+.sh .c0{position:sticky;left:0;z-index:1;background:var(--sf)!important;font-weight:700;box-shadow:2px 0 0 var(--line)}.sh td.c0>button{max-width:150px;white-space:normal;line-height:1.25}@media (min-width:600px){.sh td.c0>button{max-width:240px}}.sh th.c0{z-index:3;background:#2A2416!important}
+.sh td.r>button{background:rgba(229,72,77,.13);color:#FF9A9C}.sh td.o>button{background:rgba(242,153,74,.15);color:#FFC48F}.sh td.g>button{background:rgba(46,184,114,.14);color:#6BE6A4}
+.money{font-variant-numeric:tabular-nums;text-align:right!important}
+.opt{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--sf2);border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:6px;font-weight:700}
+.opt.on{border-color:var(--gold)}
+.dot{width:12px;height:12px;border-radius:50%;flex:none}.dot.r{background:var(--red)}.dot.o{background:var(--org)}.dot.g{background:var(--grn)}.dot.n{background:var(--faint)}
+/* auth */
+.auth{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:calc(30px + env(safe-area-inset-top,0px)) 18px 30px;background:radial-gradient(500px 300px at 50% 0%,rgba(242,210,122,.16),transparent 70%),var(--bg)}
+.auth .box{width:100%;max-width:420px}.auth h1{font:700 1.7rem var(--disp);text-align:center;margin:12px 0 2px}
+.photo-pick{display:flex;align-items:center;gap:12px}.photo-pick img{width:84px;height:84px;border-radius:18px;object-fit:cover;background:var(--sf3);border:1px solid var(--line)}
+.demo{background:#2B230F;border:1px solid #5A4718;color:#F2D27A;border-radius:12px;padding:10px 12px;font-size:.82rem;margin-top:12px}
+.toasts{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:90;display:flex;flex-direction:column;gap:8px;width:min(92vw,420px);pointer-events:none}
+.toast{background:#1E1B12;border:1px solid #5A4718;border-radius:14px;padding:10px 12px;display:flex;gap:10px;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,.5);animation:up .25s}
+.toast .e{font-size:1.3rem}.toast b{display:block}.toast span{font-size:.82rem;color:var(--soft)}
+.foot{text-align:center;color:var(--faint);font-size:.76rem;margin:26px 0 0}
+@media (min-width:700px){.menu{grid-template-columns:repeat(3,1fr)}}
+
+</style>
+</head>
+<body>
+<div id="auth" class="auth hidden"></div>
+<div id="main" class="hidden"><div class="app" id="view"></div></div>
+<nav class="nav hidden" id="nav" aria-label="Navegação"><div class="in" id="navIn"></div></nav>
+<div id="sheet" class="sheet hidden"></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<script src="config.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging-compat.js"></script>
+<script>
+const LOGO="g3-logo.png";
+"use strict";
+/* ================= UTILIDADES ================= */
+const $=id=>document.getElementById(id),qa=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const nid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+const iso=d=>{d=d||new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");};
+const TODAY=()=>iso();
+const addDays=(s,n)=>{const d=new Date(s+"T12:00:00");d.setDate(d.getDate()+n);return iso(d);};
+const fdate=s=>{if(!s)return"";const [y,m,d]=s.split("-");return `${d}/${m}/${y}`;};
+const WD=["dom","seg","ter","qua","qui","sex","sáb"],MES=["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+const flong=s=>{const d=new Date(s+"T12:00:00");return `${WD[d.getDay()]}, ${d.getDate()} de ${MES[d.getMonth()]}`;};
+const R=v=>"R$ "+(Number(v)||0).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+function money(s){s=String(s==null?"":s).trim().replace(/\s|R\$/g,"");if(!s)return 0;if(s.includes(","))s=s.replace(/\./g,"").replace(",",".");else if(/^\d{1,3}(\.\d{3})+$/.test(s))s=s.replace(/\./g,"");const v=parseFloat(s);return isFinite(v)?Math.round(v*100)/100:0;}
+const ago=t=>{const m=Math.round((Date.now()-t)/60000);if(m<1)return"agora";if(m<60)return m+" min";const h=Math.round(m/60);if(h<24)return h+" h";return fdate(iso(new Date(t)));};
+const AUTHOR="Flávio S. Praciano";
+const CFG=window.G3_CONFIG||{};
+const DEMO=!(CFG.firebase&&CFG.firebase.apiKey&&!/COLE/i.test(CFG.firebase.apiKey)&&window.firebase);
+const COLS=["users","events","folders","notes","inst","turmas","alunos","missoes","config"];
+/* ================= FRASES ================= */
+const FRASES=[["Tudo no mundo começou com um sim.","Clarice Lispector"],["O que vale na vida não é o ponto de partida e sim a caminhada. Caminhando e semeando, no fim terás o que colher.","Cora Coralina"],
+["Feliz aquele que transfere o que sabe e aprende o que ensina.","Cora Coralina"],["Recria tua vida, sempre, sempre. Remove pedras e planta roseiras e faz doces. Recomeça.","Cora Coralina"],
+["Educação não transforma o mundo. Educação muda as pessoas. Pessoas transformam o mundo.","Paulo Freire"],["Ninguém ignora tudo. Ninguém sabe tudo. Todos nós sabemos alguma coisa. Todos nós ignoramos alguma coisa. Por isso aprendemos sempre.","Paulo Freire"],
+["O correr da vida embrulha tudo. A vida é assim: esquenta e esfria, aperta e daí afrouxa, sossega e depois desinquieta. O que ela quer da gente é coragem.","Guimarães Rosa"],
+["Quem elegeu a busca não pode recusar a travessia.","Guimarães Rosa"],["Mestre não é quem sempre ensina, mas quem de repente aprende.","Guimarães Rosa"],
+["Todos esses que aí estão atravancando meu caminho, eles passarão… Eu passarinho!","Mario Quintana"],["Se as coisas são inatingíveis… ora! Não é motivo para não querê-las. Que tristes os caminhos, se não fora a presença distante das estrelas!","Mario Quintana"],
+["Aprendi com as primaveras a me deixar cortar e voltar sempre inteira.","Cecília Meireles"],["Sonho que se sonha só é só um sonho que se sonha só, mas sonho que se sonha junto é realidade.","Raul Seixas"],
+["A vida é a arte do encontro, embora haja tanto desencontro pela vida.","Vinicius de Moraes"],["O otimista é um tolo. O pessimista, um chato. Bom mesmo é ser um realista esperançoso.","Ariano Suassuna"],
+["Ostra feliz não faz pérola.","Rubem Alves"],["Faça o teu melhor, na condição que você tem, enquanto você não tem condições melhores, para fazer melhor ainda.","Mario Sergio Cortella"],
+["Se você quer ser bem-sucedido, precisa ter dedicação total, buscar seu último limite e dar o melhor de si.","Ayrton Senna"]];
+function frase(){let k=+localStorage.getItem("g3_q")||0;k=(k+1+Math.floor(Math.random()*3))%FRASES.length;localStorage.setItem("g3_q",k);return FRASES[k];}
+/* ================= BACKEND ================= */
+function LocalBackend(){const K="g3_demo_v1";const load=()=>{const s=JSON.parse(localStorage.getItem(K)||"null")||{auth:{},data:{}};COLS.forEach(c=>s.data[c]=s.data[c]||{});return s;};let st=load();
+  const subs={};let authCb=null;
+  const save=()=>{localStorage.setItem(K,JSON.stringify(st));};
+  const emit=c=>(subs[c]||[]).forEach(f=>f(Object.entries(st.data[c]).map(([id,v])=>Object.assign({id},v))));
+  window.addEventListener("storage",e=>{if(e.key===K){st=load();COLS.forEach(emit);}});
+  const sess=()=>sessionStorage.getItem("g3_sess")||localStorage.getItem("g3_sess_last");
+  return{demo:true,onAuth(cb){authCb=cb;const u=sess();cb(u?{uid:u}:null);},
+    async signUp(e,p){e=e.toLowerCase().trim();st=load();if(st.auth[e])throw{code:"auth/email-already-in-use"};const u=nid();st.auth[e]={p,u};save();sessionStorage.setItem("g3_sess",u);localStorage.setItem("g3_sess_last",u);return u;},
+    async signIn(e,p){st=load();const a=st.auth[e.toLowerCase().trim()];if(!a||a.p!==p)throw{code:"auth/invalid-credential"};sessionStorage.setItem("g3_sess",a.u);localStorage.setItem("g3_sess_last",a.u);authCb&&authCb({uid:a.u});},
+    async signOut(){sessionStorage.removeItem("g3_sess");localStorage.removeItem("g3_sess_last");authCb&&authCb(null);},
+    async reset(){throw{code:"demo"};},
+    async get(c,id){st=load();const v=st.data[c][id];return v?Object.assign({id},v):null;},
+    listen(c,cb){(subs[c]=subs[c]||[]).push(cb);setTimeout(()=>emit(c));},
+    async set(c,id,v){st=load();st.data[c][id]=JSON.parse(JSON.stringify(v));save();emit(c);},
+    async update(c,id,p){st=load();const o=st.data[c][id]||{};for(const k in p){if(p[k]&&typeof p[k]==="object"&&!Array.isArray(p[k])&&o[k]&&typeof o[k]==="object")o[k]=Object.assign({},o[k],p[k]);else o[k]=p[k];}st.data[c][id]=JSON.parse(JSON.stringify(o));save();emit(c);},
+    async add(c,v){const id=nid();await this.set(c,id,v);return id;},
+    async del(c,id){st=load();delete st.data[c][id];save();emit(c);}};}
+function FireBackend(){firebase.initializeApp(CFG.firebase);const auth=firebase.auth(),db=firebase.firestore();
+  try{db.enablePersistence({synchronizeTabs:true}).catch(()=>{});}catch(e){}
+  return{demo:false,onAuth(cb){auth.onAuthStateChanged(u=>cb(u?{uid:u.uid}:null));},
+    async signUp(e,p){const r=await auth.createUserWithEmailAndPassword(e.trim(),p);return r.user.uid;},
+    async signIn(e,p){await auth.signInWithEmailAndPassword(e.trim(),p);},
+    async signOut(){await auth.signOut();},async reset(e){await auth.sendPasswordResetEmail(e.trim());},
+    async get(c,id){const d=await db.collection(c).doc(id).get();return d.exists?Object.assign({id:d.id},d.data()):null;},
+    listen(c,cb){return db.collection(c).onSnapshot(s=>cb(s.docs.map(d=>Object.assign({id:d.id},d.data()))),e=>toast("⚠️","Falha na sincronização",e.message));},
+    set:(c,id,v)=>db.collection(c).doc(id).set(v),update:(c,id,p)=>db.collection(c).doc(id).set(p,{merge:true}),
+    add:async(c,v)=>(await db.collection(c).add(v)).id,del:(c,id)=>db.collection(c).doc(id).delete()};}
+const B=DEMO?LocalBackend():FireBackend();
+/* ================= ESTADO ================= */
+let UID=null,ME=null,STARTED=false,SIGNING=false;
+const D={};COLS.forEach(c=>D[c]=[]);
+let VIEW={v:"home"};const STACK=[];
+const user=id=>D.users.find(u=>u.id===id)||{nome:"Membro",sobrenome:"",foto:""};
+const uname=id=>{const u=user(id);return (u.nome+" "+(u.sobrenome||"")).trim();};
+const ufirst=id=>user(id).nome||"Membro";
+const avatar=(id,cls="ava")=>{const u=user(id);return u.foto?`<img class="${cls}" src="${u.foto}" alt="">`:`<span class="${cls}" style="display:inline-grid;place-items:center;font-weight:800;color:var(--gold2)">${esc((u.nome||"?")[0])}</span>`;};
+const kits=()=>((D.config.find(c=>c.id==="team")||{}).kits)||[];
+const forMe=m=>(m.para||[]).includes("todos")||(m.para||[]).includes(UID);
+/* ================= AUTENTICAÇÃO ================= */
+function errMsg(e){const c=(e&&e.code)||"";return{"auth/email-already-in-use":"Este e-mail já tem conta. Use Entrar.","auth/invalid-credential":"E-mail ou senha incorretos.","auth/wrong-password":"E-mail ou senha incorretos.","auth/user-not-found":"E-mail ou senha incorretos.","auth/weak-password":"A senha precisa ter pelo menos 6 caracteres.","auth/invalid-email":"E-mail inválido.","permission-denied":"Código da equipe incorreto.","demo":"No modo demonstração não há recuperação de senha."}[c]||(e&&e.message)||"Não foi possível concluir.";}
+let PHOTO="";
+function pickPhoto(input,img){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{const im=new Image();im.onload=()=>{const s=Math.min(im.width,im.height),c=document.createElement("canvas");c.width=c.height=320;
+  c.getContext("2d").drawImage(im,(im.width-s)/2,(im.height-s)/2,s,s,0,0,320,320);PHOTO=c.toDataURL("image/jpeg",.82);img.src=PHOTO;};im.src=r.result;};r.readAsDataURL(f);}
+function authScreen(mode="in"){document.body.className="";$("main").classList.add("hidden");$("nav").classList.add("hidden");const a=$("auth");a.classList.remove("hidden");PHOTO="";
+  a.innerHTML=`<div class="box"><div style="text-align:center"><img src="${LOGO}" alt="G3 Formatura" style="width:132px;height:132px"></div><h1>G3 Formatura</h1><p class="muted" style="text-align:center;margin:0 0 14px">Agenda, planilhas e missões da equipe</p>
+  <div class="seg" style="justify-content:center"><button id="tIn" aria-pressed="${mode==="in"}">Entrar</button><button id="tUp" aria-pressed="${mode==="up"}">Criar conta</button></div>
+  <div class="card" style="margin-top:12px">${mode==="in"?`
+   <label class="fld"><span>E-mail</span><input id="aE" type="email" autocomplete="email"></label><label class="fld"><span>Senha</span><input id="aP" type="password" autocomplete="current-password"></label>
+   <button class="btn full" id="aGo">Entrar</button><button class="link" id="aRs" style="display:block;margin:8px auto 0">Esqueci a senha</button>`:profileForm(true)}
+   <p class="tiny" id="aErr" style="color:#FF8A8D;min-height:1em;margin:8px 0 0"></p></div>
+  ${DEMO?`<div class="demo">Modo demonstração: os dados ficam só neste aparelho. Para compartilhar com a equipe em tempo real, configure o Firebase (veja o guia).</div>`:""}
+  <p class="foot">Produzido por ${AUTHOR}</p></div>`;
+  $("tIn").onclick=()=>authScreen("in");$("tUp").onclick=()=>authScreen("up");
+  if(mode==="in"){$("aGo").onclick=async()=>{try{$("aGo").disabled=true;await B.signIn($("aE").value,$("aP").value);}catch(e){$("aErr").textContent=errMsg(e);$("aGo").disabled=false;}};
+    $("aRs").onclick=async()=>{try{await B.reset($("aE").value);$("aErr").textContent="Enviamos um link de redefinição para o seu e-mail.";}catch(e){$("aErr").textContent=errMsg(e);}};}
+  else bindProfileForm(true);}
+function profileForm(isNew,u={}){return `<div class="photo-pick"><img id="pImg" src="${u.foto||LOGO}" alt=""><label class="btn ghost sm">📷 ${u.foto?"Trocar":"Escolher"} foto<input type="file" id="pFile" accept="image/*" hidden></label></div>
+  <p class="tiny muted" style="margin:6px 0 0">A foto é cortada no formato quadrado.</p>
+  <div class="row" style="gap:8px"><label class="fld grow"><span>Nome</span><input id="pN" value="${esc(u.nome||"")}" maxlength="30"></label><label class="fld grow"><span>Sobrenome</span><input id="pS" value="${esc(u.sobrenome||"")}" maxlength="40"></label></div>
+  <label class="fld"><span>Telefone (com DDD)</span><input id="pT" type="tel" inputmode="tel" value="${esc(u.tel||"")}" placeholder="(88) 99999-9999"></label>
+  <div class="fld"><span>Como prefere a saudação?</span><div class="seg" id="pTr"><button data-v="o" aria-pressed="${(u.trat||"o")==="o"}">Bem-vindo</button><button data-v="a" aria-pressed="${u.trat==="a"}">Bem-vinda</button></div></div>
+  ${isNew?`<label class="fld"><span>E-mail</span><input id="pE" type="email" autocomplete="email"></label><label class="fld"><span>Senha (mínimo 6 caracteres)</span><input id="pP" type="password" autocomplete="new-password"></label>
+  ${DEMO?"":`<label class="fld"><span>Código da equipe</span><input id="pC" autocomplete="off" placeholder="Peça ao administrador"></label>`}`:""}
+  <button class="btn full" id="pGo">${isNew?"Criar conta":"Salvar"}</button>`;}
+function bindProfileForm(isNew,after){let trat=(ME&&ME.trat)||"o";PHOTO=(ME&&!isNew&&ME.foto)||"";
+  $("pFile").onchange=e=>pickPhoto(e.target,$("pImg"));$("pTr").onclick=e=>{const b=e.target.closest("button");if(!b)return;trat=b.dataset.v;qa("#pTr button").forEach(x=>x.setAttribute("aria-pressed",x===b));};
+  $("pGo").onclick=async()=>{const nome=$("pN").value.trim(),sob=$("pS").value.trim(),tel=$("pT").value.trim(),err=$("aErr")||{};
+    if(!nome||!sob||tel.replace(/\D/g,"").length<10){err.textContent="Preencha nome, sobrenome e telefone com DDD.";if(!isNew)toast("⚠️","Preencha nome, sobrenome e telefone","");return;}
+    if(isNew&&!PHOTO){err.textContent="Escolha uma foto de perfil.";return;}
+    const prof={nome,sobrenome:sob,tel,trat,foto:PHOTO};$("pGo").disabled=true;
+    try{if(isNew){SIGNING=true;const u=await B.signUp($("pE").value,$("pP").value);UID=u;prof.codigo=DEMO?"":$("pC").value.trim();prof.criado=Date.now();await B.set("users",u,prof);SIGNING=false;await afterLogin(u);}
+      else{await B.update("users",UID,prof);toast("✅","Perfil atualizado","");after&&after();}}
+    catch(e){SIGNING=false;err.textContent=errMsg(e);$("pGo").disabled=false;if(isNew&&!DEMO&&e.code==="permission-denied"){try{await B.signOut();}catch(x){}}}};}
+async function afterLogin(uid){UID=uid;let p=null;try{p=await B.get("users",uid);}catch(e){}
+  if(!p){const a=$("auth");$("main").classList.add("hidden");a.classList.remove("hidden");a.innerHTML=`<div class="box"><h1>Complete seu perfil</h1><div class="card"><p class="small muted">Sua conta existe, mas o perfil não foi salvo.</p>
+   <button class="btn full" id="pOut">Sair e tentar de novo</button></div></div>`;$("pOut").onclick=()=>B.signOut();return;}
+  ME=p;startApp();}
+B.onAuth(u=>{if(SIGNING)return;if(!u){UID=null;ME=null;authScreen("in");return;}afterLogin(u.uid);});
+/* ================= INÍCIO DO APP E SINCRONIZAÇÃO ================= */
+let RQ=0;function rr(){if(RQ)return;RQ=requestAnimationFrame(()=>{RQ=0;render();});}
+function startApp(){$("auth").classList.add("hidden");$("main").classList.remove("hidden");$("nav").classList.remove("hidden");
+  if(!STARTED){STARTED=true;COLS.forEach(c=>B.listen(c,arr=>{D[c]=arr;if(c==="users"){const m=arr.find(u=>u.id===UID);if(m)ME=m;}if(c==="missoes")checkNotify();rr();}));}
+  if(!localStorage.getItem("g3_seen_"+UID))localStorage.setItem("g3_seen_"+UID,Date.now());
+  VIEW={v:"home"};STACK.length=0;render();guard();}
+/* ================= NOTIFICAÇÕES ================= */
+function checkNotify(){if(!UID)return;const k="g3_seen_"+UID,seen=+localStorage.getItem(k)||Date.now();let mx=seen;
+  D.missoes.filter(m=>forMe(m)&&m.de!==UID&&(m.criado||0)>seen).sort((a,b)=>a.criado-b.criado).forEach(m=>{mx=Math.max(mx,m.criado);notify((m.tipo==="aviso"?"Novo aviso de ":"Nova missão de ")+ufirst(m.de),m.titulo);});
+  localStorage.setItem(k,mx);}
+function notify(t,b){toast("🔔",t,b);if("Notification" in window&&Notification.permission==="granted"){const o={body:b,icon:"g3-icon-192.png",badge:"g3-icon-192.png",tag:"g3-"+Date.now()};
+  if(navigator.serviceWorker&&navigator.serviceWorker.controller)navigator.serviceWorker.ready.then(r=>r.showNotification(t,o)).catch(()=>{});else try{new Notification(t,o);}catch(e){}}}
+async function enableNotif(){if(!("Notification" in window))return toast("⚠️","Este navegador não suporta notificações","");const p=await Notification.requestPermission();
+  if(p!=="granted")return toast("🔕","Notificações bloqueadas","Libere nas configurações do celular.");toast("🔔","Notificações ativadas","");
+  if(!DEMO&&CFG.vapidKey&&firebase.messaging){try{const msg=firebase.messaging(),reg=await navigator.serviceWorker.ready,t=await msg.getToken({vapidKey:CFG.vapidKey,serviceWorkerRegistration:reg});
+    if(t)await B.update("users",UID,{tokens:firebase.firestore.FieldValue.arrayUnion(t)});msg.onMessage(p=>notify((p.notification||{}).title||"G3",(p.notification||{}).body||""));}catch(e){console.warn(e);}}
+  render();}
+/* ================= NAVEGAÇÃO ================= */
+let GUARD=false,ARM=false;
+function guard(){if(GUARD)return;try{history.pushState({g:1},"");GUARD=true;}catch(e){}}
+function go(v){STACK.push(VIEW);VIEW=v;window.scrollTo(0,0);render();guard();}
+function tab(v){STACK.length=0;VIEW=v;window.scrollTo(0,0);render();guard();}
+function back(){VIEW=STACK.pop()||{v:"home"};render();}
+window.addEventListener("popstate",()=>{GUARD=false;if(!$("sheet").classList.contains("hidden")){closeSheet();guard();return;}
+  if(!UID){return;}if(STACK.length||VIEW.v!=="home"){STACK.length?back():tab({v:"home"});guard();return;}
+  if(!ARM){ARM=true;toast("👋","Toque em voltar de novo para sair","");setTimeout(()=>{ARM=false;guard();},2500);}});
+const NAV=[["home","🏠","Início"],["agenda","📅","Agenda"],["inst:escola","🏫","Escolas"],["inst:faculdade","🎓","Faculdades"],["missoes","✅","Missões"]];
+function renderNav(){const pend=D.missoes.filter(m=>forMe(m)&&m.tipo!=="aviso"&&m.status!=="feita").length;
+  $("navIn").innerHTML=NAV.map(([k,i,n])=>{const [v,t]=k.split(":");const on=VIEW.v===v&&(!t||VIEW.t===t)||(t&&["instd","turma"].includes(VIEW.v)&&VIEW.t===t)||(!t&&v==="home"&&["notas","equipe","ajustes"].includes(VIEW.v)&&false);
+    return `<button data-k="${k}" aria-current="${!!on}"><span class="i">${i}</span>${n}${k==="missoes"&&pend?`<span class="bd">${pend}</span>`:""}</button>`;}).join("");
+  qa("#navIn button").forEach(b=>b.onclick=()=>{const [v,t]=b.dataset.k.split(":");tab(t?{v,t}:{v});});}
+function topBar(title,backable=true,extra=""){return `<header class="top">${backable?`<button class="back" id="bk" aria-label="Voltar">‹</button>`:`<img src="${LOGO}" class="logo" alt="G3">`}<h1>${title}</h1>${extra}<button class="back" id="me" aria-label="Perfil e ajustes" style="padding:0;overflow:hidden">${avatar(UID,"ava")}</button></header>`;}
+function bindTop(){const b=$("bk");if(b)b.onclick=()=>STACK.length?back():tab({v:"home"});$("me").onclick=()=>go({v:"ajustes"});}
+/* ================= RENDER ================= */
+function render(){if(!UID||!ME)return;const fa=document.activeElement,fid=fa&&fa.id,sel=fa&&fa.selectionStart;const w=qa(".wrap")[0],sl=w?[w.scrollLeft,w.scrollTop]:null,sy=window.scrollY;
+  const f={home:vHome,agenda:vAgenda,notas:vNotas,inst:vInst,instd:vInstD,turma:vTurma,missoes:vMissoes,equipe:vEquipe,ajustes:vAjustes}[VIEW.v]||vHome;
+  $("view").innerHTML=f();bindTop();BIND.forEach(fn=>fn());BIND=[];renderNav();
+  const w2=qa(".wrap")[0];if(w2&&sl&&VIEW._keep){w2.scrollLeft=sl[0];w2.scrollTop=sl[1];}if(VIEW._keep)window.scrollTo(0,sy);
+  if(fid&&$(fid)){$(fid).focus();try{$(fid).setSelectionRange(sel,sel);}catch(e){}}}
+let BIND=[];const on=fn=>BIND.push(fn);
+/* ---------- início ---------- */
+let QUOTE=null;
+function vHome(){QUOTE=QUOTE||frase();const t=TODAY(),wk=addDays(t,7);
+  const mine=D.missoes.filter(m=>forMe(m)&&m.tipo!=="aviso"&&m.status!=="feita");
+  const hoje=mine.filter(m=>m.prazo&&m.prazo<=t),sem=mine.filter(m=>m.prazo&&m.prazo>t&&m.prazo<=wk);
+  const evH=D.events.filter(e=>e.data===t).sort((a,b)=>(a.hi||"").localeCompare(b.hi||"")),evS=D.events.filter(e=>e.data>t&&e.data<=wk).sort((a,b)=>(a.data+(a.hi||"")).localeCompare(b.data+(b.hi||"")));
+  const avisos=D.missoes.filter(m=>m.tipo==="aviso"&&forMe(m)&&(Date.now()-(m.criado||0))<7*864e5).sort((a,b)=>b.criado-a.criado).slice(0,3);
+  const li=(arr,kind)=>arr.length?arr.map(x=>kind==="m"?`<button class="task" style="width:100%;background:none;border:0;text-align:left;color:inherit" data-m="${x.id}"><span class="ic">${x.prazo<t?"⏰":"✅"}</span><div class="grow"><b>${esc(x.titulo)}</b><div class="tiny muted">de ${esc(ufirst(x.de))}${x.prazo<t?` · <span style="color:#FF8A8D">atrasada desde ${fdate(x.prazo)}</span>`:x.prazo===t?" · hoje":" · "+flong(x.prazo)}</div></div>${stChip(x.status)}</button>`
+    :`<button class="task" style="width:100%;background:none;border:0;text-align:left;color:inherit" data-e="${x.id}"><span class="ic">📅</span><div class="grow"><b>${esc(x.titulo)}</b><div class="tiny muted">${x.data===t?"hoje":flong(x.data)}${x.hi?" · "+x.hi:""}${x.local?" · "+esc(x.local):""}</div></div></button>`).join(""):"";
+  const hH=li(hoje,"m")+li(evH,"e"),hS=li(sem,"m")+li(evS,"e");
+  on(()=>{qa("[data-m]").forEach(b=>b.onclick=()=>openMissao(b.dataset.m));qa("[data-e]").forEach(b=>b.onclick=()=>openEvent(b.dataset.e));qa("[data-go]").forEach(b=>b.onclick=()=>{const [v,t2]=b.dataset.go.split(":");go(t2?{v,t:t2}:{v});});
+    const n=$("nOn");if(n)n.onclick=enableNotif;});
+  const pend=mine.length,unseenN=D.notes.filter(n=>(n.atualizado||0)>(+localStorage.getItem("g3_notes_"+UID)||0)&&n.autor!==UID).length;
+  return topBar("G3 Formatura",false)+`<section class="hero"><span class="tiny" style="color:var(--gold);font-weight:800;letter-spacing:.08em">${flong(t).toUpperCase()}</span>
+   <h2>${ME.trat==="a"?"Bem-vinda":"Bem-vindo"}, ${esc(ME.nome)}!</h2><p class="q">“${esc(QUOTE[0])}”</p><p class="a">${esc(QUOTE[1])}</p></section>
+  ${"Notification" in window&&Notification.permission==="default"?`<button class="item" id="nOn" style="margin-top:12px"><span class="e">🔔</span><div class="grow"><b>Ativar notificações</b><span class="tiny muted">Para ser avisado de missões e avisos</span></div></button>`:""}
+  <div class="lbl">🔥 Para hoje <span class="st r">${hoje.length+evH.length}</span></div><div class="card">${hH||'<p class="empty">Nada urgente para hoje.</p>'}</div>
+  <div class="lbl">📆 Esta semana <span class="st o">${sem.length+evS.length}</span></div><div class="card">${hS||'<p class="empty">Nada marcado para os próximos 7 dias.</p>'}</div>
+  ${avisos.length?`<div class="lbl">📣 Avisos recentes</div><div class="card">${avisos.map(a=>`<button class="task" style="width:100%;background:none;border:0;text-align:left;color:inherit" data-m="${a.id}"><span class="ic">📣</span><div class="grow"><b>${esc(a.titulo)}</b><div class="tiny muted">de ${esc(ufirst(a.de))} · ${ago(a.criado)}</div></div></button>`).join("")}</div>`:""}
+  <div class="lbl">Menu</div><div class="menu">
+   <button class="mi" data-go="agenda"><span class="e">📅</span><b>Agenda da G3</b><span>Datas das escolas e faculdades</span></button>
+   <button class="mi" data-go="notas">${unseenN?`<span class="bd">${unseenN}</span>`:""}<span class="e">🗒️</span><b>Notas</b><span>Anotações da equipe em pastas</span></button>
+   <button class="mi" data-go="inst:escola"><span class="e">🏫</span><b>Planilhas das escolas</b><span>Turmas, pagamentos e fotos</span></button>
+   <button class="mi" data-go="inst:faculdade"><span class="e">🎓</span><b>Faculdades</b><span>Turmas e alunos para fotografar</span></button>
+   <button class="mi" data-go="missoes">${pend?`<span class="bd">${pend}</span>`:""}<span class="e">✅</span><b>Missões e avisos</b><span>Tarefas entre os membros</span></button>
+   <button class="mi" data-go="equipe"><span class="e">👥</span><b>Equipe</b><span>${D.users.length} membro(s)</span></button></div>
+  ${B.demo?`<div class="demo">Modo demonstração: os dados ficam só neste aparelho. Configure o Firebase para compartilhar com a equipe.</div>`:""}
+  <p class="foot">G3 Formatura · Produzido por ${AUTHOR}</p>`;}
+const stChip=s=>s==="feita"?'<span class="st g">Concluída</span>':s==="andamento"?'<span class="st o">Em andamento</span>':'<span class="st r">Pendente</span>';
+/* ---------- agenda ---------- */
+let CAL=null;
+function vAgenda(){const t=TODAY();if(!CAL){const d=new Date();CAL={y:d.getFullYear(),m:d.getMonth(),sel:t};}
+  const first=new Date(CAL.y,CAL.m,1),start=new Date(first);start.setDate(1-first.getDay());const by={};D.events.forEach(e=>(by[e.data]=by[e.data]||[]).push(e));
+  let cells="";for(let i=0;i<42;i++){const d=new Date(start);d.setDate(start.getDate()+i);const k=iso(d),n=(by[k]||[]).length;
+    cells+=`<button data-d="${k}" class="${d.getMonth()!==CAL.m?"out":""} ${k===t?"td":""} ${k===CAL.sel?"sel":""}">${d.getDate()}<span class="dots">${"<i></i>".repeat(Math.min(n,3))}</span></button>`;}
+  const day=(by[CAL.sel]||[]).sort((a,b)=>(a.hi||"").localeCompare(b.hi||""));
+  const next=D.events.filter(e=>e.data>=t).sort((a,b)=>(a.data+(a.hi||"")).localeCompare(b.data+(b.hi||""))).slice(0,8);
+  const evb=e=>`<button class="ev" data-e="${e.id}"><span class="t">${e.hi||"Dia todo"}</span><div class="grow"><b>${esc(e.titulo)}</b><div class="tiny muted">${e.data!==CAL.sel?flong(e.data)+" · ":""}${e.local?esc(e.local):""}${e.inst?" · "+esc((D.inst.find(i=>i.id===e.inst)||{}).nome||""):""}</div></div></button>`;
+  on(()=>{$("cP").onclick=()=>{CAL.m--;if(CAL.m<0){CAL.m=11;CAL.y--;}render();};$("cN").onclick=()=>{CAL.m++;if(CAL.m>11){CAL.m=0;CAL.y++;}render();};
+    qa(".cal [data-d]").forEach(b=>b.onclick=()=>{CAL.sel=b.dataset.d;render();});qa("[data-e]").forEach(b=>b.onclick=()=>openEvent(b.dataset.e));$("fab").onclick=()=>editEvent(null,CAL.sel);});
+  return topBar("Agenda da G3")+`<div class="row" style="margin:14px 0 8px"><button class="back" id="cP">‹</button><h2 class="grow" style="text-align:center;margin:0;font:700 1.1rem var(--body);text-transform:capitalize">${MES[CAL.m]} ${CAL.y}</h2><button class="back" id="cN">›</button></div>
+  <div class="cal">${"DSTQQSS".split("").map(x=>`<span class="h">${x}</span>`).join("")}${cells}</div>
+  <div class="lbl">${flong(CAL.sel)}</div>${day.length?day.map(evb).join(""):'<p class="empty">Nenhum compromisso neste dia.</p>'}
+  <div class="lbl">Próximos compromissos</div>${next.length?next.map(evb).join(""):'<p class="empty">Nenhum compromisso futuro.</p>'}
+  <button class="fab" id="fab" aria-label="Novo compromisso">＋</button>`;}
+function gcal(e){const d=e.data.replace(/-/g,"");let dates;if(e.hi){const hf=e.hf||((+e.hi.slice(0,2)+1)%24+"").padStart(2,"0")+e.hi.slice(2);dates=d+"T"+e.hi.replace(":","")+"00/"+d+"T"+hf.replace(":","")+"00";}else dates=d+"/"+addDays(e.data,1).replace(/-/g,"");
+  return "https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent(e.titulo)+"&dates="+dates+"&details="+encodeURIComponent((e.desc||"")+"\n\nAgenda G3 Formatura")+"&location="+encodeURIComponent(e.local||"");}
+function openEvent(id){const e=D.events.find(x=>x.id===id);if(!e)return;const ins=D.inst.find(i=>i.id===e.inst);
+  sheet(`<div class="grab"></div><h2>${esc(e.titulo)}</h2><p class="muted small" style="margin:0">${flong(e.data)}${e.hi?` · ${e.hi}${e.hf?"–"+e.hf:""}`:" · dia todo"}</p>
+  ${e.local?`<p class="small">📍 ${esc(e.local)}</p>`:""}${ins?`<p class="small">${ins.tipo==="escola"?"🏫":"🎓"} ${esc(ins.nome)}</p>`:""}${e.desc?`<p class="small" style="white-space:pre-wrap">${esc(e.desc)}</p>`:""}
+  <p class="tiny muted">Criado por ${esc(uname(e.autor))}</p>
+  <div class="btns"><a class="btn full" href="${gcal(e)}" target="_blank" rel="noopener">📲 Adicionar ao Google Agenda</a><button class="btn ghost full" id="eEd">Editar</button><button class="btn ghost full" id="eDel" style="color:#FF8A8D">Excluir</button></div>
+  <p class="tiny muted">Ao adicionar ao Google Agenda, o seu celular passa a lembrar do compromisso. Se excluir aqui, exclua também lá.</p>`);
+  $("eEd").onclick=()=>editEvent(id);$("eDel").onclick=()=>{if(confirm("Excluir este compromisso para toda a equipe?")){B.del("events",id);closeSheet();toast("🗑️","Compromisso excluído","");}};}
+function editEvent(id,day){const e=id?D.events.find(x=>x.id===id):{data:day||TODAY()};
+  sheet(`<div class="grab"></div><h2>${id?"Editar":"Novo"} compromisso</h2>
+  <label class="fld"><span>Título</span><input id="eT" maxlength="80" value="${esc(e.titulo||"")}" placeholder="Ex.: Fotos da turma 9º A"></label>
+  <label class="fld"><span>Descrição (até 250 caracteres)</span><textarea id="eD" maxlength="250">${esc(e.desc||"")}</textarea><div class="cnt" id="eC">0/250</div></label>
+  <div class="row" style="gap:8px"><label class="fld grow"><span>Data</span><input id="eDt" type="date" value="${e.data}"></label><label class="fld grow"><span>Início</span><input id="eHi" type="time" value="${e.hi||""}"></label><label class="fld grow"><span>Fim</span><input id="eHf" type="time" value="${e.hf||""}"></label></div>
+  <label class="fld"><span>Local</span><input id="eL" maxlength="80" value="${esc(e.local||"")}"></label>
+  <label class="fld"><span>Escola ou faculdade (opcional)</span><select id="eI"><option value="">—</option>${D.inst.map(i=>`<option value="${i.id}" ${i.id===e.inst?"selected":""}>${i.tipo==="escola"?"🏫":"🎓"} ${esc(i.nome)}</option>`).join("")}</select></label>
+  <div class="btns"><button class="btn full" id="eS">Salvar</button></div>`);
+  const c=()=>$("eC").textContent=$("eD").value.length+"/250";$("eD").oninput=c;c();
+  $("eS").onclick=async()=>{const v={titulo:$("eT").value.trim(),desc:$("eD").value.slice(0,250),data:$("eDt").value,hi:$("eHi").value,hf:$("eHf").value,local:$("eL").value.trim(),inst:$("eI").value};
+    if(!v.titulo||!v.data)return toast("⚠️","Informe título e data","");if(id)await B.update("events",id,v);else await B.add("events",Object.assign(v,{autor:UID,criado:Date.now()}));closeSheet();if(CAL)CAL.sel=v.data;toast("📅","Compromisso salvo","Toque nele para adicionar ao Google Agenda.");};}
+/* ---------- notas ---------- */
+function vNotas(){const f=VIEW.f||null;localStorage.setItem("g3_notes_"+UID,Date.now());const path=[];let p=f;while(p){const x=D.folders.find(y=>y.id===p);if(!x)break;path.unshift(x);p=x.parent||null;}
+  const subs=D.folders.filter(x=>(x.parent||null)===f).sort((a,b)=>a.nome.localeCompare(b.nome)),notes=D.notes.filter(n=>(n.folder||null)===f).sort((a,b)=>(b.atualizado||0)-(a.atualizado||0));
+  on(()=>{qa("[data-f]").forEach(b=>b.onclick=()=>go({v:"notas",f:b.dataset.f||null}));qa("[data-cr]").forEach(b=>b.onclick=()=>{VIEW.f=b.dataset.cr||null;render();});qa("[data-n]").forEach(b=>b.onclick=()=>editNote(b.dataset.n));
+    $("fab").onclick=()=>sheet(`<div class="grab"></div><h2>Criar</h2><div class="btns"><button class="btn full" id="nN">🗒️ Nova nota</button><button class="btn ghost full" id="nF">📁 Nova ${f?"subpasta":"pasta"}</button></div>`,()=>{$("nN").onclick=()=>editNote(null,f);$("nF").onclick=()=>folderForm(null,f);});
+    const fo=$("fOpt");if(fo)fo.onclick=()=>folderForm(f);});
+  return topBar(path.length?esc(path[path.length-1].nome):"Notas",true,f?`<button class="back" id="fOpt" aria-label="Opções da pasta">⋯</button>`:"")+`<nav class="crumbs"><button data-cr="">🗒️ Notas</button>${path.map(x=>`› <button data-cr="${x.id}">${esc(x.nome)}</button>`).join("")}</nav>
+  ${subs.map(x=>`<button class="item" data-f="${x.id}"><span class="e">📁</span><div class="grow"><b>${esc(x.nome)}</b><span class="tiny muted">${D.folders.filter(y=>y.parent===x.id).length} subpasta(s) · ${D.notes.filter(n=>n.folder===x.id).length} nota(s)</span></div><span class="chev">›</span></button>`).join("")}
+  ${notes.map(n=>`<button class="item" data-n="${n.id}"><span class="e">🗒️</span><div class="grow"><b>${esc(n.titulo||"Sem título")}</b><span class="tiny muted">${esc((n.texto||"").slice(0,70))}${(n.texto||"").length>70?"…":""}</span><div class="tiny muted">${esc(ufirst(n.autor))}${n.editor&&n.editor!==n.autor?" · editada por "+esc(ufirst(n.editor)):""} · ${ago(n.atualizado||n.criado)}</div></div></button>`).join("")}
+  ${!subs.length&&!notes.length?'<p class="empty">Pasta vazia. Toque em ＋ para criar uma nota ou subpasta.</p>':""}<button class="fab" id="fab" aria-label="Criar">＋</button>`;}
+function folderForm(id,parent){const x=id?D.folders.find(y=>y.id===id):null;
+  sheet(`<div class="grab"></div><h2>${x?"Pasta":"Nova pasta"}</h2><label class="fld"><span>Nome</span><input id="fN" maxlength="50" value="${esc(x?x.nome:"")}"></label>
+  <div class="btns"><button class="btn full" id="fS">Salvar</button>${x?`<button class="btn ghost full" id="fD" style="color:#FF8A8D">Excluir pasta</button>`:""}</div>`);
+  $("fS").onclick=async()=>{const n=$("fN").value.trim();if(!n)return;if(x)await B.update("folders",id,{nome:n});else await B.add("folders",{nome:n,parent:parent||null,autor:UID,criado:Date.now()});closeSheet();};
+  const d=$("fD");if(d)d.onclick=()=>{if(D.folders.some(y=>y.parent===id)||D.notes.some(n=>n.folder===id))return toast("⚠️","A pasta não está vazia","Mova ou exclua o conteúdo antes.");if(confirm("Excluir esta pasta?")){B.del("folders",id);closeSheet();back();}};}
+function editNote(id,folder){const n=id?D.notes.find(x=>x.id===id):{titulo:"",texto:"",folder:folder||null};
+  sheet(`<div class="grab"></div><label class="fld"><span>Título</span><input id="nT" maxlength="80" value="${esc(n.titulo||"")}"></label><label class="fld"><span>Anotação</span><textarea id="nX" style="min-height:200px">${esc(n.texto||"")}</textarea></label>
+  ${id?`<p class="tiny muted">Criada por ${esc(uname(n.autor))}${n.editor?` · última edição de ${esc(ufirst(n.editor))} ${ago(n.atualizado)}`:""}</p>`:""}
+  <div class="btns"><button class="btn full" id="nS">Salvar</button>${id&&n.autor===UID?`<button class="btn ghost full" id="nD" style="color:#FF8A8D">Excluir nota</button>`:""}</div>`);
+  $("nS").onclick=async()=>{const v={titulo:$("nT").value.trim()||"Sem título",texto:$("nX").value,atualizado:Date.now(),editor:UID};if(id)await B.update("notes",id,v);else await B.add("notes",Object.assign(v,{folder:n.folder,autor:UID,criado:Date.now()}));closeSheet();toast("🗒️","Nota salva","Toda a equipe já pode ver.");};
+  const d=$("nD");if(d)d.onclick=()=>{if(confirm("Excluir esta nota?")){B.del("notes",id);closeSheet();}};}
+/* ---------- escolas e faculdades ---------- */
+function stats(tid){const t=D.turmas.find(x=>x.id===tid),al=D.alunos.filter(a=>a.turma===tid);let g=0,o=0,r=0,pago=0,tot=0;al.forEach(a=>{const s=payStatus(t,a);s.c==="g"?g++:s.c==="o"?o++:r++;pago+=s.pago;tot+=s.total;});return{n:al.length,g,o,r,pago,tot};}
+function vInst(){const t=VIEW.t,L=D.inst.filter(i=>i.tipo===t).sort((a,b)=>a.nome.localeCompare(b.nome)),E=t==="escola"?"🏫":"🎓";
+  on(()=>{qa("[data-i]").forEach(b=>b.onclick=()=>go({v:"instd",id:b.dataset.i,t}));$("fab").onclick=()=>instForm(null,t);});
+  return topBar(t==="escola"?"Planilhas das escolas":"Faculdades")+`<p class="muted small" style="margin:14px 0 10px">${t==="escola"?"Toque numa escola para ver as turmas e as planilhas.":"Toque numa faculdade para ver as turmas e os alunos."}</p>
+  ${L.map(i=>{const ts=D.turmas.filter(x=>x.inst===i.id);let n=0,g=0;ts.forEach(x=>{const s=stats(x.id);n+=s.n;g+=s.g;});
+    return `<button class="item" data-i="${i.id}"><span class="e">${E}</span><div class="grow"><b>${esc(i.nome)}</b><span class="tiny muted">${ts.length} turma(s) · ${n} aluno(s)${n?` · ${Math.round(g/n*100)}% quitados`:""}${i.cidade?" · "+esc(i.cidade):""}</span></div><span class="chev">›</span></button>`;}).join("")||`<p class="empty">Nenhuma ${t==="escola"?"escola":"faculdade"} cadastrada. Toque em ＋.</p>`}
+  <button class="fab" id="fab" aria-label="Adicionar">＋</button>`;}
+function instForm(id,tipo){const i=id?D.inst.find(x=>x.id===id):{tipo};
+  sheet(`<div class="grab"></div><h2>${id?"Editar":"Nova"} ${i.tipo==="escola"?"escola":"faculdade"}</h2><label class="fld"><span>Nome</span><input id="iN" maxlength="80" value="${esc(i.nome||"")}"></label><label class="fld"><span>Cidade (opcional)</span><input id="iC" maxlength="50" value="${esc(i.cidade||"")}"></label>
+  <div class="btns"><button class="btn full" id="iS">Salvar</button>${id?`<button class="btn ghost full" id="iD" style="color:#FF8A8D">Excluir</button>`:""}</div>`);
+  $("iS").onclick=async()=>{const n=$("iN").value.trim();if(!n)return;const v={nome:n,cidade:$("iC").value.trim()};if(id)await B.update("inst",id,v);else await B.add("inst",Object.assign(v,{tipo:i.tipo,autor:UID,criado:Date.now()}));closeSheet();};
+  const d=$("iD");if(d)d.onclick=()=>{if(D.turmas.some(t=>t.inst===id))return toast("⚠️","Exclua as turmas antes","");if(confirm("Excluir?")){B.del("inst",id);closeSheet();back();}};}
+function vInstD(){const i=D.inst.find(x=>x.id===VIEW.id);if(!i)return topBar("Não encontrado")+'<p class="empty">Este item foi excluído.</p>';
+  const ts=D.turmas.filter(x=>x.inst===i.id).sort((a,b)=>a.nome.localeCompare(b.nome,"pt",{numeric:true}));
+  on(()=>{qa("[data-tm]").forEach(b=>b.onclick=()=>go({v:"turma",id:b.dataset.tm,t:VIEW.t}));$("fab").onclick=()=>turmaForm(null,i.id);$("iEd").onclick=()=>instForm(i.id);});
+  return topBar(esc(i.nome),true,`<button class="back" id="iEd" aria-label="Editar">⋯</button>`)+`<p class="muted small" style="margin:14px 0 10px">Turmas${i.cidade?" · "+esc(i.cidade):""}</p>
+  ${ts.map(t=>{const s=stats(t.id);return `<button class="item" data-tm="${t.id}"><span class="e">📋</span><div class="grow"><b>${esc(t.nome)}</b><span class="tiny muted">${t.modelo==="mensal"?"Mensalidades":"Formatura e kits"} · ${s.n} aluno(s)</span>
+    <div class="row" style="gap:6px;margin-top:5px"><span class="st g">${s.g}</span><span class="st o">${s.o}</span><span class="st r">${s.r}</span></div></div><span class="chev">›</span></button>`;}).join("")||'<p class="empty">Nenhuma turma. Toque em ＋ para criar a Turma A, B, C…</p>'}
+  <button class="fab" id="fab" aria-label="Nova turma">＋</button>`;}
+const MESES_PAD="Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro, Janeiro";
+function turmaForm(id,inst){const t=id?D.turmas.find(x=>x.id===id):{inst,modelo:"formatura",meses:MESES_PAD.split(", "),parcela:0};let mod=t.modelo;
+  const draw=()=>{sheet(`<div class="grab"></div><h2>${id?"Configurar turma":"Nova turma"}</h2><label class="fld"><span>Nome da turma</span><input id="tN" maxlength="40" value="${esc(t.nome||"")}" placeholder="Ex.: 9º A"></label>
+   ${id?"":`<div class="fld"><span>Modelo de planilha</span><div class="seg" id="tM"><button data-v="formatura" aria-pressed="${mod==="formatura"}">Formatura e kits</button><button data-v="mensal" aria-pressed="${mod==="mensal"}">Mensalidades</button></div></div>`}
+   ${mod==="mensal"?`<label class="fld"><span>Colunas de pagamento (separe por vírgula)</span><input id="tMs" value="${esc((t.meses||[]).join(", "))}"></label><label class="fld"><span>Valor de cada parcela (R$)</span><input id="tP" inputmode="decimal" value="${t.parcela?String(t.parcela).replace(".",","):""}"></label>`
+   :`<p class="tiny muted">Colunas: turma, nome, contato, kit, status de pagamento, envio das fotos, pago, total, foto da placa e observações. Você pode adicionar ou ocultar colunas depois.</p>`}
+   <div class="btns"><button class="btn full" id="tS">Salvar</button>${id?`<button class="btn ghost full" id="tD" style="color:#FF8A8D">Excluir turma</button>`:""}</div>`);
+   const m=$("tM");if(m)m.onclick=e=>{const b=e.target.closest("button");if(!b)return;t.nome=$("tN").value;mod=b.dataset.v;draw();};
+   $("tS").onclick=async()=>{const n=$("tN").value.trim();if(!n)return toast("⚠️","Dê um nome à turma","");const v={nome:n};
+     if(mod==="mensal"){v.meses=$("tMs").value.split(",").map(s=>s.trim()).filter(Boolean);v.parcela=money($("tP").value);}
+     if(id)await B.update("turmas",id,v);else await B.add("turmas",Object.assign(v,{inst:t.inst,modelo:mod,cols:[],hide:[],criado:Date.now(),autor:UID}));closeSheet();};
+   const d=$("tD");if(d)d.onclick=()=>{const n=D.alunos.filter(a=>a.turma===id).length;if(confirm(`Excluir a turma e ${n} aluno(s)? Isso vale para toda a equipe.`)){D.alunos.filter(a=>a.turma===id).forEach(a=>B.del("alunos",a.id));B.del("turmas",id);closeSheet();back();}};};draw();}
+/* ---------- planilha ---------- */
+const ENVIO=[["Não enviado","r"],["Em andamento","o"],["Enviado","g"]];
+function columns(t){let c;if(t.modelo==="mensal")c=[{k:"nome",n:"Aluno",t:"text",fix:1},...(t.meses||[]).map((m,i)=>({k:"m"+i,n:m,t:"mes",i})),{k:"soma",n:"Soma das parcelas",t:"soma"},{k:"pagto",n:"Status",t:"pagto"},{k:"obs",n:"Observações",t:"long"}];
+  else c=[{k:"turmaTxt",n:"Turma",t:"text"},{k:"nome",n:"Nome completo",t:"text",fix:1},{k:"contato",n:"Contato",t:"text"},{k:"kit",n:"Kit",t:"kit"},{k:"pagto",n:"Status de pagamento",t:"pagto"},{k:"envio",n:"Envio das fotos",t:"envio"},
+    {k:"pago",n:"Pago",t:"money"},{k:"total",n:"Total a pagar",t:"money"},{k:"placa",n:"Foto da placa confirmada",t:"yesno"},{k:"obs",n:"Observações",t:"long"}];
+  c=c.filter(x=>x.fix||!(t.hide||[]).includes(x.k));(t.cols||[]).forEach(x=>c.push({k:"x_"+x.id,n:x.nome,t:"x",c:x}));return c;}
+function payStatus(t,a){if(!t)return{c:"r",l:"—",pago:0,total:0};let pago,total;
+  if(t.modelo==="mensal"){pago=(t.meses||[]).reduce((s,m,i)=>s+(Number((a.mes||{})["m"+i])||0),0);total=(t.parcela||0)*(t.meses||[]).length;}else{pago=Number(a.pago)||0;total=Number(a.total)||0;}
+  if(total>0&&pago>=total)return{c:"g",l:"Pago",pago,total};if(pago>0)return{c:"o",l:total?`Parcial · ${Math.round(pago/total*100)}%`:"Pagamento registrado",pago,total};return{c:"r",l:"Não pago",pago,total};}
+function cellView(t,a,col){const v=k=>a[k];switch(col.t){
+  case"text":return{h:esc(v(col.k)||"")||(col.k==="turmaTxt"?esc(t.nome):'<span class="muted">—</span>')};
+  case"long":return{h:esc((v(col.k)||"").slice(0,40))+((v(col.k)||"").length>40?"…":"")||'<span class="muted">—</span>'};
+  case"money":return{h:R(v(col.k)),m:1};
+  case"kit":{const k=kits().find(x=>x.id===a.kit);return{h:k?esc(k.nome):'<span class="muted">Escolher</span>'};}
+  case"pagto":{const s=payStatus(t,a);return{h:s.l,c:s.c};}
+  case"envio":{const e=ENVIO.find(x=>x[0]===a.envio)||ENVIO[0];return{h:e[0],c:e[1]};}
+  case"yesno":return a[col.k]==="Sim"?{h:"Sim",c:"g"}:a[col.k]==="Não"?{h:"Não",c:"r"}:{h:'<span class="muted">—</span>'};
+  case"mes":{const x=Number((a.mes||{})[col.k])||0,p=t.parcela||0;return{h:x?R(x):'<span>—</span>',m:1,c:!x?"r":p&&x<p?"o":"g"};}
+  case"soma":return{h:R(payStatus(t,a).pago),m:1};
+  case"x":{const c=col.c,x=(a.x||{})[c.id];if(c.tipo==="opcoes"){const o=(c.ops||[]).find(y=>y.t===x);return o?{h:esc(o.t),c:o.c!=="n"?o.c:""}:{h:'<span class="muted">—</span>'};}
+    if(c.tipo==="simnao")return x==="Sim"?{h:"Sim",c:"g"}:x==="Não"?{h:"Não",c:"r"}:{h:'<span class="muted">—</span>'};if(c.tipo==="valor")return{h:R(x),m:1};if(c.tipo==="data")return{h:x?fdate(x):'<span class="muted">—</span>'};
+    return{h:esc((x||"").slice(0,40))||'<span class="muted">—</span>'};}}return{h:""};}
+function vTurma(){const t=D.turmas.find(x=>x.id===VIEW.id);if(!t)return topBar("Turma")+'<p class="empty">Esta turma foi excluída.</p>';VIEW._keep=1;
+  const i=D.inst.find(x=>x.id===t.inst)||{};const q=(VIEW.q||"").toLowerCase();const cols=columns(t);
+  const al=D.alunos.filter(a=>a.turma===t.id).sort((a,b)=>(a.nome||"").localeCompare(b.nome||"","pt")).filter(a=>!q||(a.nome||"").toLowerCase().includes(q)||(a.contato||"").includes(q));
+  const s=stats(t.id);const sk=cols.findIndex(c=>c.k==="nome");
+  on(()=>{$("q").oninput=e=>{VIEW.q=e.target.value;render();};$("aAdd").onclick=()=>addAlunos(t);$("cols").onclick=()=>colsManager(t);$("tCfg").onclick=()=>turmaForm(t.id);$("csv").onclick=()=>csv(t);
+    qa(".sh [data-c]").forEach(b=>b.onclick=()=>{const [aid,k]=b.dataset.c.split("|");if(k==="nome"||k==="soma")openRow(t,aid);else editCell(t,aid,k);});});
+  return topBar(esc(t.nome),true,`<button class="back" id="tCfg" aria-label="Configurar turma">⚙️</button>`)+`<p class="muted small" style="margin:12px 0 0">${esc(i.nome||"")} · ${t.modelo==="mensal"?`Mensalidades · parcela ${R(t.parcela)}`:"Formatura e kits"}</p>
+  <div class="sum"><div><b>${s.n}</b><span>alunos</span></div><div><b>${R(s.pago)}</b><span>arrecadado</span></div><div><b>${R(Math.max(0,s.tot-s.pago))}</b><span>a receber</span></div>
+   <div><b><span class="st g">${s.g}</span> <span class="st o">${s.o}</span> <span class="st r">${s.r}</span></b><span>pago · parcial · não pago</span></div></div>
+  <div class="tools"><input id="q" placeholder="🔎 Buscar aluno" value="${esc(VIEW.q||"")}"><button class="btn sm" id="aAdd">＋ Aluno</button><button class="btn ghost sm" id="cols">Colunas</button><button class="btn ghost sm" id="csv">⬇ CSV</button></div>
+  <div class="wrap"><table class="sh"><thead><tr>${cols.map((c,j)=>`<th class="${j===sk?"c0":""}">${esc(c.n)}</th>`).join("")}</tr></thead>
+  <tbody>${al.map(a=>`<tr>${cols.map((c,j)=>{const v=cellView(t,a,c);return `<td class="${j===sk?"c0":""} ${v.c||""}"><button data-c="${a.id}|${c.k}" class="${v.m?"money":""}">${v.h}</button></td>`;}).join("")}</tr>`).join("")}</tbody></table>
+  ${al.length?"":'<p class="empty" style="padding:14px">Nenhum aluno. Toque em ＋ Aluno.</p>'}</div>
+  <p class="tiny muted" style="margin-top:8px">Toque numa célula para editar. Toque no nome para ver a ficha completa. As cores mudam sozinhas: vermelho (não pago), laranja (parcial), verde (pago).</p>`;}
+function addAlunos(t){sheet(`<div class="grab"></div><h2>Adicionar alunos</h2><p class="small muted">Um nome por linha. Para incluir o contato, use “Nome; telefone”.</p>
+  <label class="fld"><textarea id="aL" style="min-height:160px" placeholder="Ana Beatriz Bezerra; 88999990000&#10;João Gabriel da Silva"></textarea></label><div class="btns"><button class="btn full" id="aS">Adicionar</button></div>`);
+  $("aS").onclick=async()=>{const ls=$("aL").value.split("\n").map(s=>s.trim()).filter(Boolean);if(!ls.length)return;
+    for(const l of ls){const [n,c]=l.split(";").map(x=>(x||"").trim());const v={turma:t.id,nome:n,contato:c||"",criado:Date.now(),autor:UID};if(t.modelo!=="mensal")Object.assign(v,{pago:0,total:0,envio:"Não enviado",placa:"",obs:"",kit:""});else Object.assign(v,{mes:{},obs:""});await B.add("alunos",v);}
+    closeSheet();toast("👥",`${ls.length} aluno(s) adicionado(s)`,"");};}
+function editCell(t,aid,k){const a=D.alunos.find(x=>x.id===aid);if(!a)return;const col=columns(t).find(c=>c.k===k)||{k,t:"text",n:k};const save=p=>B.update("alunos",aid,p);
+  const head=`<div class="grab"></div><p class="tiny muted" style="margin:0">${esc(a.nome)}</p><h2>${esc(col.n)}</h2>`;
+  const opts=(list,cur,fn)=>{sheet(head+list.map(([l,c])=>`<button class="opt ${l===cur?"on":""}" data-o="${esc(l)}"><span class="dot ${c}"></span>${esc(l)}</button>`).join("")+`<button class="link" id="oClr">Limpar</button>`);
+    qa(".sheet [data-o]").forEach(b=>b.onclick=()=>{fn(b.dataset.o);closeSheet();});$("oClr").onclick=()=>{fn("");closeSheet();};};
+  const text=(cur,long,fn)=>{sheet(head+`<label class="fld">${long?`<textarea id="cV" style="min-height:140px">${esc(cur||"")}</textarea>`:`<input id="cV" value="${esc(cur||"")}">`}</label><div class="btns"><button class="btn full" id="cS">Salvar</button></div>`);setTimeout(()=>$("cV").focus(),50);
+    $("cS").onclick=()=>{fn($("cV").value);closeSheet();};$("cV").onkeydown=e=>{if(e.key==="Enter"&&!long){fn($("cV").value);closeSheet();}};};
+  if(col.t==="text")return text(a[k]||(k==="turmaTxt"?t.nome:""),false,v=>save({[k]:v.trim()}));
+  if(col.t==="long")return text(a[k],true,v=>save({[k]:v}));
+  if(col.t==="kit"){const ks=kits();sheet(head+(ks.length?ks.map(x=>`<button class="opt ${x.id===a.kit?"on":""}" data-k="${x.id}"><span class="grow">${esc(x.nome)}</span><span class="muted">${R(x.preco)}</span></button>`).join(""):'<p class="empty">Nenhum kit cadastrado ainda.</p>')+
+    `<div class="btns"><button class="btn ghost full" id="kM">⚙️ Cadastrar e editar kits</button><button class="link" id="kC">Sem kit</button></div>`);
+    qa(".sheet [data-k]").forEach(b=>b.onclick=()=>{const kt=ks.find(x=>x.id===b.dataset.k),old=ks.find(x=>x.id===a.kit);const p={kit:kt.id};if(!a.total||(old&&a.total===old.preco))p.total=kt.preco;save(p);closeSheet();});
+    $("kM").onclick=kitsManager;$("kC").onclick=()=>{save({kit:""});closeSheet();};return;}
+  if(col.t==="envio")return opts(ENVIO,a.envio,v=>save({envio:v||"Não enviado"}));
+  if(col.t==="yesno")return opts([["Sim","g"],["Não","r"]],a[k],v=>save({[k]:v}));
+  if(col.t==="money"||col.t==="pagto")return payDialog(t,a);
+  if(col.t==="mes"){const cur=(a.mes||{})[k]||"";sheet(head+`<label class="fld"><span>Valor pago nesta parcela (R$)</span><input id="cV" inputmode="decimal" value="${cur?String(cur).replace(".",","):""}"></label>
+    <div class="btns">${t.parcela?`<button class="btn full" id="cF">Parcela completa · ${R(t.parcela)}</button>`:""}<button class="btn ghost full" id="cS">Salvar valor</button><button class="link" id="cZ">Zerar</button></div>`);setTimeout(()=>$("cV").focus(),50);
+    const f=$("cF");if(f)f.onclick=()=>{save({mes:{[k]:t.parcela}});closeSheet();};$("cS").onclick=()=>{save({mes:{[k]:money($("cV").value)}});closeSheet();};$("cZ").onclick=()=>{save({mes:{[k]:0}});closeSheet();};return;}
+  if(col.t==="x"){const c=col.c,cur=(a.x||{})[c.id];const sx=v=>save({x:{[c.id]:v}});
+    if(c.tipo==="opcoes")return opts((c.ops||[]).map(o=>[o.t,o.c]),cur,sx);if(c.tipo==="simnao")return opts([["Sim","g"],["Não","r"]],cur,sx);
+    if(c.tipo==="valor"){sheet(head+`<label class="fld"><input id="cV" inputmode="decimal" value="${cur?String(cur).replace(".",","):""}"></label><div class="btns"><button class="btn full" id="cS">Salvar</button></div>`);$("cS").onclick=()=>{sx(money($("cV").value));closeSheet();};return;}
+    if(c.tipo==="data"){sheet(head+`<label class="fld"><input id="cV" type="date" value="${cur||""}"></label><div class="btns"><button class="btn full" id="cS">Salvar</button></div>`);$("cS").onclick=()=>{sx($("cV").value);closeSheet();};return;}
+    return text(cur,true,sx);}}
+function payDialog(t,a){if(t.modelo==="mensal")return openRow(t,a.id);const s=payStatus(t,a);
+  sheet(`<div class="grab"></div><p class="tiny muted" style="margin:0">${esc(a.nome)}</p><h2>Pagamento</h2><div class="row" style="margin:6px 0 12px"><span class="st ${s.c}">${s.l}</span><span class="muted small">${R(s.pago)} de ${R(s.total)}</span></div>
+  <label class="fld"><span>Registrar novo pagamento (soma ao valor pago)</span><input id="pA" inputmode="decimal" placeholder="Ex.: 50,00"></label><button class="btn full" id="pAdd">＋ Adicionar pagamento</button>
+  <div class="row" style="gap:8px;margin-top:8px"><label class="fld grow"><span>Valor pago (total)</span><input id="pP" inputmode="decimal" value="${String(a.pago||0).replace(".",",")}"></label><label class="fld grow"><span>Total a pagar</span><input id="pT" inputmode="decimal" value="${String(a.total||0).replace(".",",")}"></label></div>
+  <div class="btns"><button class="btn ghost full" id="pS">Salvar valores</button></div><p class="tiny muted">O status muda sozinho: vermelho sem pagamento, laranja com pagamento parcial e verde quando o valor pago chega ao total.</p>`);
+  $("pAdd").onclick=()=>{const v=money($("pA").value);if(!v)return;B.update("alunos",a.id,{pago:Math.round(((Number(a.pago)||0)+v)*100)/100});closeSheet();toast("💰",`${R(v)} registrado`,a.nome);};
+  $("pS").onclick=()=>{B.update("alunos",a.id,{pago:money($("pP").value),total:money($("pT").value)});closeSheet();};}
+function openRow(t,aid){const a=D.alunos.find(x=>x.id===aid);if(!a)return;const cols=columns(t);const tel=(a.contato||"").replace(/\D/g,"");
+  sheet(`<div class="grab"></div><h2>${esc(a.nome)}</h2>${tel.length>=10?`<div class="row" style="gap:8px;margin-bottom:8px"><a class="btn ghost sm" href="tel:${tel}">📞 Ligar</a><a class="btn ghost sm" href="https://wa.me/55${tel.replace(/^55/,"")}" target="_blank" rel="noopener">💬 WhatsApp</a></div>`:""}
+  ${cols.filter(c=>c.k!=="soma").map(c=>{const v=cellView(t,a,c);return `<button class="opt" data-k="${c.k}"><span class="grow small muted">${esc(c.n)}</span><span class="${v.c?"st "+v.c:""}">${v.h}</span></button>`;}).join("")}
+  <div class="btns"><button class="btn ghost full" id="rD" style="color:#FF8A8D">Excluir aluno</button></div>`);
+  qa(".sheet [data-k]").forEach(b=>b.onclick=()=>{const k=b.dataset.k;if(k==="nome")return editCell(t,aid,"nome");if(k==="pagto"&&t.modelo==="mensal")return;editCell(t,aid,k);});
+  $("rD").onclick=()=>{if(confirm(`Excluir ${a.nome} da planilha?`)){B.del("alunos",aid);closeSheet();}};}
+function colsManager(t){const base=t.modelo==="mensal"?[["obs","Observações"]]:[["turmaTxt","Turma"],["contato","Contato"],["kit","Kit"],["pagto","Status de pagamento"],["envio","Envio das fotos"],["pago","Pago"],["total","Total a pagar"],["placa","Foto da placa confirmada"],["obs","Observações"]];
+  const hide=t.hide||[];const TIP={texto:"Texto livre",opcoes:"Opções",simnao:"Sim ou não",valor:"Valor (R$)",data:"Data"};
+  sheet(`<div class="grab"></div><h2>Colunas</h2><p class="small muted">Mostre ou oculte as colunas padrão e crie colunas novas.</p>
+  ${base.map(([k,n])=>`<button class="opt" data-h="${k}"><span class="grow">${n}</span><span class="st ${hide.includes(k)?"n":"g"}">${hide.includes(k)?"Oculta":"Visível"}</span></button>`).join("")}
+  <div class="lbl">Colunas personalizadas</div>${(t.cols||[]).map(c=>`<button class="opt" data-x="${c.id}"><span class="grow">${esc(c.nome)}</span><span class="muted small">${TIP[c.tipo]}</span></button>`).join("")||'<p class="empty">Nenhuma ainda.</p>'}
+  <div class="btns"><button class="btn full" id="cNew">＋ Nova coluna</button></div>`);
+  qa(".sheet [data-h]").forEach(b=>b.onclick=()=>{const k=b.dataset.h,h=hide.includes(k)?hide.filter(x=>x!==k):hide.concat(k);B.update("turmas",t.id,{hide:h});t.hide=h;colsManager(t);});
+  qa(".sheet [data-x]").forEach(b=>b.onclick=()=>colForm(t,b.dataset.x));$("cNew").onclick=()=>colForm(t,null);}
+function colForm(t,cid){const c=cid?JSON.parse(JSON.stringify((t.cols||[]).find(x=>x.id===cid))):{id:nid(),nome:"",tipo:"texto",ops:[]};
+  const draw=()=>{sheet(`<div class="grab"></div><h2>${cid?"Editar":"Nova"} coluna</h2><label class="fld"><span>Nome da coluna</span><input id="xN" maxlength="40" value="${esc(c.nome)}"></label>
+   <div class="fld"><span>Tipo</span><div class="seg" id="xT">${[["texto","Texto livre"],["opcoes","Opções"],["simnao","Sim ou não"],["valor","Valor (R$)"],["data","Data"]].map(([v,l])=>`<button data-v="${v}" aria-pressed="${c.tipo===v}">${l}</button>`).join("")}</div></div>
+   ${c.tipo==="opcoes"?`<div class="lbl">Opções e cores</div>${c.ops.map((o,i)=>`<div class="row" style="margin-bottom:6px"><input data-oi="${i}" value="${esc(o.t)}" style="flex:1;background:var(--sf2);border:1px solid var(--line);border-radius:10px;padding:9px"><div class="seg" data-oc="${i}">${["r","o","g","n"].map(k=>`<button data-v="${k}" aria-pressed="${o.c===k}" title="cor"><span class="dot ${k}"></span></button>`).join("")}</div><button class="back" data-od="${i}">✕</button></div>`).join("")}
+   <button class="btn ghost sm" id="xAdd">＋ Opção</button>`:""}
+   <div class="btns"><button class="btn full" id="xS">Salvar coluna</button>${cid?`<button class="btn ghost full" id="xD" style="color:#FF8A8D">Remover coluna</button>`:""}</div>`);
+   const sync=()=>{c.nome=$("xN").value;qa("[data-oi]").forEach(i=>c.ops[+i.dataset.oi].t=i.value);};
+   $("xT").onclick=e=>{const b=e.target.closest("button");if(!b)return;sync();c.tipo=b.dataset.v;if(c.tipo==="opcoes"&&!c.ops.length)c.ops=[{t:"Não iniciado",c:"r"},{t:"Em andamento",c:"o"},{t:"Concluído",c:"g"}];draw();};
+   qa("[data-oc]").forEach(s=>s.onclick=e=>{const b=e.target.closest("button");if(!b)return;sync();c.ops[+s.dataset.oc].c=b.dataset.v;draw();});
+   qa("[data-od]").forEach(b=>b.onclick=()=>{sync();c.ops.splice(+b.dataset.od,1);draw();});const ad=$("xAdd");if(ad)ad.onclick=()=>{sync();c.ops.push({t:"",c:"n"});draw();};
+   $("xS").onclick=()=>{sync();c.nome=c.nome.trim();if(!c.nome)return toast("⚠️","Dê um nome à coluna","");c.ops=(c.ops||[]).filter(o=>o.t.trim());const cols=(t.cols||[]).filter(x=>x.id!==c.id).concat(c);
+     if(cid)cols.sort((a,b)=>(t.cols||[]).findIndex(x=>x.id===a.id)-(t.cols||[]).findIndex(x=>x.id===b.id));B.update("turmas",t.id,{cols});t.cols=cols;colsManager(t);};
+   const d=$("xD");if(d)d.onclick=()=>{if(confirm("Remover esta coluna? Os valores dela deixam de aparecer.")){const cols=(t.cols||[]).filter(x=>x.id!==c.id);B.update("turmas",t.id,{cols});t.cols=cols;colsManager(t);}};};draw();}
+function csv(t){const cols=columns(t),al=D.alunos.filter(a=>a.turma===t.id).sort((a,b)=>(a.nome||"").localeCompare(b.nome||"","pt"));
+  const txt=h=>String(h).replace(/<[^>]+>/g,"").replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&quot;/g,'"');
+  const rows=[cols.map(c=>c.n)].concat(al.map(a=>cols.map(c=>{if(c.t==="long")return a[c.k]||"";if(c.t==="x"&&(c.c.tipo==="texto"))return (a.x||{})[c.c.id]||"";return txt(cellView(t,a,c).h).replace("—","");})));
+  const s="\ufeff"+rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(";")).join("\n");const l=document.createElement("a");l.href=URL.createObjectURL(new Blob([s],{type:"text/csv"}));l.download=`${t.nome}.csv`;document.body.appendChild(l);l.click();l.remove();toast("⬇️","Planilha exportada","Abra no Excel ou no Google Planilhas.");}
+function kitsManager(){const ks=kits().slice();const saveK=l=>B.set("config","team",Object.assign({},D.config.find(c=>c.id==="team")||{},{kits:l}));
+  sheet(`<div class="grab"></div><h2>Kits</h2><p class="small muted">Os kits aparecem para escolha na coluna “Kit” das planilhas. Ao escolher um kit, o total a pagar é preenchido com o preço dele.</p>
+  ${ks.map(k=>`<button class="opt" data-k="${k.id}"><span class="grow">${esc(k.nome)}</span><span class="muted">${R(k.preco)}</span></button>`).join("")||'<p class="empty">Nenhum kit ainda.</p>'}
+  <div class="row" style="gap:8px;margin-top:10px"><input id="kN" placeholder="Nome do kit" maxlength="40" style="flex:2;background:var(--sf2);border:1px solid var(--line);border-radius:12px;padding:10px"><input id="kP" placeholder="Preço" inputmode="decimal" style="flex:1;min-width:0;background:var(--sf2);border:1px solid var(--line);border-radius:12px;padding:10px"></div>
+  <div class="btns"><button class="btn full" id="kA">＋ Adicionar kit</button></div>`);
+  $("kA").onclick=async()=>{const n=$("kN").value.trim();if(!n)return;ks.push({id:nid(),nome:n,preco:money($("kP").value)});await saveK(ks);kitsManager();};
+  qa(".sheet [data-k]").forEach(b=>b.onclick=()=>{const k=ks.find(x=>x.id===b.dataset.k);sheet(`<div class="grab"></div><h2>Editar kit</h2><label class="fld"><span>Nome</span><input id="kN2" value="${esc(k.nome)}"></label><label class="fld"><span>Preço (R$)</span><input id="kP2" inputmode="decimal" value="${String(k.preco).replace(".",",")}"></label>
+    <div class="btns"><button class="btn full" id="kS2">Salvar</button><button class="btn ghost full" id="kD2" style="color:#FF8A8D">Excluir kit</button></div>`);
+    $("kS2").onclick=async()=>{k.nome=$("kN2").value.trim()||k.nome;k.preco=money($("kP2").value);await saveK(ks);kitsManager();};$("kD2").onclick=async()=>{await saveK(ks.filter(x=>x.id!==k.id));kitsManager();};});}
+/* ---------- missões e avisos ---------- */
+function vMissoes(){const f=VIEW.f||"mim";const t=TODAY();
+  let L=D.missoes.slice();if(f==="mim")L=L.filter(m=>forMe(m)&&m.tipo!=="aviso");else if(f==="env")L=L.filter(m=>m.de===UID);else if(f==="av")L=L.filter(m=>m.tipo==="aviso");
+  L.sort((a,b)=>(a.status==="feita")-(b.status==="feita")||(a.prazo||"9").localeCompare(b.prazo||"9")||(b.criado-a.criado));
+  on(()=>{qa("#mF button").forEach(b=>b.onclick=()=>{VIEW.f=b.dataset.v;render();});qa("[data-m]").forEach(b=>b.onclick=()=>openMissao(b.dataset.m));$("fab").onclick=()=>newMissao();});
+  return topBar("Missões e avisos")+`<div class="seg" id="mF" style="margin:14px 0 10px">${[["mim","Para mim"],["env","Enviadas"],["todas","Todas"],["av","Avisos"]].map(([v,l])=>`<button data-v="${v}" aria-pressed="${f===v}">${l}</button>`).join("")}</div>
+  ${L.map(m=>`<button class="item" data-m="${m.id}"><span class="e">${m.tipo==="aviso"?"📣":m.status==="feita"?"✅":m.prazo&&m.prazo<t?"⏰":"📌"}</span><div class="grow"><b>${esc(m.titulo)}</b>
+   <span class="tiny muted">${esc(ufirst(m.de))} → ${(m.para||[]).includes("todos")?"todos":(m.para||[]).map(ufirst).map(esc).join(", ")}${m.prazo?` · ${m.prazo===t?"hoje":m.prazo<t&&m.status!=="feita"?`<span style="color:#FF8A8D">atrasada (${fdate(m.prazo)})</span>`:fdate(m.prazo)}`:""}</span></div>${m.tipo==="aviso"?"":stChip(m.status)}</button>`).join("")||'<p class="empty">Nada por aqui.</p>'}
+  <button class="fab" id="fab" aria-label="Nova missão">＋</button>`;}
+function newMissao(pre){let tipo="missao",para=pre?[pre]:[];
+  const draw=()=>{const others=D.users.filter(u=>u.id!==UID);sheet(`<div class="grab"></div><h2>Nova ${tipo==="aviso"?"mensagem de aviso":"missão"}</h2>
+   <div class="seg" id="nTp"><button data-v="missao" aria-pressed="${tipo==="missao"}">✅ Missão (tarefa)</button><button data-v="aviso" aria-pressed="${tipo==="aviso"}">📣 Aviso</button></div>
+   <label class="fld"><span>Título</span><input id="mT" maxlength="100" placeholder="${tipo==="aviso"?"Ex.: Reunião amanhã às 8h":"Ex.: Confirmar fotos da placa do 9º B"}"></label>
+   <label class="fld"><span>Detalhes (até 250 caracteres)</span><textarea id="mD" maxlength="250"></textarea><div class="cnt" id="mC">0/250</div></label>
+   <div class="fld"><span>Para</span><div class="seg" id="mP"><button data-v="todos" aria-pressed="${para.includes("todos")}">👥 Todos</button>${others.map(u=>`<button data-v="${u.id}" aria-pressed="${para.includes(u.id)}">${esc(u.nome)}</button>`).join("")}</div></div>
+   ${tipo==="missao"?`<label class="fld"><span>Prazo</span><input id="mPz" type="date" value="${TODAY()}"></label><div class="seg" id="mQ"><button data-d="0">Hoje</button><button data-d="1">Amanhã</button><button data-d="7">Em 1 semana</button></div>`:""}
+   <div class="btns"><button class="btn full" id="mS">Enviar</button></div>`);
+   $("nTp").onclick=e=>{const b=e.target.closest("button");if(!b)return;tipo=b.dataset.v;draw();};
+   $("mP").onclick=e=>{const b=e.target.closest("button");if(!b)return;const v=b.dataset.v;if(v==="todos")para=para.includes("todos")?[]:["todos"];else{para=para.filter(x=>x!=="todos");para=para.includes(v)?para.filter(x=>x!==v):para.concat(v);}qa("#mP button").forEach(x=>x.setAttribute("aria-pressed",para.includes(x.dataset.v)));};
+   const q=$("mQ");if(q)q.onclick=e=>{const b=e.target.closest("button");if(b)$("mPz").value=addDays(TODAY(),+b.dataset.d);};
+   $("mD").oninput=()=>$("mC").textContent=$("mD").value.length+"/250";
+   $("mS").onclick=async()=>{const ti=$("mT").value.trim();if(!ti)return toast("⚠️","Escreva o título","");if(!para.length)return toast("⚠️","Escolha para quem enviar","");
+     const v={tipo,titulo:ti,desc:$("mD").value.slice(0,250),para,de:UID,criado:Date.now()};if(tipo==="missao"){v.prazo=$("mPz").value||TODAY();v.status="pendente";}
+     await B.add("missoes",v);closeSheet();toast(tipo==="aviso"?"📣":"✅",tipo==="aviso"?"Aviso enviado":"Missão enviada",para.includes("todos")?"Para toda a equipe":para.map(ufirst).join(", "));};};draw();}
+function openMissao(id){const m=D.missoes.find(x=>x.id===id);if(!m)return;const can=forMe(m)||m.de===UID;
+  sheet(`<div class="grab"></div><div class="row">${avatar(m.de)}<div class="grow"><span class="tiny muted">${m.tipo==="aviso"?"Aviso":"Missão"} de ${esc(uname(m.de))} · ${ago(m.criado)}</span><h2 style="margin:2px 0 0">${esc(m.titulo)}</h2></div></div>
+  ${m.desc?`<p class="small" style="white-space:pre-wrap">${esc(m.desc)}</p>`:""}<p class="tiny muted">Para: ${(m.para||[]).includes("todos")?"toda a equipe":(m.para||[]).map(uname).map(esc).join(", ")}${m.prazo?" · prazo "+fdate(m.prazo):""}</p>
+  ${m.tipo!=="aviso"&&can?`<div class="lbl">Status</div><div class="btns" style="margin-top:0">${[["pendente","Pendente","r"],["andamento","Em andamento","o"],["feita","Concluída","g"]].map(([v,l,c])=>`<button class="opt ${m.status===v?"on":""}" data-s="${v}"><span class="dot ${c}"></span>${l}</button>`).join("")}</div>
+   ${m.feitaPor?`<p class="tiny muted">Concluída por ${esc(uname(m.feitaPor))}</p>`:""}`:""}
+  <div class="btns">${m.de===UID?`<button class="btn ghost full" id="mDel" style="color:#FF8A8D">Excluir</button>`:""}</div>`);
+  qa(".sheet [data-s]").forEach(b=>b.onclick=()=>{const p={status:b.dataset.s};if(b.dataset.s==="feita")p.feitaPor=UID;B.update("missoes",id,p);closeSheet();if(b.dataset.s==="feita")toast("✅","Missão concluída","");});
+  const d=$("mDel");if(d)d.onclick=()=>{if(confirm("Excluir para todos?")){B.del("missoes",id);closeSheet();}};}
+/* ---------- equipe e ajustes ---------- */
+function vEquipe(){on(()=>qa("[data-u]").forEach(b=>b.onclick=()=>openMember(b.dataset.u)));
+  return topBar("Equipe")+`<div class="menu" style="margin-top:14px">${D.users.slice().sort((a,b)=>a.nome.localeCompare(b.nome)).map(u=>`<button class="mi" data-u="${u.id}" style="align-items:center;text-align:center">${avatar(u.id,"ava lg")}<b>${esc(u.nome)} ${esc(u.sobrenome||"")}</b><span>${esc(u.tel||"")}${u.id===UID?" · você":""}</span></button>`).join("")}</div>`;}
+function openMember(id){const u=user(id),tel=(u.tel||"").replace(/\D/g,"");
+  sheet(`<div class="grab"></div><div style="text-align:center">${avatar(id,"ava xl")}<h2 style="margin-top:10px">${esc(uname(id))}</h2><p class="muted">${esc(u.tel||"")}</p></div>
+  <div class="btns">${tel?`<a class="btn ghost full" href="tel:${tel}">📞 Ligar</a><a class="btn ghost full" href="https://wa.me/55${tel.replace(/^55/,"")}" target="_blank" rel="noopener">💬 WhatsApp</a>`:""}${id!==UID?`<button class="btn full" id="uM">✅ Enviar missão ou aviso</button>`:""}</div>`);
+  const b=$("uM");if(b)b.onclick=()=>newMissao(id);}
+function vAjustes(){on(()=>{$("aPf").onclick=()=>{sheet(`<div class="grab"></div><h2>Meu perfil</h2>${profileForm(false,ME)}`);bindProfileForm(false,closeSheet);};$("aKit").onclick=kitsManager;$("aEq").onclick=()=>go({v:"equipe"});
+    const n=$("aNt");if(n)n.onclick=enableNotif;$("aOut").onclick=()=>{if(confirm("Sair da conta neste aparelho?")){STARTED=false;B.signOut();}};});
+  const np="Notification" in window?Notification.permission:"unsupported";
+  return topBar("Perfil e ajustes")+`<div class="card row" style="margin-top:14px">${avatar(UID,"ava lg")}<div class="grow"><b style="font-size:1.1rem">${esc(uname(UID))}</b><div class="muted small">${esc(ME.tel||"")}</div></div><button class="btn ghost sm" id="aPf">Editar</button></div>
+  <div class="lbl">Equipe e planilhas</div><button class="item" id="aKit"><span class="e">🎁</span><div class="grow"><b>Kits</b><span class="tiny muted">${kits().length} kit(s) cadastrados</span></div><span class="chev">›</span></button>
+  <button class="item" id="aEq"><span class="e">👥</span><div class="grow"><b>Equipe</b><span class="tiny muted">${D.users.length} membro(s)</span></div><span class="chev">›</span></button>
+  <div class="lbl">Notificações</div><div class="card small">${np==="granted"?"🔔 Ativadas neste aparelho.":np==="denied"?"🔕 Bloqueadas. Libere nas configurações do celular.":np==="unsupported"?"Este navegador não suporta notificações.":`<button class="btn full" id="aNt">🔔 Ativar notificações</button>`}
+   <p class="tiny muted" style="margin:8px 0 0">${!B.demo&&CFG.vapidKey?"Avisos chegam mesmo com o app fechado.":"Os avisos chegam com o app aberto ou em segundo plano."}</p></div>
+  <div class="lbl">Conta</div><button class="btn ghost full" id="aOut">Sair da conta</button>
+  ${B.demo?`<div class="demo">Modo demonstração: dados só neste aparelho.</div>`:""}
+  <p class="foot"><img src="${LOGO}" alt="" style="width:56px;height:56px"><br>G3 Formatura · versão 1.0<br>Produzido por ${AUTHOR}</p>`;}
+/* ================= FOLHA, AVISOS ================= */
+function sheet(h,after){$("sheet").innerHTML=`<div class="in" role="dialog" aria-modal="true">${h}</div>`;$("sheet").classList.remove("hidden");guard();if(after)after();}
+function closeSheet(){$("sheet").classList.add("hidden");$("sheet").innerHTML="";}
+$("sheet").addEventListener("click",e=>{if(e.target.id==="sheet")closeSheet();});
+function toast(e,t,s){const d=document.createElement("div");d.className="toast";d.innerHTML=`<span class="e">${e}</span><div><b>${esc(t)}</b>${s?`<span>${esc(s)}</span>`:""}</div>`;$("toasts").appendChild(d);setTimeout(()=>d.remove(),3400);}
+try{history.replaceState({g:0},"");}catch(e){}
+
+if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+</script>
+</body>
+</html>

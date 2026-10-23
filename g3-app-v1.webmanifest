@@ -1,0 +1,37 @@
+{
+  "id": "./",
+  "name": "G3 Formatura",
+  "short_name": "G3",
+  "description": "Agenda, planilhas das escolas e faculdades, notas e missões da equipe G3 Formatura. Produzido por Flávio S. Praciano.",
+  "lang": "pt-BR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#09090A",
+  "theme_color": "#09090A",
+  "categories": [
+    "business",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "g3-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "g3-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "g3-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
