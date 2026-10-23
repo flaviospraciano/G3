@@ -121,7 +121,7 @@ table.sh{border-collapse:separate;border-spacing:0;font-size:.86rem;min-width:10
 
 .logo.sm{width:26px;height:26px;margin-left:-2px}
 .foot{text-align:center;color:var(--soft);font-size:.98rem;margin:30px 0 6px;line-height:1.4}.foot b{color:var(--ink);font-weight:800}
-.foot .flat{width:78px;display:block;margin:0 auto 6px;opacity:.9}:root:not([data-theme="light"]) .foot .flat{filter:invert(1) hue-rotate(180deg)}
+.foot .flat{width:84px;display:block;margin:0 auto 8px}:root[data-theme="light"] .foot .flat{background:#15130E;padding:10px 12px;border-radius:16px;width:104px;box-sizing:content-box}
 .calcbtn{margin-top:22px;padding:16px;font-size:1.05rem;background:linear-gradient(135deg,var(--grn),#1A8F4A);color:#fff;box-shadow:0 4px 0 rgba(0,0,0,.28)}
 .years{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 6px}.yr{background:var(--sf);border:2px solid var(--ghostbd);border-radius:16px;padding:12px;text-align:left;color:var(--ink)}
 .yr b{display:block;font-size:1.5rem;line-height:1.1}.yr span{font-size:.8rem;color:var(--soft)}.yr.on{background:var(--btn);border-color:var(--btn);color:var(--btntx)}.yr.on span{color:var(--btntx)}
@@ -156,9 +156,10 @@ table.tax td{padding:8px 14px;border-bottom:1px solid var(--line);font-weight:70
 <script>
 const LOGO="g3-logo.png";
 const LOGO_PRINT="g3-logo-flat.png";
+const LOGO_WHITE="g3-logo-white.png";
 "use strict";
 /* ================= MARCA E RODAPÉ ================= */
-function FOOT(){return `<div class="foot"><img class="flat" src="${LOGO_PRINT}" alt="Grupo G3 Formatura"><div>Produzido por <b>${AUTHOR}</b></div></div>`;}
+function FOOT(){return `<div class="foot"><img class="flat" src="${LOGO_WHITE}" alt="Grupo G3 Formatura"><div>Produzido por <b>${AUTHOR}</b></div></div>`;}
 const ANOS=["2026","2027"];const instAno=i=>i.ano||"2026";
 const curAno=()=>VIEW.ano||localStorage.getItem("g3_ano")||"2026";
 const byName=(a,b)=>(a.nome||"").localeCompare(b.nome||"","pt",{numeric:true});
