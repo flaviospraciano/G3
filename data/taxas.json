@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "provider": "Ton",
+  "plano": "MegaTon",
+  "fonte": "https://ton.com.br/planos-e-taxas",
+  "atualizadoEm": null,
+  "observacao": "SEED PARCIAL. Valores null ainda nao foram lidos da pagina oficial. Confira com o app da Ton (Planos e Taxas) antes de usar em producao. Percentuais em %.",
+  "faixas": [
+    { "id": "promo",   "nome": "Promocional (30 dias ou ate R$ 5 mil)", "min": 0,     "max": 5000,  "promocional": true },
+    { "id": "ate3k",   "nome": "Ate R$ 3 mil",          "min": 0,     "max": 3000 },
+    { "id": "3k-6k",   "nome": "R$ 3 mil a R$ 6 mil",   "min": 3000,  "max": 6000 },
+    { "id": "6k-10k",  "nome": "R$ 6 mil a R$ 10 mil",  "min": 6000,  "max": 10000 },
+    { "id": "10k-30k", "nome": "R$ 10 mil a R$ 30 mil", "min": 10000, "max": 30000 },
+    { "id": "30k+",    "nome": "Acima de R$ 30 mil",    "min": 30000, "max": null }
+  ],
+  "bandeiras": { "visa_master": ["Visa", "Mastercard"], "outras": ["Elo", "Amex", "Hipercard"] },
+  "recebimento": { "1du": "Em 1 dia util", "na_hora": "Na hora" },
+  "taxas": {
+    "promo": { "visa_master": { "1du": { "debito": 0.57, "credito": 0.57, "parcelas": { "2": 3.97, "3": 3.97, "4": 4.97, "5": 5.97, "6": 6.97, "7": 7.97, "8": 7.97, "9": 7.97, "10": 7.97, "11": 7.97, "12": 7.97 } } } },
+    "ate3k": { "visa_master": { "1du": { "debito": 1.69, "credito": 3.86, "parcelas": { "2": 9.86, "3": 11.24, "4": 12.59, "5": 13.92, "6": 15.22, "7": 16.50, "8": null, "9": null, "10": null, "11": null, "12": 20.39 } } } },
+    "3k-6k": { "visa_master": { "1du": { "debito": 1.39, "credito": 3.34, "parcelas": { "2": null, "3": null, "4": null, "5": null, "6": 10.85, "7": null, "8": null, "9": null, "10": null, "11": null, "12": 12.38 } } } },
+    "6k-10k": { "visa_master": { "1du": { "debito": 1.32, "credito": 3.25, "parcelas": { "2": null, "3": null, "4": null, "5": null, "6": 10.37, "7": null, "8": null, "9": null, "10": null, "11": null, "12": 12.35 } } } },
+    "10k-30k": { "visa_master": { "1du": { "debito": 1.22, "credito": 3.02, "parcelas": { "2": null, "3": null, "4": null, "5": null, "6": 9.27, "7": null, "8": null, "9": null, "10": null, "11": null, "12": 11.73 } } } },
+    "30k+": { "visa_master": { "1du": { "debito": 1.19, "credito": 2.85, "parcelas": { "2": null, "3": null, "4": null, "5": null, "6": 9.22, "7": null, "8": null, "9": null, "10": null, "11": null, "12": 11.51 } } } }
+  }
+}
