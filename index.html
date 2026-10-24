@@ -362,7 +362,7 @@ function normalizeRates(j,base){if(!j||typeof j!=="object")throw new Error("Resp
     taxas:MODS.map(([id,n,parc],i)=>({id,n,parc,p:pc[i]}))};}
 /* Busca as taxas do dia no endpoint (tela aberta ou botão Atualizar). Em caso de falha, segue com a última tabela salva. */
 async function fetchDailyRates(o={}){const base=fixTax(taxInfo()||TAX_PAD),url=String(taxInfo()&&taxInfo().url||CFG.ratesUrl||"").trim();
-  if(!url){RATES.err="";if(o.manual)toast("ℹ️","Endpoint não configurado","Informe o endereço em ✏️ Editar taxas (ou ratesUrl no config.js). Por enquanto vale a tabela salva.");return{ok:false,reason:"sem-url"};}
+  if(!url){RATES.err="";if(o.manual)atualizarTaxas();return{ok:false,reason:"sem-url"};}
   if(!/^https:\/\//i.test(url)){RATES.err="O endereço precisa começar com https://";if(o.manual)toast("⚠️","Endereço inválido",RATES.err);refreshTaxView();return{ok:false,reason:"url"};}
   if(RATES.busy)return{ok:false,reason:"busy"};RATES.busy=true;RATES.err="";refreshTaxView();
   const ctl=typeof AbortController!=="undefined"?new AbortController():null,to=setTimeout(()=>ctl&&ctl.abort(),8000);
@@ -384,13 +384,35 @@ function vTaxas(){seedFixas();const A=activeRates(),tx=A.tx,sel=Math.max(0,Math.
       <div class="profit"><div class="pc ideal"><span>Valor do desconto da taxa</span><b>${R(c.desconto)}</b><small>cobrado − desejado</small></div><div class="pc ok"><span>Taxa aplicada</span><b>${pctTxt(c.pct)}</b><small>${esc(tx.nome)} · ${esc(r.n)}</small></div></div>
       <p class="small muted">Você recebe líquido ${R(c.liquido)}. Se digitasse só ${R(v)}, receberia ${R(c.recebeSem)}.</p><button class="btn ghost full" id="tCp">📋 Copiar valor para o cliente</button>`;
       $("tCp").onclick=()=>copyText(`💳 Valor no cartão (${r.n.toLowerCase()}): ${R(c.cobrar)}${r.parc>1?` — ${r.parc}x de ${R(c.cobrar/r.parc)}`:""}`);};
-    $("tV").oninput=upd;$("tS").onchange=upd;upd();$("tEd").onclick=taxForm;$("tRf").onclick=()=>fetchDailyRates({manual:true});});
-  return topBar("Taxas da maquininha")+`<div class="card ratebar"><div class="grow"><b>${esc(tx.nome)}${(tx.bandeiras||[]).length?" · "+esc(tx.bandeiras.join(" e ")):""}</b><div class="tiny muted">${stt}</div>${RATES.err?`<div class="tiny" style="color:var(--danger)">⚠️ ${esc(RATES.err)} Usando a última tabela salva.</div>`:""}</div><button class="btn sm" id="tRf" ${RATES.busy?"disabled":""}>🔄 Atualizar</button></div>
+    $("tV").oninput=upd;$("tS").onchange=upd;upd();$("tEd").onclick=taxForm;$("tRf").onclick=()=>fetchDailyRates({manual:true});$("tRf2")&&($("tRf2").onclick=atualizarTaxas);});
+  return topBar("Taxas da maquininha")+`<div class="card ratebar"><div class="grow"><b>${esc(tx.nome)}${(tx.bandeiras||[]).length?" · "+esc(tx.bandeiras.join(" e ")):""}</b><div class="tiny muted">${stt}</div>${A.at&&A.fonte!=="padrao"&&iso(new Date(A.at))!==TODAY()?`<div class="tiny" style="color:var(--org)">⚠️ Tabela de dias atrás. Toque em Atualizar para a de hoje.</div>`:""}${RATES.err?`<div class="tiny" style="color:var(--danger)">⚠️ ${esc(RATES.err)} Usando a última tabela salva.</div>`:""}</div><button class="btn sm" id="tRf" ${RATES.busy?"disabled":""}>🔄 Atualizar</button></div>
   <div class="lbl">🧮 Calculadora: quanto cobrar</div><div class="card"><label class="fld"><span>Valor que você quer receber (R$)</span><input id="tV" inputmode="decimal" placeholder="Ex.: 100,00" value="${esc(VIEW.val||"")}"></label>
   <label class="fld"><span>Forma de pagamento</span><select id="tS">${tx.taxas.map((r,i)=>`<option value="${i}" ${i===sel?"selected":""}>${esc(r.n)} · ${pctTxt(r.p)}</option>`).join("")}</select></label><div id="tRes"></div></div>
   <div class="lbl">Tabela de taxas</div><div class="card" style="padding:0;overflow:hidden"><div class="taxhd"><b>${esc(tx.nome)}</b><span>${esc(tx.obs||"")}</span></div>
   <table class="tax"><thead><tr><th>Modalidade</th><th>Taxa</th></tr></thead><tbody>${tx.taxas.map(r=>`<tr><td>${esc(r.n)}</td><td>${pctTxt(r.p)}</td></tr>`).join("")}</tbody></table></div>
   <div class="btns"><button class="btn ghost full" id="tEd">✏️ Editar taxas e endpoint</button></div>`;}
+
+/* ===== ATUALIZAR TAXAS LENDO FOTO, PDF OU TEXTO ===== */
+function parseTaxasTexto(rows){const out={};rows.forEach(r=>{const j=(Array.isArray(r)?r.join(" "):String(r)).replace(/\s+/g," ");const n=nrm(j);const pm=j.match(/(\d{1,2}[.,]\d{1,4})\s*%?/);if(!pm)return;const v=parseFloat(pm[1].replace(",","."));if(!(v>0&&v<50))return;
+    const lab=j.slice(0,pm.index),ln=nrm(lab),mx=ln.match(/(\d{1,2})\s*x/);let id=null;
+    if(/debito/.test(ln))id="debito";else if(mx&&+mx[1]>=2&&+mx[1]<=12)id="p"+mx[1];else if(/credito|a vista|1\s*x/.test(ln))id="credito";else if(/debito/.test(n))id="debito";
+    if(id&&!(id in out))out[id]=v;});return out;}
+function atualizarTaxas(){const A=activeRates();sheet(`<div class="grab"></div><h2>🔄 Atualizar taxas do dia</h2><p class="small muted">Tire uma foto ou print da tabela de taxas da ${esc(A.tx.nome)} (app ou site), anexe o PDF ou cole o texto. O G3 lê as taxas e mostra o que mudou antes de aplicar.</p>
+  <div class="btns"><label class="btn full">📷 Foto ou print da tabela<input type="file" id="txImg" accept="image/*" hidden></label><label class="btn ghost full">📎 Anexar PDF ou imagem<input type="file" id="txDoc" accept=".pdf,image/*,application/pdf" hidden></label><button class="btn ghost full" id="txPaste">📋 Colar texto</button><button class="btn ghost full" id="txMan">✏️ Digitar à mão</button></div>`);
+  const lerF=async f=>{sheet(`<div class="grab"></div><h2>Lendo tabela…</h2><div id="rdP"><p class="small muted"><span>Preparando…</span></p><div class="bar"><i style="width:3%"></i></div></div>`);
+    try{const rows=await rowsDeArquivo(f,(t,p)=>{const el=$("rdP");if(el){el.querySelector("span").textContent=t;el.querySelector(".bar i").style.width=Math.max(3,Math.round((p||0)*100))+"%";}});revisarTaxas(parseTaxasTexto(rows));}
+    catch(e){toast("⚠️","Não consegui ler a tabela",/offline|fetch/i.test(e&&e.message||"")?"Conecte-se à internet para ler fotos.":"Tente outra foto, mais reta e nítida.");atualizarTaxas();}};
+  $("txImg").onchange=e=>e.target.files[0]&&lerF(e.target.files[0]);$("txDoc").onchange=e=>e.target.files[0]&&lerF(e.target.files[0]);$("txMan").onclick=taxForm;
+  $("txPaste").onclick=()=>{sheet(`<div class="grab"></div><h2>Colar tabela</h2><p class="small muted">Uma modalidade por linha, ex.: “Débito 2,69%”, “Crédito à vista 4,49%”, “2x 9,99%”.</p><label class="fld"><textarea id="txT" style="min-height:200px"></textarea></label><div class="btns"><button class="btn full" id="txGo">Ler taxas</button></div>`);
+    $("txGo").onclick=()=>revisarTaxas(parseTaxasTexto($("txT").value.split(/\r?\n/)));};}
+function revisarTaxas(got){const A=activeRates(),tx=A.tx,n=Object.keys(got).length;
+  if(n<3){toast("🔍","Não achei as taxas","Foram lidas "+n+". Tente uma foto mais nítida ou cole o texto.");return atualizarTaxas();}
+  const rows=tx.taxas.map(r=>{const v=got[rid(r)];return{r,v,ch:v!=null&&Math.abs(v-r.p)>1e-9};}),falt=rows.filter(x=>x.v==null).length,mud=rows.filter(x=>x.ch).length;
+  sheet(`<div class="grab"></div><h2>Conferir taxas</h2><p class="small muted">${n} de ${rows.length} modalidades lidas · ${mud} mudaram${falt?` · ${falt} não encontradas (mantêm o valor atual)`:""}.</p>
+   ${rows.map(x=>`<div class="row small" style="padding:5px 0;border-bottom:1px solid var(--line)"><span class="grow">${esc(x.r.n)}</span>${x.v==null?`<span class="muted">${pctTxt(x.r.p)} (sem leitura)</span>`:x.ch?`<span class="muted" style="text-decoration:line-through">${pctTxt(x.r.p)}</span><b>${pctTxt(x.v)}</b>`:`<span>${pctTxt(x.r.p)}</span>`}</div>`).join("")}
+   <div class="btns"><button class="btn full" id="txOk">Aplicar taxas de hoje</button><button class="btn ghost full" id="txBk">Voltar</button></div>`);
+  $("txBk").onclick=atualizarTaxas;$("txOk").onclick=async()=>{const t2=tx.taxas.map(r=>Object.assign({},r,{p:got[rid(r)]!=null?got[rid(r)]:r.p}));
+    await B.set("config","taxas",{nome:tx.nome,obs:tx.obs||"",bandeiras:tx.bandeiras||["Visa","Mastercard"],url:tx.url||"",taxas:t2,fonte:"manual",atualizado:Date.now()});closeSheet();toast("✅","Taxas de hoje aplicadas",mud+" alteradas · a equipe toda já vê.");};}
 function taxForm(){const tx=JSON.parse(JSON.stringify(activeRates().tx)),pn=s=>{const n=parseFloat(String(s).replace(/\s/g,"").replace(",","."));return isFinite(n)?n:NaN;};
   sheet(`<div class="grab"></div><h2>Editar taxas</h2><label class="fld"><span>Maquininha</span><input id="xN" value="${esc(tx.nome)}"></label><label class="fld"><span>Observação</span><input id="xO" value="${esc(tx.obs||"")}"></label>
   <label class="fld"><span>Endereço da API de taxas diárias (https, opcional)</span><input id="xU" inputmode="url" placeholder="https://seu-servidor.com/taxas.json" value="${esc(tx.url||CFG.ratesUrl||"")}"></label>
@@ -1058,7 +1080,7 @@ async function salvarLeitura(){const ctx=RD.ctx,d=RD.dest,res=RD.res,tipo=ctx.ti
 function sheet(h,after){$("sheet").innerHTML=`<div class="in" role="dialog" aria-modal="true">${h}</div>`;$("sheet").classList.remove("hidden");guard();if(after)after();}
 function closeSheet(){$("sheet").classList.add("hidden");$("sheet").innerHTML="";}
 $("sheet").addEventListener("click",e=>{if(e.target.id==="sheet")closeSheet();});
-function toast(e,t,s){const d=document.createElement("div");d.className="toast";d.innerHTML=`<span class="e">${e}</span><div><b>${esc(t)}</b>${s?`<span>${esc(s)}</span>`:""}</div>`;$("toasts").appendChild(d);setTimeout(()=>d.remove(),3400);}
+function toast(e,t,s){qa(".toast").forEach(x=>{const b=x.querySelector("b");if(b&&b.textContent===t)x.remove();});const d=document.createElement("div");d.className="toast";d.innerHTML=`<span class="e">${e}</span><div><b>${esc(t)}</b>${s?`<span>${esc(s)}</span>`:""}</div>`;$("toasts").appendChild(d);setTimeout(()=>d.remove(),3400);}
 try{history.replaceState({g:0},"");}catch(e){}
 
 if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
