@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>G3 Formatura</title>
 <meta name="description" content="G3 Formatura: agenda, planilhas das escolas e faculdades, notas e missões da equipe. Produzido por Flávio S. Praciano.">
-<meta name="theme-color" content="#F5F7FF">
+<meta name="theme-color" content="#FBFCFF">
 <meta name="color-scheme" content="light dark">
 <script>try{if(localStorage.getItem("g3_theme_ver")!=="3"){localStorage.setItem("g3_theme","leve");localStorage.setItem("g3_theme_ver","3");}var _t=localStorage.getItem("g3_theme")||"leve";if(_t==="auto")_t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"leve";if(_t!=="dark")_t="leve";document.documentElement.dataset.theme=_t;}catch(e){}</script>
-<meta name="g3-version" content="1.5.0">
+<meta name="g3-version" content="1.6.0">
 <link rel="manifest" href="g3-app-v1.webmanifest">
 <link rel="icon" type="image/png" href="g3-icon-192.png">
 <link rel="apple-touch-icon" href="g3-apple-touch.png">
@@ -141,61 +141,43 @@ table.tax{width:100%;border-collapse:collapse}table.tax th{background:#7BD389;co
 table.tax td{padding:8px 14px;border-bottom:1px solid var(--line);font-weight:700}table.tax td:last-child{font-size:1.05rem;color:var(--ink)}
 .lhead{margin:22px 0 8px;display:flex;flex-direction:column;gap:6px}.lhead b{font-size:1.08rem}
 /* ===== TEMA LEVE (claro e fino) ===== */
-:root[data-theme="leve"]{--bg:#F4F6FF;--sf:#FFFFFF;--sf2:#EEF1FF;--sf3:#E1E7FB;--line:#E3E8F7;--ink:#1A2042;--soft:#566083;--faint:#8A93B3;--gold:#F59E0B;--gold2:#B45309;--goldd:#92400E;--btn:#FFC21A;--btntx:#2B1A00;--ghost:#FFFFFF;--ghostbd:#CFD6F0;--ghosttx:#1A2042;--link:#4F46E5;--red:#F0455A;--org:#FF8A1F;--grn:#16B364;--blue:#3B82F6;--danger:#E02D45;--topbg:rgba(255,255,255,.9);--navbg:rgba(255,255,255,.97);--thbg:#EEF1FF;--thtx:#3A44A0;--thbd:#DCE2F8;--zebra:#F9FAFF;--toastbg:#FFFFFF;--toastbd:#E3E8F7;--herobg:linear-gradient(135deg,#FFD84D 0%,#FFA23F 60%,#FF7E67 120%);--herobd:#FFC15C;--herotx:#3A2200;--cr:#FFE3E8;--crt:#C21D36;--co:#FFEBD0;--cot:#B45309;--cg:#D6F7E5;--cgt:#0A8A48;--r:12px;--evbg:#FFEFB8;color-scheme:light}
-[data-theme=leve] body{font-weight:400}
-[data-theme=leve] b,[data-theme=leve] strong{font-weight:600}
-[data-theme=leve] .top{padding-top:calc(8px + env(safe-area-inset-top,0px));padding-bottom:8px}
-[data-theme=leve] .top h1{font-weight:600;font-size:1rem}
-[data-theme=leve] .back,[data-theme=leve] .theme{border-width:1px;width:34px;height:34px;border-radius:10px;background:var(--sf);font-size:1rem}
-[data-theme=leve] .btn{font-weight:600;box-shadow:none;border-radius:12px;padding:11px 15px}
-[data-theme=leve] .btn.ghost{border-width:1px}
-[data-theme=leve] .btn.sm{padding:7px 11px}
+:root[data-theme="leve"]{--bg:#FBFCFF;--sf:#FFFFFF;--sf2:#F6F8FF;--sf3:#ECF0FC;--line:#EAEEF9;--ink:#2A3150;--soft:#667091;--faint:#9AA2BF;--gold:#F5B63D;--gold2:#B8730A;--goldd:#9A5F08;--btn:#FFD966;--btntx:#3A2600;--ghost:#FFFFFF;--ghostbd:#DDE3F5;--ghosttx:#2A3150;--link:#5B54D6;--red:#F26B7B;--org:#FFA64D;--grn:#3CC98A;--blue:#6AA3F8;--danger:#E04A5E;--topbg:rgba(255,255,255,.92);--navbg:rgba(255,255,255,.97);--thbg:#F5F7FF;--thtx:#5560B5;--thbd:#E8ECFA;--zebra:#FCFDFF;--toastbg:#FFFFFF;--toastbd:#EAEEF9;--herobg:linear-gradient(135deg,#FFF1BF 0%,#FFE3B8 60%,#FFD6D6 120%);--herobd:#FFE7A8;--herotx:#4A3300;--cr:#FFEAEE;--crt:#C93349;--co:#FFF2E0;--cot:#B8650A;--cg:#E3F9EE;--cgt:#12885A;--r:12px;--evbg:#FFF6D6;color-scheme:light}
+[data-theme=leve] .back,[data-theme=leve] .theme{background:var(--sf);border-radius:12px}
+[data-theme=leve] .btn{box-shadow:none;border-radius:12px}
 [data-theme=leve] .card,[data-theme=leve] .item,[data-theme=leve] .mi,[data-theme=leve] .ev,[data-theme=leve] .sum div,[data-theme=leve] .wrap,[data-theme=leve] .meta,[data-theme=leve] .kpi{box-shadow:0 1px 2px rgba(40,34,10,.04)}
-[data-theme=leve] .item,[data-theme=leve] .mi{border-radius:14px}
-[data-theme=leve] .lbl{font-weight:600;letter-spacing:.06em}
-[data-theme=leve] .link,[data-theme=leve] .seg button,[data-theme=leve] .opt{font-weight:600}
-[data-theme=leve] .st{font-weight:600;font-size:.72rem;padding:2px 9px}
 [data-theme=leve] .st.r{background:var(--cr);color:var(--crt)}[data-theme=leve] .st.o{background:var(--co);color:var(--cot)}[data-theme=leve] .st.g{background:var(--cg);color:var(--cgt)}
 [data-theme=leve] .st.r::before{background:var(--red)}[data-theme=leve] .st.o::before{background:var(--org)}[data-theme=leve] .st.g::before{background:var(--grn)}
-[data-theme=leve] .hero{border:1px solid var(--herobd);border-radius:18px;padding:16px}
-[data-theme=leve] .hero h2{font-weight:600}
-[data-theme=leve] .nav button{font-weight:500}
-[data-theme=leve] .nav button[aria-current="true"]{font-weight:700}
 [data-theme=leve] .mini{box-shadow:0 2px 8px rgba(40,34,10,.12)}
 [data-theme=leve] .icard{box-shadow:0 1px 2px rgba(40,34,10,.04)}
-[data-theme=leve] .fab{box-shadow:0 6px 16px rgba(120,90,0,.22);border-radius:16px}
 [data-theme=leve] .sheet{background:rgba(35,30,15,.32)}
 [data-theme=leve] .sheet .in{box-shadow:0 -8px 30px rgba(40,34,10,.12)}
-[data-theme=leve] .toast{color:var(--ink);box-shadow:0 8px 24px rgba(40,34,10,.14);border-width:1px}
+[data-theme=leve] .toast{color:var(--ink);box-shadow:0 8px 24px rgba(40,34,10,.14)}
 [data-theme=leve] .toast span{color:var(--soft)}
-[data-theme=leve] .exit{background:rgba(35,30,15,.35)}[data-theme=leve] .exit .box{border-width:1px}
-[data-theme=leve] .sh th{font-weight:600;border-bottom-width:1px}
-[data-theme=leve] .sh td.r>button,[data-theme=leve] .sh td.o>button,[data-theme=leve] .sh td.g>button{font-weight:600}
-[data-theme=leve] .yr{border-width:1px}[data-theme=leve] .yr.on{border-color:var(--btn)}
-[data-theme=leve] .profit .pc{border-width:1px}[data-theme=leve] .cal button.has{border-width:1px}[data-theme=leve] .cal button.td{border-width:1.5px}
-[data-theme=leve] .opt.on,[data-theme=leve] .item.hl{border-width:1px}[data-theme=leve] .demo{border-width:1px}
+[data-theme=leve] .exit{background:rgba(35,30,15,.35)}
+[data-theme=leve] .yr.on{border-color:var(--btn)}
 [data-theme=leve] .taxhd{background:#EAF6EE;color:#17663A}
 [data-theme=leve] table.tax th{background:#F3F8F4;color:#2D6B45}[data-theme=leve] table.tax th:last-child{background:#DFF1E5;color:#17663A}
 [data-theme=leve] .calcbtn{background:var(--grn);box-shadow:none}
+
 /* ===== VISUAL VIBRANTE (modo claro) ===== */
-[data-theme=leve] body{background:linear-gradient(180deg,#E9EEFF 0,#F4F6FF 280px)}
-[data-theme=leve] .top{border-bottom:0;box-shadow:0 6px 18px rgba(60,70,150,.08)}
-[data-theme=leve] .btn:not(.ghost):not(.calcbtn):not(.danger){background:linear-gradient(135deg,#FFD233,#FFA927);box-shadow:0 4px 12px rgba(255,165,30,.32)}
-[data-theme=leve] .yr.on{background:linear-gradient(135deg,#FFD233,#FFA927);border-color:transparent}
-[data-theme=leve] .fab{background:linear-gradient(135deg,#FFD233,#FF9F1A);box-shadow:0 8px 20px rgba(255,150,20,.4)}
-[data-theme=leve] .hero{box-shadow:0 10px 26px rgba(255,140,40,.28);border:0}
+[data-theme=leve] body{background:linear-gradient(180deg,#F1F5FF 0,#FBFCFF 260px)}
+[data-theme=leve] .top{border-bottom-color:transparent;box-shadow:0 4px 14px rgba(60,70,150,.05)}
+[data-theme=leve] .btn:not(.ghost):not(.calcbtn):not(.danger){background:linear-gradient(135deg,#FFE58A,#FFCF70);box-shadow:0 3px 10px rgba(255,190,60,.25)}
+[data-theme=leve] .yr.on{background:linear-gradient(135deg,#FFEB9E,#FFD98A);border-color:transparent}
+[data-theme=leve] .fab{background:linear-gradient(135deg,#FFE58A,#FFCB6B);box-shadow:0 6px 16px rgba(255,180,50,.32)}
+[data-theme=leve] .hero{box-shadow:0 6px 18px rgba(255,190,90,.18);border-color:transparent}
 [data-theme=leve] .hero *{color:var(--herotx)!important}
-[data-theme=leve] .nav button[aria-current="true"]{color:#E07B00}
-[data-theme=leve] .item .e{background:#FFF1C9}
-[data-theme=leve] .menu .mi .e{background:#FFF1C9}
-[data-theme=leve] .menu .mi:nth-child(5n+2) .e{background:#DDE8FF}[data-theme=leve] .menu .mi:nth-child(5n+3) .e{background:#D9F7E8}[data-theme=leve] .menu .mi:nth-child(5n+4) .e{background:#FFE0E6}[data-theme=leve] .menu .mi:nth-child(5n) .e{background:#EBDDFF}
-[data-theme=leve] .lbl{color:#6B73A0}
-[data-theme=leve] .bar i{background:linear-gradient(90deg,#FFC21A,#FF9F1A)}
-[data-theme=leve] .bar.g i{background:linear-gradient(90deg,#16B364,#3DDC97)}[data-theme=leve] .bar.o i{background:linear-gradient(90deg,#FF8A1F,#FFB347)}[data-theme=leve] .bar.r i{background:linear-gradient(90deg,#F0455A,#FF7A8A)}
-[data-theme=leve] .kpi:nth-child(1){background:#FFF6DA;border-color:#FFE29A}[data-theme=leve] .kpi:nth-child(2){background:#E4FAEE;border-color:#B8EFD0}[data-theme=leve] .kpi:nth-child(3){background:#E6EEFF;border-color:#C5D6FF}
+[data-theme=leve] .nav button[aria-current="true"]{color:#C9780A}
+[data-theme=leve] .item .e{background:#FFF6D9}
+[data-theme=leve] .menu .mi .e{background:#FFF6D9}
+[data-theme=leve] .menu .mi:nth-child(5n+2) .e{background:#E6EEFF}[data-theme=leve] .menu .mi:nth-child(5n+3) .e{background:#E3F8EE}[data-theme=leve] .menu .mi:nth-child(5n+4) .e{background:#FFE9ED}[data-theme=leve] .menu .mi:nth-child(5n) .e{background:#F0E7FF}
+[data-theme=leve] .lbl{color:#8088AD}
+[data-theme=leve] .bar i{background:linear-gradient(90deg,#FFD966,#FFBE55)}
+[data-theme=leve] .bar.g i{background:linear-gradient(90deg,#3CC98A,#7BE0B3)}[data-theme=leve] .bar.o i{background:linear-gradient(90deg,#FFA64D,#FFC888)}[data-theme=leve] .bar.r i{background:linear-gradient(90deg,#F26B7B,#FF9DA8)}
+[data-theme=leve] .kpi:nth-child(1){background:#FFF9E6;border-color:#FFEDB8}[data-theme=leve] .kpi:nth-child(2){background:#EEFBF4;border-color:#CDF2DF}[data-theme=leve] .kpi:nth-child(3){background:#F0F5FF;border-color:#D7E3FF}
 [data-theme=leve] .foot .flat{background:transparent;filter:brightness(0)}
-[data-theme=leve] .item.pinned{background:#FFF8E1}
-[data-theme=leve] .cobrar{background:linear-gradient(135deg,#FFF3C4,#FFE0A3);border-color:#FFC15C}
+[data-theme=leve] .item.pinned{background:#FFFBEC}
+[data-theme=leve] .cobrar{background:linear-gradient(135deg,#FFF8DC,#FFEFC9);border-color:#FFE19A}
 /* ===== BOTOES DISCRETOS + GRADE DE ESCOLAS ===== */
 .mini{position:fixed;right:26px;z-index:29;width:42px;height:42px;border-radius:50%;border:1px solid var(--ghostbd);background:var(--sf);color:var(--ink);font-size:1.05rem;display:grid;place-items:center;box-shadow:0 3px 10px rgba(0,0,0,.18);opacity:.92}
 .mini.m1{bottom:calc(154px + env(safe-area-inset-bottom,0px))}.mini.m2{bottom:calc(204px + env(safe-area-inset-bottom,0px))}
@@ -487,7 +469,7 @@ const THEMES=[["leve","☀️","Modo claro"],["dark","🌙","Modo escuro"]];
 function curTheme(){const t=THEME();if(t==="auto")return matchMedia("(prefers-color-scheme: dark)").matches?"dark":"leve";return t==="dark"?"dark":"leve";}
 function isDark(){return curTheme()==="dark";}
 function nextTheme(){return isDark()?THEMES[0]:THEMES[1];}
-function applyTheme(){const c=curTheme();document.documentElement.dataset.theme=c;const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=c==="dark"?"#0B0B0D":"#F5F7FF";}
+function applyTheme(){const c=curTheme();document.documentElement.dataset.theme=c;const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=c==="dark"?"#0B0B0D":"#FBFCFF";}
 function setTheme(t){localStorage.setItem("g3_theme",t);applyTheme();if(UID&&ME)render();}
 applyTheme();try{matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>{if(THEME()==="auto"){applyTheme();}});}catch(e){}
 /* ================= FRASES ================= */
@@ -997,7 +979,7 @@ function vAjustes(){on(()=>{$("aPf").onclick=()=>{sheet(`<div class="grab"></div
    <p class="tiny muted" style="margin:8px 0 0">${!B.demo&&CFG.vapidKey?"Avisos chegam mesmo com o app fechado.":"Os avisos chegam com o app aberto ou em segundo plano."}</p></div>
   <div class="lbl">Conta</div><button class="btn ghost full" id="aOut">Sair da conta</button>
   ${B.demo?`<div class="demo">Modo demonstração: dados só neste aparelho.</div>`:""}
-  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 1.5</p>`;}
+  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 1.6</p>`;}
 /* ================= LEITOR DE DOCUMENTOS ================= */
 const U_TESS="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js",U_PDFJS="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js",U_PDFW="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 const nrm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9 ]+/g," ").replace(/\s+/g," ").trim();
