@@ -1,5 +1,5 @@
 // Service worker do G3: funcionamento offline e notificações.
-const CACHE = "g3-v5";
+const CACHE = "g3-v7";
 const ARQUIVOS = ["./","index.html","config.js","g3-app-v1.webmanifest","g3-logo.png","g3-logo-flat.png","g3-logo-white.png","g3-icon-192.png","g3-icon-512.png","g3-maskable-512.png","g3-apple-touch.png"];
 try {
   importScripts("config.js");
@@ -16,7 +16,7 @@ self.addEventListener("fetch", e => {
   const u = new URL(req.url);
   if (u.searchParams.has("t") || u.hostname.endsWith("googleapis.com")) return;
   if (req.mode === "navigate") {
-    e.respondWith(fetch(req).then(r => { const c = r.clone(); caches.open(CACHE).then(x => x.put("index.html", c)); return r; }).catch(() => caches.match("index.html")));
+    e.respondWith(fetch(req, {cache: "no-cache"}).then(r => { const c = r.clone(); caches.open(CACHE).then(x => x.put("index.html", c)); return r; }).catch(() => caches.match("index.html")));
     return;
   }
   if (u.origin === location.origin && u.pathname.endsWith("config.js")) {

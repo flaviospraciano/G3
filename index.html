@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>G3 Formatura</title>
 <meta name="description" content="G3 Formatura: agenda, planilhas das escolas e faculdades, notas e missões da equipe. Produzido por Flávio S. Praciano.">
-<meta name="theme-color" content="#FAFAF7">
+<meta name="theme-color" content="#F5F7FF">
 <meta name="color-scheme" content="light dark">
-<script>try{if(localStorage.getItem("g3_theme_ver")!=="2"){localStorage.setItem("g3_theme","leve");localStorage.setItem("g3_theme_ver","2");}var _t=localStorage.getItem("g3_theme")||"leve";if(_t==="auto")_t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=_t;}catch(e){}</script>
-<meta name="g3-version" content="1.3.0">
+<script>try{if(localStorage.getItem("g3_theme_ver")!=="3"){localStorage.setItem("g3_theme","leve");localStorage.setItem("g3_theme_ver","3");}var _t=localStorage.getItem("g3_theme")||"leve";if(_t==="auto")_t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"leve";if(_t!=="dark")_t="leve";document.documentElement.dataset.theme=_t;}catch(e){}</script>
+<meta name="g3-version" content="1.5.0">
 <link rel="manifest" href="g3-app-v1.webmanifest">
 <link rel="icon" type="image/png" href="g3-icon-192.png">
 <link rel="apple-touch-icon" href="g3-apple-touch.png">
@@ -141,7 +141,7 @@ table.tax{width:100%;border-collapse:collapse}table.tax th{background:#7BD389;co
 table.tax td{padding:8px 14px;border-bottom:1px solid var(--line);font-weight:700}table.tax td:last-child{font-size:1.05rem;color:var(--ink)}
 .lhead{margin:22px 0 8px;display:flex;flex-direction:column;gap:6px}.lhead b{font-size:1.08rem}
 /* ===== TEMA LEVE (claro e fino) ===== */
-:root[data-theme="leve"]{--bg:#FAFAF7;--sf:#FFFFFF;--sf2:#F5F4EF;--sf3:#EDEBE4;--line:#ECE9E0;--ink:#2A2822;--soft:#6B675B;--faint:#9C9889;--gold:#D9A400;--gold2:#946C00;--goldd:#7A5A00;--btn:#FFCB3D;--btntx:#1D1B15;--ghost:#FFFFFF;--ghostbd:#DEDACD;--ghosttx:#2A2822;--link:#8A6400;--red:#E2514B;--org:#F29A1F;--grn:#2FAE66;--blue:#3B78DA;--danger:#C9372F;--topbg:rgba(250,250,247,.88);--navbg:rgba(255,255,255,.94);--thbg:#F6F3EA;--thtx:#7A6A2C;--thbd:#E9E3D0;--zebra:#FCFBF8;--toastbg:#FFFFFF;--toastbd:#E6E2D6;--herobg:linear-gradient(160deg,#FFF8E2,#FFFFFF 70%);--herobd:#F3E4B0;--herotx:#4B3F1C;--cr:#FCEAE8;--crt:#B1302A;--co:#FFF1DE;--cot:#945200;--cg:#E4F6EB;--cgt:#17773F;--r:12px;--evbg:#FFF2CC;color-scheme:light}
+:root[data-theme="leve"]{--bg:#F4F6FF;--sf:#FFFFFF;--sf2:#EEF1FF;--sf3:#E1E7FB;--line:#E3E8F7;--ink:#1A2042;--soft:#566083;--faint:#8A93B3;--gold:#F59E0B;--gold2:#B45309;--goldd:#92400E;--btn:#FFC21A;--btntx:#2B1A00;--ghost:#FFFFFF;--ghostbd:#CFD6F0;--ghosttx:#1A2042;--link:#4F46E5;--red:#F0455A;--org:#FF8A1F;--grn:#16B364;--blue:#3B82F6;--danger:#E02D45;--topbg:rgba(255,255,255,.9);--navbg:rgba(255,255,255,.97);--thbg:#EEF1FF;--thtx:#3A44A0;--thbd:#DCE2F8;--zebra:#F9FAFF;--toastbg:#FFFFFF;--toastbd:#E3E8F7;--herobg:linear-gradient(135deg,#FFD84D 0%,#FFA23F 60%,#FF7E67 120%);--herobd:#FFC15C;--herotx:#3A2200;--cr:#FFE3E8;--crt:#C21D36;--co:#FFEBD0;--cot:#B45309;--cg:#D6F7E5;--cgt:#0A8A48;--r:12px;--evbg:#FFEFB8;color-scheme:light}
 [data-theme=leve] body{font-weight:400}
 [data-theme=leve] b,[data-theme=leve] strong{font-weight:600}
 [data-theme=leve] .top{padding-top:calc(8px + env(safe-area-inset-top,0px));padding-bottom:8px}
@@ -161,6 +161,8 @@ table.tax td{padding:8px 14px;border-bottom:1px solid var(--line);font-weight:70
 [data-theme=leve] .hero h2{font-weight:600}
 [data-theme=leve] .nav button{font-weight:500}
 [data-theme=leve] .nav button[aria-current="true"]{font-weight:700}
+[data-theme=leve] .mini{box-shadow:0 2px 8px rgba(40,34,10,.12)}
+[data-theme=leve] .icard{box-shadow:0 1px 2px rgba(40,34,10,.04)}
 [data-theme=leve] .fab{box-shadow:0 6px 16px rgba(120,90,0,.22);border-radius:16px}
 [data-theme=leve] .sheet{background:rgba(35,30,15,.32)}
 [data-theme=leve] .sheet .in{box-shadow:0 -8px 30px rgba(40,34,10,.12)}
@@ -175,7 +177,37 @@ table.tax td{padding:8px 14px;border-bottom:1px solid var(--line);font-weight:70
 [data-theme=leve] .taxhd{background:#EAF6EE;color:#17663A}
 [data-theme=leve] table.tax th{background:#F3F8F4;color:#2D6B45}[data-theme=leve] table.tax th:last-child{background:#DFF1E5;color:#17663A}
 [data-theme=leve] .calcbtn{background:var(--grn);box-shadow:none}
-:root[data-theme="leve"] .foot .flat{background:transparent;filter:drop-shadow(0 0 1px rgba(0,0,0,.85)) drop-shadow(0 1px 3px rgba(0,0,0,.35))}
+/* ===== VISUAL VIBRANTE (modo claro) ===== */
+[data-theme=leve] body{background:linear-gradient(180deg,#E9EEFF 0,#F4F6FF 280px)}
+[data-theme=leve] .top{border-bottom:0;box-shadow:0 6px 18px rgba(60,70,150,.08)}
+[data-theme=leve] .btn:not(.ghost):not(.calcbtn):not(.danger){background:linear-gradient(135deg,#FFD233,#FFA927);box-shadow:0 4px 12px rgba(255,165,30,.32)}
+[data-theme=leve] .yr.on{background:linear-gradient(135deg,#FFD233,#FFA927);border-color:transparent}
+[data-theme=leve] .fab{background:linear-gradient(135deg,#FFD233,#FF9F1A);box-shadow:0 8px 20px rgba(255,150,20,.4)}
+[data-theme=leve] .hero{box-shadow:0 10px 26px rgba(255,140,40,.28);border:0}
+[data-theme=leve] .hero *{color:var(--herotx)!important}
+[data-theme=leve] .nav button[aria-current="true"]{color:#E07B00}
+[data-theme=leve] .item .e{background:#FFF1C9}
+[data-theme=leve] .menu .mi .e{background:#FFF1C9}
+[data-theme=leve] .menu .mi:nth-child(5n+2) .e{background:#DDE8FF}[data-theme=leve] .menu .mi:nth-child(5n+3) .e{background:#D9F7E8}[data-theme=leve] .menu .mi:nth-child(5n+4) .e{background:#FFE0E6}[data-theme=leve] .menu .mi:nth-child(5n) .e{background:#EBDDFF}
+[data-theme=leve] .lbl{color:#6B73A0}
+[data-theme=leve] .bar i{background:linear-gradient(90deg,#FFC21A,#FF9F1A)}
+[data-theme=leve] .bar.g i{background:linear-gradient(90deg,#16B364,#3DDC97)}[data-theme=leve] .bar.o i{background:linear-gradient(90deg,#FF8A1F,#FFB347)}[data-theme=leve] .bar.r i{background:linear-gradient(90deg,#F0455A,#FF7A8A)}
+[data-theme=leve] .kpi:nth-child(1){background:#FFF6DA;border-color:#FFE29A}[data-theme=leve] .kpi:nth-child(2){background:#E4FAEE;border-color:#B8EFD0}[data-theme=leve] .kpi:nth-child(3){background:#E6EEFF;border-color:#C5D6FF}
+[data-theme=leve] .foot .flat{background:transparent;filter:brightness(0)}
+[data-theme=leve] .item.pinned{background:#FFF8E1}
+[data-theme=leve] .cobrar{background:linear-gradient(135deg,#FFF3C4,#FFE0A3);border-color:#FFC15C}
+/* ===== BOTOES DISCRETOS + GRADE DE ESCOLAS ===== */
+.mini{position:fixed;right:26px;z-index:29;width:42px;height:42px;border-radius:50%;border:1px solid var(--ghostbd);background:var(--sf);color:var(--ink);font-size:1.05rem;display:grid;place-items:center;box-shadow:0 3px 10px rgba(0,0,0,.18);opacity:.92}
+.mini.m1{bottom:calc(154px + env(safe-area-inset-bottom,0px))}.mini.m2{bottom:calc(204px + env(safe-area-inset-bottom,0px))}
+.igrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.icard{background:var(--sf);border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.icard .icb{display:block;width:100%;text-align:left;color:inherit;background:none;border:0;padding:0}
+.icard .icb .e{font-size:1.25rem;display:block;margin-bottom:4px}.icard .icb b{display:block;overflow-wrap:anywhere;line-height:1.25}
+.icard .icb .tiny{display:block;margin-top:3px}
+.icard .mv2{display:flex;gap:6px}.icard .mv2 button{flex:1;border:1px solid var(--ghostbd);background:var(--sf2);border-radius:10px;padding:7px 0;font-size:.9rem;color:var(--ink)}
+.icard .mv2 button:disabled{opacity:.35}
+.irow{position:relative}.pinb{position:absolute;right:34px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;border:0;background:transparent;font-size:1rem;opacity:.28;filter:grayscale(1)}
+.pinb.on{opacity:1;filter:none;background:var(--evbg)}.item.pinned{border-color:var(--gold)}
 /* ===== METAS ===== */
 .bar{height:8px;border-radius:99px;background:var(--sf3);overflow:hidden}.bar i{display:block;height:100%;border-radius:99px;background:var(--gold);transition:width .4s}
 .bar.g i{background:var(--grn)}.bar.o i{background:var(--org)}.bar.r i{background:var(--red)}
@@ -451,11 +483,11 @@ const CFG=window.G3_CONFIG||{};
 const DEMO=!(CFG.firebase&&CFG.firebase.apiKey&&!/COLE/i.test(CFG.firebase.apiKey)&&window.firebase);
 const COLS=["users","events","folders","notes","inst","turmas","alunos","missoes","config"];
 const THEME=()=>localStorage.getItem("g3_theme")||"leve";
-const THEMES=[["leve","☁️","Modo leve"],["light","☀️","Modo dia"],["dark","🌙","Modo noite"]];
-function curTheme(){const t=THEME();if(t==="auto")return matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";return THEMES.some(x=>x[0]===t)?t:"leve";}
+const THEMES=[["leve","☀️","Modo claro"],["dark","🌙","Modo escuro"]];
+function curTheme(){const t=THEME();if(t==="auto")return matchMedia("(prefers-color-scheme: dark)").matches?"dark":"leve";return t==="dark"?"dark":"leve";}
 function isDark(){return curTheme()==="dark";}
-function nextTheme(){const i=THEMES.findIndex(x=>x[0]===curTheme());return THEMES[(i+1)%THEMES.length];}
-function applyTheme(){const c=curTheme();document.documentElement.dataset.theme=c;const m=document.querySelector('meta[name="theme-color"]');if(m)m.content={dark:"#0B0B0D",light:"#F6F4EF",leve:"#FAFAF7"}[c];}
+function nextTheme(){return isDark()?THEMES[0]:THEMES[1];}
+function applyTheme(){const c=curTheme();document.documentElement.dataset.theme=c;const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=c==="dark"?"#0B0B0D":"#F5F7FF";}
 function setTheme(t){localStorage.setItem("g3_theme",t);applyTheme();if(UID&&ME)render();}
 applyTheme();try{matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>{if(THEME()==="auto"){applyTheme();}});}catch(e){}
 /* ================= FRASES ================= */
@@ -702,13 +734,19 @@ function editNote(id,folder){const n=id?D.notes.find(x=>x.id===id):{titulo:"",te
   const d=$("nD");if(d)d.onclick=()=>{if(confirm("Excluir esta nota?")){B.del("notes",id);closeSheet();}};}
 /* ---------- escolas e faculdades ---------- */
 function stats(tid){const t=D.turmas.find(x=>x.id===tid),al=D.alunos.filter(a=>a.turma===tid);let g=0,o=0,r=0,pago=0,tot=0;al.forEach(a=>{const s=payStatus(t,a);s.c==="g"?g++:s.c==="o"?o++:r++;pago+=s.pago;tot+=s.total;});return{n:al.length,g,o,r,pago,tot};}
-function vInst(){const t=VIEW.t,ano=curAno(),L=D.inst.filter(i=>i.tipo===t&&instAno(i)===ano).sort(byName),E=t==="escola"?"🏫":"🎓";
-  on(()=>{qa("[data-i]").forEach(b=>b.onclick=()=>go({v:"instd",id:b.dataset.i,t}));$("fab").onclick=()=>instForm(null,t);qa("[data-y]").forEach(b=>b.onclick=()=>{VIEW.ano=b.dataset.y;localStorage.setItem("g3_ano",b.dataset.y);render();});$("lucBtn").onclick=()=>go({v:"lucros",ano});$("rdBtn").onclick=()=>leitor({tipo:t,ano});});
+const byPin=(a,b)=>(!!b.fixada-!!a.fixada)||(a.fixada&&b.fixada?a.fixada-b.fixada:0)||byName(a,b);
+async function fixarInst(id){const o=D.inst.find(x=>x.id===id);if(!o)return;
+  if(o.fixada){o.fixada=0;await B.update("inst",id,{fixada:0});render();return;}
+  const n=D.inst.filter(x=>x.tipo===o.tipo&&instAno(x)===instAno(o)&&x.fixada).length;
+  if(n>=2)return toast("📌","Máximo de 2 fixadas","Desafixe uma para fixar outra.");
+  o.fixada=Date.now();await B.update("inst",id,{fixada:o.fixada});render();}
+function vInst(){const t=VIEW.t,ano=curAno(),L=D.inst.filter(i=>i.tipo===t&&instAno(i)===ano).sort(byPin),E=t==="escola"?"🏫":"🎓";
+  on(()=>{qa("[data-i]").forEach(b=>b.onclick=()=>go({v:"instd",id:b.dataset.i,t}));qa("[data-pin]").forEach(b=>b.onclick=()=>fixarInst(b.dataset.pin));$("fab").onclick=()=>instForm(null,t);qa("[data-y]").forEach(b=>b.onclick=()=>{VIEW.ano=b.dataset.y;localStorage.setItem("g3_ano",b.dataset.y);render();});$("lucBtn").onclick=()=>go({v:"lucros",ano});$("rdBtn").onclick=()=>leitor({tipo:t,ano});});
   return topBar(t==="escola"?"Planilhas das escolas":"Faculdades")+`<div class="years">${ANOS.map(y=>`<button class="yr ${y===ano?"on":""}" data-y="${y}"><b>${y}</b><span>${D.inst.filter(i=>i.tipo===t&&instAno(i)===y).length} ${t==="escola"?"escola(s)":"faculdade(s)"}</span></button>`).join("")}</div>
-  <p class="muted small" style="margin:4px 0 10px">${t==="escola"?"Escolas de "+ano+". Toque numa escola para ver as turmas e as planilhas.":"Faculdades de "+ano+". Toque numa faculdade para ver as turmas e os alunos."}</p>
+  <p class="muted small" style="margin:4px 0 10px">${t==="escola"?"Escolas de "+ano+". Toque numa escola para ver as turmas e as planilhas.":"Faculdades de "+ano+". Toque numa faculdade para ver as turmas e os alunos."} Use 📌 para deixar até 2 no topo.</p>
   ${L.map(i=>{const ts=D.turmas.filter(x=>x.inst===i.id);let n=0,g=0;ts.forEach(x=>{const s=stats(x.id);n+=s.n;g+=s.g;});
-    return `<button class="item" data-i="${i.id}"><span class="e">${E}</span><div class="grow"><b>${esc(i.nome)}</b><span class="tiny muted">${ts.length} turma(s) · ${n} aluno(s)${n?` · ${Math.round(g/n*100)}% quitados`:""}${i.cidade?" · "+esc(i.cidade):""}</span></div><span class="chev">›</span></button>`;}).join("")||`<p class="empty">Nenhuma ${t==="escola"?"escola":"faculdade"} cadastrada. Toque em ＋.</p>`}
-  <button class="btn full" id="rdBtn" style="margin-top:14px">📷 Ler documento (foto, PDF ou planilha)</button><button class="btn full calcbtn" id="lucBtn">💰 Calculadora de lucros</button><button class="fab" id="fab" aria-label="Adicionar">＋</button>`;}
+    return `<div class="irow"><button class="item ${i.fixada?"pinned":""}" data-i="${i.id}" style="padding-right:78px"><span class="e">${E}</span><div class="grow"><b>${esc(i.nome)}</b><span class="tiny muted">${ts.length} turma(s) · ${n} aluno(s)${n?` · ${Math.round(g/n*100)}% quitados`:""}${i.cidade?" · "+esc(i.cidade):""}</span></div><span class="chev">›</span></button><button class="pinb ${i.fixada?"on":""}" data-pin="${i.id}" aria-label="${i.fixada?"Desafixar":"Fixar no topo"}" title="${i.fixada?"Desafixar":"Fixar no topo"}">📌</button></div>`;}).join("")||`<p class="empty">Nenhuma ${t==="escola"?"escola":"faculdade"} cadastrada. Toque em ＋.</p>`}
+  <button class="mini m2" id="rdBtn" title="Ler documento (foto, PDF ou planilha)" aria-label="Ler documento (foto, PDF ou planilha)">📷</button><button class="mini m1" id="lucBtn" title="Calculadora de lucros" aria-label="Calculadora de lucros">💰</button><button class="fab" id="fab" aria-label="Adicionar">＋</button>`;}
 function instForm(id,tipo){const i=id?D.inst.find(x=>x.id===id):{tipo,ano:curAno()};let ano=instAno(i);
   sheet(`<div class="grab"></div><h2>${id?"Editar":"Nova"} ${i.tipo==="escola"?"escola":"faculdade"}</h2><label class="fld"><span>Nome</span><input id="iN" maxlength="80" value="${esc(i.nome||"")}"></label><label class="fld"><span>Cidade (opcional)</span><input id="iC" maxlength="50" value="${esc(i.cidade||"")}"></label><div class="fld"><span>Ano das fotos</span><div class="seg" id="iA">${ANOS.map(y=>`<button data-v="${y}" aria-pressed="${y===ano}">${y}</button>`).join("")}</div></div>
   <div class="btns"><button class="btn full" id="iS">Salvar</button>${id?`<button class="btn ghost full" id="iD" style="color:var(--danger)">Excluir</button>`:""}</div>`);
@@ -721,7 +759,7 @@ function vInstD(){const i=D.inst.find(x=>x.id===VIEW.id);if(!i)return topBar("N�
   return topBar(esc(i.nome),true,`<button class="back" id="iEd" aria-label="Editar">⋯</button>`)+`<p class="muted small" style="margin:14px 0 10px">Turmas${i.cidade?" · "+esc(i.cidade):""}</p>
   ${ts.map(t=>{const s=stats(t.id);return `<button class="item" data-tm="${t.id}"><span class="e">📋</span><div class="grow"><b>${esc(t.nome)}</b><span class="tiny muted">${t.modelo==="mensal"?"Mensalidades":"Formatura e kits"} · ${s.n} aluno(s)</span>
     <div class="row" style="gap:6px;margin-top:5px"><span class="st g">${s.g}</span><span class="st o">${s.o}</span><span class="st r">${s.r}</span></div></div><span class="chev">›</span></button>`;}).join("")||'<p class="empty">Nenhuma turma. Toque em ＋ para criar a Turma A, B, C…</p>'}
-  <button class="btn full" id="rdBtn" style="margin-top:12px">📷 Ler lista de alunos (foto, PDF ou planilha)</button><button class="fab" id="fab" aria-label="Nova turma">＋</button>`;}
+  <button class="mini m1" id="rdBtn" title="Ler lista de alunos (foto, PDF ou planilha)" aria-label="Ler lista de alunos (foto, PDF ou planilha)">📷</button><button class="fab" id="fab" aria-label="Nova turma">＋</button>`;}
 const MESES_PAD="Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro, Janeiro";
 function turmaForm(id,inst){const t=id?D.turmas.find(x=>x.id===id):{inst,modelo:"formatura",meses:MESES_PAD.split(", "),parcela:0};let mod=t.modelo;
   const draw=()=>{sheet(`<div class="grab"></div><h2>${id?"Configurar turma":"Nova turma"}</h2><label class="fld"><span>Nome da turma</span><input id="tN" maxlength="40" value="${esc(t.nome||"")}" placeholder="Ex.: 9º A"></label>
@@ -765,7 +803,7 @@ function vTurma(){const t=D.turmas.find(x=>x.id===VIEW.id);if(!t)return topBar("
   return topBar(esc(t.nome),true,`<button class="back" id="tCfg" aria-label="Configurar turma">⚙️</button>`)+`<p class="muted small" style="margin:12px 0 0">${esc(i.nome||"")} · ${t.modelo==="mensal"?`Mensalidades · parcela ${R(t.parcela)}`:"Formatura e kits"}</p>
   <div class="sum"><div><b>${s.n}</b><span>alunos</span></div><div><b>${R(s.pago)}</b><span>arrecadado</span></div><div><b>${R(Math.max(0,s.tot-s.pago))}</b><span>a receber</span></div>
    <div><b><span class="st g">${s.g}</span> <span class="st o">${s.o}</span> <span class="st r">${s.r}</span></b><span>pago · parcial · não pago</span></div></div>
-  <div class="tools"><input id="q" placeholder="🔎 Buscar aluno" value="${esc(VIEW.q||"")}"><button class="btn sm" id="rdT">📷 Ler</button><button class="btn ghost sm" id="aAdd">＋ Aluno</button><button class="btn ghost sm" id="cols">Colunas</button><button class="btn ghost sm" id="csv">⬇ Baixar</button></div>
+  <div class="tools"><input id="q" placeholder="🔎 Buscar aluno" value="${esc(VIEW.q||"")}"><button class="btn ghost sm" id="rdT" title="Ler lista (foto, PDF ou planilha)">📷</button><button class="btn ghost sm" id="aAdd">＋ Aluno</button><button class="btn ghost sm" id="cols">Colunas</button><button class="btn ghost sm" id="csv">⬇ Baixar</button></div>
   <div class="wrap"><table class="sh"><thead><tr>${cols.map((c,j)=>`<th class="${j===sk?"c0":""}">${esc(c.n)}</th>`).join("")}</tr></thead>
   <tbody>${al.map(a=>`<tr>${cols.map((c,j)=>{const v=cellView(t,a,c);return `<td class="${j===sk?"c0":""} ${v.c||""}"><button data-c="${a.id}|${c.k}" class="${v.m?"money":""}">${v.h}</button></td>`;}).join("")}</tr>`).join("")}</tbody></table>
   ${al.length?"":'<p class="empty" style="padding:14px">Nenhum aluno. Toque em ＋ Aluno.</p>'}</div>
@@ -952,14 +990,14 @@ function vAjustes(){on(()=>{$("aPf").onclick=()=>{sheet(`<div class="grab"></div
     const n=$("aNt");if(n)n.onclick=enableNotif;$("aTh").onclick=e=>{const b=e.target.closest("button");if(b)setTheme(b.dataset.v);};$("aOut").onclick=()=>{if(confirm("Sair da conta neste aparelho?")){STARTED=false;B.signOut();}};});
   const np="Notification" in window?Notification.permission:"unsupported";
   return topBar("Perfil e ajustes")+`<div class="card row" style="margin-top:14px">${avatar(UID,"ava lg")}<div class="grow"><b style="font-size:1.1rem">${esc(uname(UID))}</b><div class="muted small">${esc(ME.tel||"")}</div></div><button class="btn ghost sm" id="aPf">Editar</button></div>
-  <div class="lbl">Aparência</div><div class="seg" id="aTh">${[["leve","☁️ Leve"],["light","☀️ Dia"],["dark","🌙 Noite"],["auto","📱 Auto"]].map(([v,l])=>`<button data-v="${v}" aria-pressed="${THEME()===v}">${l}</button>`).join("")}</div>
+  <div class="lbl">Aparência</div><div class="seg" id="aTh">${[["leve","☀️ Claro"],["dark","🌙 Escuro"],["auto","📱 Auto"]].map(([v,l])=>`<button data-v="${v}" aria-pressed="${THEME()===v}">${l}</button>`).join("")}</div>
   <div class="lbl">Equipe e planilhas</div><button class="item" id="aKit"><span class="e">🎁</span><div class="grow"><b>Kits</b><span class="tiny muted">${kits().length} kit(s) cadastrados</span></div><span class="chev">›</span></button>
   <button class="item" id="aEq"><span class="e">👥</span><div class="grow"><b>Equipe</b><span class="tiny muted">${D.users.length} membro(s)</span></div><span class="chev">›</span></button>
   <div class="lbl">Notificações</div><div class="card small">${np==="granted"?"🔔 Ativadas neste aparelho.":np==="denied"?"🔕 Bloqueadas. Libere nas configurações do celular.":np==="unsupported"?"Este navegador não suporta notificações.":`<button class="btn full" id="aNt">🔔 Ativar notificações</button>`}
    <p class="tiny muted" style="margin:8px 0 0">${!B.demo&&CFG.vapidKey?"Avisos chegam mesmo com o app fechado.":"Os avisos chegam com o app aberto ou em segundo plano."}</p></div>
   <div class="lbl">Conta</div><button class="btn ghost full" id="aOut">Sair da conta</button>
   ${B.demo?`<div class="demo">Modo demonstração: dados só neste aparelho.</div>`:""}
-  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 1.3</p>`;}
+  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 1.5</p>`;}
 /* ================= LEITOR DE DOCUMENTOS ================= */
 const U_TESS="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js",U_PDFJS="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js",U_PDFW="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 const nrm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9 ]+/g," ").replace(/\s+/g," ").trim();
