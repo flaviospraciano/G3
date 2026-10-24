@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>G3 Formatura</title>
 <meta name="description" content="G3 Formatura: agenda, planilhas das escolas e faculdades, notas e missões da equipe. Produzido por Flávio S. Praciano.">
-<meta name="theme-color" content="#0B0B0D">
-<meta name="color-scheme" content="dark light">
-<meta name="g3-version" content="1.0.0">
+<meta name="theme-color" content="#FAFAF7">
+<meta name="color-scheme" content="light dark">
+<script>try{if(localStorage.getItem("g3_theme_ver")!=="2"){localStorage.setItem("g3_theme","leve");localStorage.setItem("g3_theme_ver","2");}var _t=localStorage.getItem("g3_theme")||"leve";if(_t==="auto")_t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=_t;}catch(e){}</script>
+<meta name="g3-version" content="1.3.0">
 <link rel="manifest" href="g3-app-v1.webmanifest">
 <link rel="icon" type="image/png" href="g3-icon-192.png">
 <link rel="apple-touch-icon" href="g3-apple-touch.png">
@@ -139,7 +140,61 @@ table.sh{border-collapse:separate;border-spacing:0;font-size:.86rem;min-width:10
 table.tax{width:100%;border-collapse:collapse}table.tax th{background:#7BD389;color:#0B3D18;text-align:left;padding:8px 14px}table.tax th:last-child{background:#0B5D24;color:#fff}
 table.tax td{padding:8px 14px;border-bottom:1px solid var(--line);font-weight:700}table.tax td:last-child{font-size:1.05rem;color:var(--ink)}
 .lhead{margin:22px 0 8px;display:flex;flex-direction:column;gap:6px}.lhead b{font-size:1.08rem}
-
+/* ===== TEMA LEVE (claro e fino) ===== */
+:root[data-theme="leve"]{--bg:#FAFAF7;--sf:#FFFFFF;--sf2:#F5F4EF;--sf3:#EDEBE4;--line:#ECE9E0;--ink:#2A2822;--soft:#6B675B;--faint:#9C9889;--gold:#D9A400;--gold2:#946C00;--goldd:#7A5A00;--btn:#FFCB3D;--btntx:#1D1B15;--ghost:#FFFFFF;--ghostbd:#DEDACD;--ghosttx:#2A2822;--link:#8A6400;--red:#E2514B;--org:#F29A1F;--grn:#2FAE66;--blue:#3B78DA;--danger:#C9372F;--topbg:rgba(250,250,247,.88);--navbg:rgba(255,255,255,.94);--thbg:#F6F3EA;--thtx:#7A6A2C;--thbd:#E9E3D0;--zebra:#FCFBF8;--toastbg:#FFFFFF;--toastbd:#E6E2D6;--herobg:linear-gradient(160deg,#FFF8E2,#FFFFFF 70%);--herobd:#F3E4B0;--herotx:#4B3F1C;--cr:#FCEAE8;--crt:#B1302A;--co:#FFF1DE;--cot:#945200;--cg:#E4F6EB;--cgt:#17773F;--r:12px;--evbg:#FFF2CC;color-scheme:light}
+[data-theme=leve] body{font-weight:400}
+[data-theme=leve] b,[data-theme=leve] strong{font-weight:600}
+[data-theme=leve] .top{padding-top:calc(8px + env(safe-area-inset-top,0px));padding-bottom:8px}
+[data-theme=leve] .top h1{font-weight:600;font-size:1rem}
+[data-theme=leve] .back,[data-theme=leve] .theme{border-width:1px;width:34px;height:34px;border-radius:10px;background:var(--sf);font-size:1rem}
+[data-theme=leve] .btn{font-weight:600;box-shadow:none;border-radius:12px;padding:11px 15px}
+[data-theme=leve] .btn.ghost{border-width:1px}
+[data-theme=leve] .btn.sm{padding:7px 11px}
+[data-theme=leve] .card,[data-theme=leve] .item,[data-theme=leve] .mi,[data-theme=leve] .ev,[data-theme=leve] .sum div,[data-theme=leve] .wrap,[data-theme=leve] .meta,[data-theme=leve] .kpi{box-shadow:0 1px 2px rgba(40,34,10,.04)}
+[data-theme=leve] .item,[data-theme=leve] .mi{border-radius:14px}
+[data-theme=leve] .lbl{font-weight:600;letter-spacing:.06em}
+[data-theme=leve] .link,[data-theme=leve] .seg button,[data-theme=leve] .opt{font-weight:600}
+[data-theme=leve] .st{font-weight:600;font-size:.72rem;padding:2px 9px}
+[data-theme=leve] .st.r{background:var(--cr);color:var(--crt)}[data-theme=leve] .st.o{background:var(--co);color:var(--cot)}[data-theme=leve] .st.g{background:var(--cg);color:var(--cgt)}
+[data-theme=leve] .st.r::before{background:var(--red)}[data-theme=leve] .st.o::before{background:var(--org)}[data-theme=leve] .st.g::before{background:var(--grn)}
+[data-theme=leve] .hero{border:1px solid var(--herobd);border-radius:18px;padding:16px}
+[data-theme=leve] .hero h2{font-weight:600}
+[data-theme=leve] .nav button{font-weight:500}
+[data-theme=leve] .nav button[aria-current="true"]{font-weight:700}
+[data-theme=leve] .fab{box-shadow:0 6px 16px rgba(120,90,0,.22);border-radius:16px}
+[data-theme=leve] .sheet{background:rgba(35,30,15,.32)}
+[data-theme=leve] .sheet .in{box-shadow:0 -8px 30px rgba(40,34,10,.12)}
+[data-theme=leve] .toast{color:var(--ink);box-shadow:0 8px 24px rgba(40,34,10,.14);border-width:1px}
+[data-theme=leve] .toast span{color:var(--soft)}
+[data-theme=leve] .exit{background:rgba(35,30,15,.35)}[data-theme=leve] .exit .box{border-width:1px}
+[data-theme=leve] .sh th{font-weight:600;border-bottom-width:1px}
+[data-theme=leve] .sh td.r>button,[data-theme=leve] .sh td.o>button,[data-theme=leve] .sh td.g>button{font-weight:600}
+[data-theme=leve] .yr{border-width:1px}[data-theme=leve] .yr.on{border-color:var(--btn)}
+[data-theme=leve] .profit .pc{border-width:1px}[data-theme=leve] .cal button.has{border-width:1px}[data-theme=leve] .cal button.td{border-width:1.5px}
+[data-theme=leve] .opt.on,[data-theme=leve] .item.hl{border-width:1px}[data-theme=leve] .demo{border-width:1px}
+[data-theme=leve] .taxhd{background:#EAF6EE;color:#17663A}
+[data-theme=leve] table.tax th{background:#F3F8F4;color:#2D6B45}[data-theme=leve] table.tax th:last-child{background:#DFF1E5;color:#17663A}
+[data-theme=leve] .calcbtn{background:var(--grn);box-shadow:none}
+:root[data-theme="leve"] .foot .flat{background:transparent;filter:drop-shadow(0 0 1px rgba(0,0,0,.85)) drop-shadow(0 1px 3px rgba(0,0,0,.35))}
+/* ===== METAS ===== */
+.bar{height:8px;border-radius:99px;background:var(--sf3);overflow:hidden}.bar i{display:block;height:100%;border-radius:99px;background:var(--gold);transition:width .4s}
+.bar.g i{background:var(--grn)}.bar.o i{background:var(--org)}.bar.r i{background:var(--red)}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.kpi{background:var(--sf);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+.kpi span{display:block;font-size:.72rem;color:var(--soft)}.kpi b{display:block;font-size:1.12rem;margin-top:2px;font-variant-numeric:tabular-nums}
+@media (min-width:560px){.kpis{grid-template-columns:repeat(3,1fr)}}
+.meta{display:block;width:100%;text-align:left;background:var(--sf);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:8px;color:inherit}
+.meta .mh{display:flex;gap:10px;align-items:flex-start}.meta .mv{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:10px 0 6px}.meta .mp{font-weight:800;font-size:1.05rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chips button{border:1px dashed var(--ghostbd);background:var(--sf);border-radius:999px;padding:6px 11px;font-size:.82rem;font-weight:600}
+/* ===== TAXAS ===== */
+.cobrar{background:var(--evbg);border:1px solid var(--gold);border-radius:16px;padding:14px;text-align:center;margin:10px 0}
+.cobrar span{font-size:.8rem;font-weight:700;color:var(--soft)}.cobrar b{display:block;font-size:2rem;line-height:1.15;margin:2px 0;font-variant-numeric:tabular-nums}.cobrar small{color:var(--soft)}
+.ratebar{display:flex;align-items:center;gap:10px;margin-top:14px}
+/* ===== LEITOR ===== */
+.rdr{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
+.rdr input[type=checkbox]{width:22px;height:22px;accent-color:var(--gold)}
+.rdr input[type=text],.rdr input:not([type]){width:100%;background:var(--sf2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;min-width:0}
+.rdr .sub{grid-column:2;display:flex;gap:6px;align-items:center;flex-wrap:wrap}.rdr .sub input{flex:1;min-width:120px}
+.rdr.dup{opacity:.8}
 </style>
 </head>
 <body>
@@ -255,8 +310,9 @@ const FIX_PAD=[{id:"end",icone:"📍",titulo:"Endereço",texto:"📍 Endereço: 
  {id:"pix1",icone:"📲",titulo:"Chave Pix · Evila Maria",texto:"📲 Chave Pix: 634 402 063 60\n🏫 Destinatário: Evila Maria Fernandes Mesquita"},
  {id:"pix2",icone:"📲",titulo:"Chave Pix · G3 Formatura",texto:"📲 Chave Pix: (88) 993731542\n🏫 Destinatário: G3 Formatura"},
  {id:"hor",icone:"🕗",titulo:"Horário de atendimento",texto:"📌 Atendimento Presencial – G3\n🕗 Segunda a Sexta\n➡️ 08h às 12h\n➡️ 14h às 18h"}];
-const TAX_PAD={nome:"MegaTon",obs:"Mastercard e Visa · recebimento no mesmo dia",taxas:[["Débito",2.69,1],["Crédito à vista",4.49,1],["Parcelado em 2x",9.99,2],["Parcelado em 3x",11.99,3],["Parcelado em 4x",12.99,4],["Parcelado em 5x",13.99,5],
- ["Parcelado em 6x",14.99,6],["Parcelado em 7x",15.99,7],["Parcelado em 8x",16.99,8],["Parcelado em 9x",17.99,9],["Parcelado em 10x",18.99,10],["Parcelado em 11x",18.99,11],["Parcelado em 12x",18.99,12]].map(([n,p,parc])=>({n,p,parc}))};
+const MODS=[["debito","Débito",1],["credito","Crédito à vista",1],...Array.from({length:11},(_,i)=>["p"+(i+2),`Parcelado em ${i+2}x`,i+2])];
+const TAX_PAD={nome:"MegaTon",obs:"Mastercard e Visa · recebimento no mesmo dia",bandeiras:["Visa","Mastercard"],fonte:"padrao",url:"",
+ taxas:[2.69,4.49,9.99,11.99,12.99,13.99,14.99,15.99,16.99,17.99,18.99,18.99,18.99].map((p,i)=>({id:MODS[i][0],n:MODS[i][1],p,parc:MODS[i][2]}))};
 let CONFIG_READY=false,SEEDED=false;
 const fixList=()=>((D.config.find(c=>c.id==="fixas")||{}).lista)||null;const taxInfo=()=>D.config.find(c=>c.id==="taxas")||null;
 function seedFixas(){if(SEEDED||!CONFIG_READY)return;SEEDED=true;if(!fixList())B.set("config","fixas",{lista:FIX_PAD});if(!taxInfo())B.set("config","taxas",TAX_PAD);}
@@ -275,23 +331,75 @@ function msgForm(id){const L=(fixList()||FIX_PAD).slice(),m=id?L.find(x=>x.id===
   $("mSv").onclick=async()=>{const v={icone:$("mI").value.trim()||"📌",titulo:$("mTi").value.trim(),texto:$("mTx").value.trim()};if(!v.titulo||!v.texto)return toast("⚠️","Preencha título e mensagem","");
     if(id)Object.assign(L.find(x=>x.id===id),v);else L.push(Object.assign({id:nid()},v));await B.update("config","fixas",{lista:L});closeSheet();toast("📌","Mensagem salva","A equipe toda já vê.");};
   const d=$("mDl");if(d)d.onclick=async()=>{if(!confirm("Excluir esta mensagem para toda a equipe?"))return;await B.update("config","fixas",{lista:L.filter(x=>x.id!==id)});closeSheet();};}
-function calcTaxa(v,p){const pr=p/100,cobrar=Math.ceil(v/(1-pr)*100)/100;return{cobrar,taxa:cobrar-v,recebeSem:Math.round(v*(1-pr)*100)/100};}
-function vTaxas(){seedFixas();const tx=taxInfo()||TAX_PAD;const sel=+(VIEW.sel||0);
-  on(()=>{const upd=()=>{const v=money($("tV").value),r=tx.taxas[+$("tS").value],o=$("tRes");if(!v){o.innerHTML='<p class="empty">Digite o valor que você quer receber.</p>';return;}const c=calcTaxa(v,r.p);VIEW.sel=$("tS").value;
-      o.innerHTML=`<div class="profit"><div class="pc ideal"><span>Cobrar na maquininha</span><b>${R(c.cobrar)}</b><small>${r.parc>1?`${r.parc}x de ${R(c.cobrar/r.parc)}`:esc(r.n)}</small></div><div class="pc ok"><span>Você recebe</span><b>${R(v)}</b><small>taxa ${String(r.p).replace(".",",")}% = ${R(c.taxa)}</small></div></div>
-      <p class="small muted">Se cobrar ${R(v)} sem repassar a taxa, você recebe ${R(c.recebeSem)}.</p><button class="btn ghost full" id="tCp">📋 Copiar valor para o cliente</button>`;
+/* ===== TAXAS DINÂMICAS DA MAQUININHA ===== */
+const RATES_KEY="g3_rates_cache_v1";
+const rateCache=()=>{try{return JSON.parse(localStorage.getItem(RATES_KEY)||"null");}catch(e){return null;}};
+const rid=r=>r.id||(r.n==="Débito"?"debito":r.parc>1?"p"+r.parc:"credito");
+const fixTax=t=>Object.assign({},t,{taxas:(t.taxas||[]).map(r=>Object.assign({},r,{id:rid(r)}))});
+const pctTxt=p=>(Number(p)||0).toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:4})+"%";
+const fdt=ts=>{const d=new Date(ts);return fdate(iso(d))+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");};
+const RATES={busy:false,err:"",ok:0};
+const refreshTaxView=()=>{if(VIEW.v==="taxas")rr();};
+/* Fórmula de repasse: Valor_A_Cobrar = Valor_Desejado / (1 - Taxa_Decimal).
+   O resultado é ajustado ao centavo: vale o menor valor cujo líquido, arredondado em centavos como a maquininha faz, não fica abaixo do desejado. */
+function calcTaxa(desejado,pct){const t=(Number(pct)||0)/100;if(!(desejado>0)||t<0||t>=1)return null;const dc=Math.round(desejado*100),base=Math.round(desejado/(1-t)*100);let k=null;
+  for(let c=base-3;c<=base+3;c++){if(Math.round(c*(1-t))>=dc){k=c;break;}}if(k==null)k=Math.ceil(desejado/(1-t)*100-1e-6);
+  const r2=x=>Math.round(x*100)/100,cobrar=k/100;return{cobrar,desconto:r2(cobrar-desejado),pct:Number(pct),liquido:Math.round(k*(1-t))/100,recebeSem:r2(desejado*(1-t))};}
+/* Tabela em uso: a mais recente entre a tabela da equipe (Firestore) e o cache local da última resposta da API. */
+function activeRates(){const doc=taxInfo(),c=rateCache(),dAt=doc?(doc.atualizado||0):0,cAt=c&&c.data?c.at:0;
+  let tx=TAX_PAD,at=0,fonte="padrao";if(doc){tx=doc;at=dAt;fonte=doc.fonte||(dAt?"manual":"salva");}
+  if(cAt>dAt){tx=c.data;at=cAt;fonte="api";}return{tx:fixTax(tx),at,fonte};}
+/* Aceita {provider,brands,updatedAt,unit,rates:{debit,credit,installments:{"2":..,"12":..}}} (chaves em português também). */
+function normalizeRates(j,base){if(!j||typeof j!=="object")throw new Error("Resposta inválida");const R0=j.rates||j.taxas||j;
+  const ins=R0.installments||R0.parcelado||R0.parcelas||{};const raw=[R0.debit??R0.debito,R0.credit??R0.credito];for(let k=2;k<=12;k++)raw.push(ins[k]??ins[k+"x"]);
+  const nums=raw.map(v=>typeof v==="string"?parseFloat(v.replace(",",".")):Number(v));
+  if(nums.some(n=>!isFinite(n)||n<=0))throw new Error("Resposta incompleta: faltam taxas");
+  const dec=j.unit==="decimal"||(j.unit==null&&Math.max(...nums)<1);const pc=nums.map(n=>Math.round((dec?n*100:n)*10000)/10000);
+  if(pc.some(n=>n>=50))throw new Error("Taxa fora do esperado");
+  const br=Array.isArray(j.brands)&&j.brands.length?j.brands:(base.bandeiras||["Visa","Mastercard"]);
+  const vig=j.updatedAt&&!isNaN(Date.parse(j.updatedAt))?Date.parse(j.updatedAt):0;
+  return{nome:j.provider||base.nome||"MegaTon",bandeiras:br,obs:br.join(" e ")+" · recebimento no mesmo dia",url:base.url||"",fonte:"api",atualizado:Date.now(),vigencia:vig,
+    taxas:MODS.map(([id,n,parc],i)=>({id,n,parc,p:pc[i]}))};}
+/* Busca as taxas do dia no endpoint (tela aberta ou botão Atualizar). Em caso de falha, segue com a última tabela salva. */
+async function fetchDailyRates(o={}){const base=fixTax(taxInfo()||TAX_PAD),url=String(taxInfo()&&taxInfo().url||CFG.ratesUrl||"").trim();
+  if(!url){RATES.err="";if(o.manual)toast("ℹ️","Endpoint não configurado","Informe o endereço em ✏️ Editar taxas (ou ratesUrl no config.js). Por enquanto vale a tabela salva.");return{ok:false,reason:"sem-url"};}
+  if(!/^https:\/\//i.test(url)){RATES.err="O endereço precisa começar com https://";if(o.manual)toast("⚠️","Endereço inválido",RATES.err);refreshTaxView();return{ok:false,reason:"url"};}
+  if(RATES.busy)return{ok:false,reason:"busy"};RATES.busy=true;RATES.err="";refreshTaxView();
+  const ctl=typeof AbortController!=="undefined"?new AbortController():null,to=setTimeout(()=>ctl&&ctl.abort(),8000);
+  try{const r=await fetch(url+(url.includes("?")?"&":"?")+"t="+Date.now(),{cache:"no-store",signal:ctl&&ctl.signal,headers:{Accept:"application/json"}});
+    if(!r.ok)throw new Error("HTTP "+r.status);const nt=normalizeRates(await r.json(),base);
+    try{localStorage.setItem(RATES_KEY,JSON.stringify({at:Date.now(),data:nt}));}catch(e){}
+    const old=taxInfo(),key=t=>JSON.stringify([t.nome,(t.taxas||[]).map(x=>[rid(x),x.p])]);
+    if(!old||key(old)!==key(nt)||old.fonte!=="api"){try{await B.set("config","taxas",nt);}catch(e){}}
+    RATES.ok=Date.now();if(o.manual)toast("✅","Taxas atualizadas","Tabela do dia carregada.");return{ok:true,tx:nt};}
+  catch(e){RATES.err=e&&e.name==="AbortError"?"A API demorou demais para responder.":/Failed to fetch|NetworkError|Load failed/i.test(e&&e.message||"")?"Sem conexão com a API.":(e&&e.message)||"Falha na conexão.";
+    if(o.manual)toast("⚠️","Não foi possível atualizar","Usando as últimas taxas salvas.");return{ok:false,reason:"erro"};}
+  finally{clearTimeout(to);RATES.busy=false;refreshTaxView();}}
+function vTaxas(){seedFixas();const A=activeRates(),tx=A.tx,sel=Math.max(0,Math.min(+(VIEW.sel||0),tx.taxas.length-1));
+  const stt=RATES.busy?"🔄 Atualizando taxas…":A.fonte==="api"?`✅ Taxas via API · ${fdt(A.at)}`:A.fonte==="manual"?`✏️ Editadas manualmente · ${fdt(A.at)}`:A.fonte==="salva"?"📋 Última tabela salva":"📋 Tabela padrão (ainda sem atualização)";
+  on(()=>{if(!VIEW._rf){VIEW._rf=1;fetchDailyRates();}
+    const upd=()=>{VIEW.val=$("tV").value;VIEW.sel=$("tS").value;const v=money(VIEW.val),r=tx.taxas[+VIEW.sel],o=$("tRes");
+      if(!v){o.innerHTML='<p class="empty">Digite o valor que você quer receber.</p>';return;}const c=calcTaxa(v,r.p);
+      o.innerHTML=`<div class="cobrar"><span>Valor a digitar na maquininha</span><b>${R(c.cobrar)}</b><small>${r.parc>1?`${r.parc}x de ${R(c.cobrar/r.parc)} · `:""}${esc(r.n)}</small></div>
+      <div class="profit"><div class="pc ideal"><span>Valor do desconto da taxa</span><b>${R(c.desconto)}</b><small>cobrado − desejado</small></div><div class="pc ok"><span>Taxa aplicada</span><b>${pctTxt(c.pct)}</b><small>${esc(tx.nome)} · ${esc(r.n)}</small></div></div>
+      <p class="small muted">Você recebe líquido ${R(c.liquido)}. Se digitasse só ${R(v)}, receberia ${R(c.recebeSem)}.</p><button class="btn ghost full" id="tCp">📋 Copiar valor para o cliente</button>`;
       $("tCp").onclick=()=>copyText(`💳 Valor no cartão (${r.n.toLowerCase()}): ${R(c.cobrar)}${r.parc>1?` — ${r.parc}x de ${R(c.cobrar/r.parc)}`:""}`);};
-    $("tV").oninput=upd;$("tS").onchange=upd;upd();$("tEd").onclick=taxForm;});
-  return topBar("Taxas da maquininha")+`<div class="card" style="margin-top:14px;padding:0;overflow:hidden"><div class="taxhd"><b>${esc(tx.nome)}</b><span>${esc(tx.obs||"")}</span></div>
-  <table class="tax"><thead><tr><th>Modalidade</th><th>Taxa</th></tr></thead><tbody>${tx.taxas.map(r=>`<tr><td>${esc(r.n)}</td><td>${String(r.p.toFixed(2)).replace(".",",")}%</td></tr>`).join("")}</tbody></table></div>
-  <div class="lbl">🧮 Calculadora: quanto cobrar</div><div class="card"><label class="fld"><span>Valor que você quer receber (R$)</span><input id="tV" inputmode="decimal" placeholder="Ex.: 180,00" value="${esc(VIEW.val||"")}"></label>
-  <label class="fld"><span>Forma de pagamento</span><select id="tS">${tx.taxas.map((r,i)=>`<option value="${i}" ${i===sel?"selected":""}>${esc(r.n)} · ${String(r.p).replace(".",",")}%</option>`).join("")}</select></label><div id="tRes"></div></div>
-  <div class="btns"><button class="btn ghost full" id="tEd">✏️ Editar taxas</button></div>`;}
-function taxForm(){const tx=JSON.parse(JSON.stringify(taxInfo()||TAX_PAD));
-  sheet(`<div class="grab"></div><h2>Editar taxas</h2><div class="row" style="gap:8px"><label class="fld grow"><span>Maquininha</span><input id="xN" value="${esc(tx.nome)}"></label></div><label class="fld"><span>Observação</span><input id="xO" value="${esc(tx.obs||"")}"></label>
+    $("tV").oninput=upd;$("tS").onchange=upd;upd();$("tEd").onclick=taxForm;$("tRf").onclick=()=>fetchDailyRates({manual:true});});
+  return topBar("Taxas da maquininha")+`<div class="card ratebar"><div class="grow"><b>${esc(tx.nome)}${(tx.bandeiras||[]).length?" · "+esc(tx.bandeiras.join(" e ")):""}</b><div class="tiny muted">${stt}</div>${RATES.err?`<div class="tiny" style="color:var(--danger)">⚠️ ${esc(RATES.err)} Usando a última tabela salva.</div>`:""}</div><button class="btn sm" id="tRf" ${RATES.busy?"disabled":""}>🔄 Atualizar</button></div>
+  <div class="lbl">🧮 Calculadora: quanto cobrar</div><div class="card"><label class="fld"><span>Valor que você quer receber (R$)</span><input id="tV" inputmode="decimal" placeholder="Ex.: 100,00" value="${esc(VIEW.val||"")}"></label>
+  <label class="fld"><span>Forma de pagamento</span><select id="tS">${tx.taxas.map((r,i)=>`<option value="${i}" ${i===sel?"selected":""}>${esc(r.n)} · ${pctTxt(r.p)}</option>`).join("")}</select></label><div id="tRes"></div></div>
+  <div class="lbl">Tabela de taxas</div><div class="card" style="padding:0;overflow:hidden"><div class="taxhd"><b>${esc(tx.nome)}</b><span>${esc(tx.obs||"")}</span></div>
+  <table class="tax"><thead><tr><th>Modalidade</th><th>Taxa</th></tr></thead><tbody>${tx.taxas.map(r=>`<tr><td>${esc(r.n)}</td><td>${pctTxt(r.p)}</td></tr>`).join("")}</tbody></table></div>
+  <div class="btns"><button class="btn ghost full" id="tEd">✏️ Editar taxas e endpoint</button></div>`;}
+function taxForm(){const tx=JSON.parse(JSON.stringify(activeRates().tx)),pn=s=>{const n=parseFloat(String(s).replace(/\s/g,"").replace(",","."));return isFinite(n)?n:NaN;};
+  sheet(`<div class="grab"></div><h2>Editar taxas</h2><label class="fld"><span>Maquininha</span><input id="xN" value="${esc(tx.nome)}"></label><label class="fld"><span>Observação</span><input id="xO" value="${esc(tx.obs||"")}"></label>
+  <label class="fld"><span>Endereço da API de taxas diárias (https, opcional)</span><input id="xU" inputmode="url" placeholder="https://seu-servidor.com/taxas.json" value="${esc(tx.url||CFG.ratesUrl||"")}"></label>
+  <p class="tiny muted">Com o endereço preenchido, o app busca as taxas do dia ao abrir esta tela e no botão Atualizar. Valores da API substituem os digitados à mão.</p>
   ${tx.taxas.map((r,i)=>`<div class="row" style="gap:8px"><span class="grow small">${esc(r.n)}</span><input data-tx="${i}" inputmode="decimal" value="${String(r.p).replace(".",",")}" style="width:90px;background:var(--sf2);border:1px solid var(--line);border-radius:10px;padding:8px;margin:3px 0"><span>%</span></div>`).join("")}
   <div class="btns"><button class="btn full" id="xS">Salvar taxas</button></div>`);
-  $("xS").onclick=async()=>{tx.nome=$("xN").value.trim()||tx.nome;tx.obs=$("xO").value.trim();qa("[data-tx]").forEach(i=>tx.taxas[+i.dataset.tx].p=money(i.value));await B.set("config","taxas",{nome:tx.nome,obs:tx.obs,taxas:tx.taxas});closeSheet();toast("💳","Taxas atualizadas","");};}
+  $("xS").onclick=async()=>{let bad=false;qa("[data-tx]").forEach(i=>{const n=pn(i.value);if(!(n>0&&n<50))bad=true;else tx.taxas[+i.dataset.tx].p=n;});if(bad)return toast("⚠️","Confira as taxas","Use valores entre 0 e 50, como 3,49.");
+    const u=$("xU").value.trim();if(u&&!/^https:\/\//i.test(u))return toast("⚠️","Endereço inválido","A API precisa começar com https://");
+    await B.set("config","taxas",{nome:$("xN").value.trim()||tx.nome,obs:$("xO").value.trim(),bandeiras:tx.bandeiras||["Visa","Mastercard"],url:u,taxas:tx.taxas,fonte:"manual",atualizado:Date.now()});closeSheet();toast("💳","Taxas atualizadas","");};}
 /* ================= LEMBRETES DA AGENDA ================= */
 const REM=[3*864e5,2*864e5,864e5,2*36e5];
 const evWhen=e=>new Date(e.data+"T"+(e.hi||"08:00")+":00").getTime();
@@ -320,9 +428,12 @@ const AUTHOR="Flávio S. Praciano";
 const CFG=window.G3_CONFIG||{};
 const DEMO=!(CFG.firebase&&CFG.firebase.apiKey&&!/COLE/i.test(CFG.firebase.apiKey)&&window.firebase);
 const COLS=["users","events","folders","notes","inst","turmas","alunos","missoes","config"];
-const THEME=()=>localStorage.getItem("g3_theme")||"auto";
-function isDark(){const t=THEME();return t==="dark"||(t==="auto"&&matchMedia("(prefers-color-scheme: dark)").matches);}
-function applyTheme(){const d=isDark();document.documentElement.dataset.theme=d?"dark":"light";const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=d?"#0B0B0D":"#F6F4EF";}
+const THEME=()=>localStorage.getItem("g3_theme")||"leve";
+const THEMES=[["leve","☁️","Modo leve"],["light","☀️","Modo dia"],["dark","🌙","Modo noite"]];
+function curTheme(){const t=THEME();if(t==="auto")return matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";return THEMES.some(x=>x[0]===t)?t:"leve";}
+function isDark(){return curTheme()==="dark";}
+function nextTheme(){const i=THEMES.findIndex(x=>x[0]===curTheme());return THEMES[(i+1)%THEMES.length];}
+function applyTheme(){const c=curTheme();document.documentElement.dataset.theme=c;const m=document.querySelector('meta[name="theme-color"]');if(m)m.content={dark:"#0B0B0D",light:"#F6F4EF",leve:"#FAFAF7"}[c];}
 function setTheme(t){localStorage.setItem("g3_theme",t);applyTheme();if(UID&&ME)render();}
 applyTheme();try{matchMedia("(prefers-color-scheme: dark)").addEventListener("change",()=>{if(THEME()==="auto"){applyTheme();}});}catch(e){}
 /* ================= FRASES ================= */
@@ -453,13 +564,13 @@ function exitAsk(){if($("exitM"))return;const d=document.createElement("div");d.
   d.innerHTML=`<div class="box" role="dialog" aria-modal="true"><img src="${LOGO}" alt="" style="width:72px;height:72px"><h2>Tem certeza que deseja sair?</h2><p class="small muted" style="margin:0">Seus dados continuam salvos.</p>
   <div class="btns"><button class="btn full" id="exNo">Ficar no G3</button><button class="btn ghost full" id="exYes">Sair do app</button></div></div>`;document.body.appendChild(d);
   $("exNo").onclick=()=>{d.remove();guard();};$("exYes").onclick=()=>{d.remove();try{window.close();}catch(e){}setTimeout(()=>history.back(),50);};}
-const NAV=[["home","🏠","Início"],["agenda","📅","Agenda"],["inst:escola","🏫","Escolas"],["inst:faculdade","🎓","Faculdades"],["missoes","✅","Missões"],["fixas","📌","Mensagens"]];
+const NAV=[["home","🏠","Início"],["agenda","📅","Agenda"],["inst:escola","🏫","Escolas"],["inst:faculdade","🎓","Faculdades"],["missoes","🎯","Metas"],["fixas","📌","Mensagens"]];
 function renderNav(){const pend=D.missoes.filter(m=>forMe(m)&&m.tipo!=="aviso"&&m.status!=="feita").length;
   $("navIn").innerHTML=NAV.map(([k,i,n])=>{const [v,t]=k.split(":");const on=VIEW.v===v&&(!t||VIEW.t===t)||(t&&["instd","turma"].includes(VIEW.v)&&VIEW.t===t)||(!t&&v==="fixas"&&VIEW.v==="taxas");
     return `<button data-k="${k}" aria-current="${!!on}"><span class="i">${i}</span>${n}${k==="missoes"&&pend?`<span class="bd">${pend}</span>`:""}</button>`;}).join("");
   qa("#navIn button").forEach(b=>b.onclick=()=>{const [v,t]=b.dataset.k.split(":");tab(t?{v,t}:{v});});}
-function topBar(title,backable=true,extra=""){return `<header class="top">${backable?`<button class="back" id="bk" aria-label="Voltar">‹</button><img src="${LOGO}" class="logo sm" alt="G3">`:`<img src="${LOGO}" class="logo" alt="G3">`}<h1>${title}</h1>${extra}<button class="theme" id="thB" aria-label="${isDark()?"Mudar para modo dia":"Mudar para modo noite"}">${isDark()?"☀️":"🌙"}</button><button class="back" id="me" aria-label="Perfil e ajustes" style="padding:0;overflow:hidden">${avatar(UID,"ava")}</button></header>`;}
-function bindTop(){const b=$("bk");if(b)b.onclick=()=>STACK.length?back():tab({v:"home"});$("me").onclick=()=>go({v:"ajustes"});$("thB").onclick=()=>{setTheme(isDark()?"light":"dark");toast(isDark()?"🌙":"☀️",isDark()?"Modo noite":"Modo dia","Você pode escolher o automático em Perfil e ajustes.");};}
+function topBar(title,backable=true,extra=""){return `<header class="top">${backable?`<button class="back" id="bk" aria-label="Voltar">‹</button><img src="${LOGO}" class="logo sm" alt="G3">`:`<img src="${LOGO}" class="logo" alt="G3">`}<h1>${title}</h1>${extra}<button class="theme" id="thB" aria-label="Mudar para ${nextTheme()[2].toLowerCase()}" title="${nextTheme()[2]}">${nextTheme()[1]}</button><button class="back" id="me" aria-label="Perfil e ajustes" style="padding:0;overflow:hidden">${avatar(UID,"ava")}</button></header>`;}
+function bindTop(){const b=$("bk");if(b)b.onclick=()=>STACK.length?back():tab({v:"home"});$("me").onclick=()=>go({v:"ajustes"});$("thB").onclick=()=>{const n=nextTheme();setTheme(n[0]);toast(n[1],n[2],"Toque de novo para trocar. Automático em Perfil e ajustes.");};}
 /* ================= RENDER ================= */
 function render(){if(!UID||!ME)return;const fa=document.activeElement,fid=fa&&fa.id,sel=fa&&fa.selectionStart;const w=qa(".wrap")[0],sl=w?[w.scrollLeft,w.scrollTop]:null,sy=window.scrollY;
   const f={home:vHome,agenda:vAgenda,notas:vNotas,inst:vInst,instd:vInstD,turma:vTurma,missoes:vMissoes,equipe:vEquipe,ajustes:vAjustes,lucros:vLucros,fixas:vFixas,taxas:vTaxas}[VIEW.v]||vHome;
@@ -486,16 +597,20 @@ function vHome(){QUOTE=QUOTE||frase();const t=TODAY(),wk=addDays(t,7);
   <div class="lbl">🔥 Para hoje <span class="st r">${hoje.length+evH.length}</span></div><div class="card">${hH||'<p class="empty">Nada urgente para hoje.</p>'}</div>
   <div class="lbl">📆 Esta semana <span class="st o">${sem.length+evS.length}</span></div><div class="card">${hS||'<p class="empty">Nada marcado para os próximos 7 dias.</p>'}</div>
   ${avisos.length?`<div class="lbl">📣 Avisos recentes</div><div class="card">${avisos.map(a=>`<button class="task" style="width:100%;background:none;border:0;text-align:left;color:inherit" data-m="${a.id}"><span class="ic">📣</span><div class="grow"><b>${esc(a.titulo)}</b><div class="tiny muted">de ${esc(ufirst(a.de))} · ${ago(a.criado)}</div></div></button>`).join("")}</div>`:""}
+  ${homeMetas()}
   <div class="lbl">Menu</div><div class="menu">
    <button class="mi" data-go="agenda"><span class="e">📅</span><b>Agenda da G3</b><span>Datas das escolas e faculdades</span></button>
    <button class="mi" data-go="notas">${unseenN?`<span class="bd">${unseenN}</span>`:""}<span class="e">🗒️</span><b>Notas</b><span>Anotações da equipe em pastas</span></button>
    <button class="mi" data-go="inst:escola"><span class="e">🏫</span><b>Planilhas das escolas</b><span>Turmas, pagamentos e fotos</span></button>
    <button class="mi" data-go="inst:faculdade"><span class="e">🎓</span><b>Faculdades</b><span>Turmas e alunos para fotografar</span></button>
-   <button class="mi" data-go="missoes">${pend?`<span class="bd">${pend}</span>`:""}<span class="e">✅</span><b>Missões e avisos</b><span>Tarefas entre os membros</span></button>
+   <button class="mi" data-go="missoes">${pend?`<span class="bd">${pend}</span>`:""}<span class="e">🎯</span><b>Metas e missões</b><span>Metas da empresa, tarefas e avisos</span></button>
    <button class="mi" data-go="fixas"><span class="e">📌</span><b>Mensagens prontas</b><span>Pix, endereço, horários e taxas</span></button>
    <button class="mi" data-go="equipe"><span class="e">👥</span><b>Equipe</b><span>${D.users.length} membro(s)</span></button></div>
   ${B.demo?`<div class="demo">Modo demonstração: os dados ficam só neste aparelho. Configure o Firebase para compartilhar com a equipe.</div>`:""}
   <button class="btn full calcbtn" data-go="lucros">💰 Calculadora de lucros</button>`;}
+function homeMetas(){const L=metasL();if(!L.length)return"";const ano=curAno(),E=empData(ano),top=L.filter(m=>m.ano===ano||m.ano==="todos").map(m=>({m,C:metaCalc(m,E)})).filter(x=>x.C.st!=="ok").sort((a,b)=>({venc:0,risco:1,and:2,ritmo:3}[a.C.st]-{venc:0,risco:1,and:2,ritmo:3}[b.C.st])).slice(0,3);if(!top.length)return"";
+  on(()=>{const b=$("hmG");if(b)b.onclick=()=>go({v:"missoes"});});
+  return `<div class="lbl">🎯 Metas da empresa · ${ano}</div><div class="card">${top.map(x=>{const s=MST[x.C.st];return `<div style="margin-bottom:10px"><div class="row small"><b class="grow">${esc(x.m.titulo)}</b><span class="st ${s[0]}">${Math.round(x.C.pct)}%</span></div><div class="bar ${s[2]}" style="margin-top:5px"><i style="width:${Math.max(x.C.pct,x.C.cur>0?2:0)}%"></i></div><div class="tiny muted" style="margin-top:3px">${fmtMeta(x.m,x.C.cur)} de ${fmtMeta(x.m,x.C.alvo)}${x.m.prazo?" · até "+fdate(x.m.prazo):""}</div></div>`;}).join("")}<button class="link" id="hmG">Ver todas as metas ›</button></div>`;}
 const stChip=s=>s==="feita"?'<span class="st g">Concluída</span>':s==="andamento"?'<span class="st o">Em andamento</span>':'<span class="st r">Pendente</span>';
 /* ---------- agenda ---------- */
 let CAL=null;
@@ -566,12 +681,12 @@ function editNote(id,folder){const n=id?D.notes.find(x=>x.id===id):{titulo:"",te
 /* ---------- escolas e faculdades ---------- */
 function stats(tid){const t=D.turmas.find(x=>x.id===tid),al=D.alunos.filter(a=>a.turma===tid);let g=0,o=0,r=0,pago=0,tot=0;al.forEach(a=>{const s=payStatus(t,a);s.c==="g"?g++:s.c==="o"?o++:r++;pago+=s.pago;tot+=s.total;});return{n:al.length,g,o,r,pago,tot};}
 function vInst(){const t=VIEW.t,ano=curAno(),L=D.inst.filter(i=>i.tipo===t&&instAno(i)===ano).sort(byName),E=t==="escola"?"🏫":"🎓";
-  on(()=>{qa("[data-i]").forEach(b=>b.onclick=()=>go({v:"instd",id:b.dataset.i,t}));$("fab").onclick=()=>instForm(null,t);qa("[data-y]").forEach(b=>b.onclick=()=>{VIEW.ano=b.dataset.y;localStorage.setItem("g3_ano",b.dataset.y);render();});$("lucBtn").onclick=()=>go({v:"lucros",ano});});
+  on(()=>{qa("[data-i]").forEach(b=>b.onclick=()=>go({v:"instd",id:b.dataset.i,t}));$("fab").onclick=()=>instForm(null,t);qa("[data-y]").forEach(b=>b.onclick=()=>{VIEW.ano=b.dataset.y;localStorage.setItem("g3_ano",b.dataset.y);render();});$("lucBtn").onclick=()=>go({v:"lucros",ano});$("rdBtn").onclick=()=>leitor({tipo:t,ano});});
   return topBar(t==="escola"?"Planilhas das escolas":"Faculdades")+`<div class="years">${ANOS.map(y=>`<button class="yr ${y===ano?"on":""}" data-y="${y}"><b>${y}</b><span>${D.inst.filter(i=>i.tipo===t&&instAno(i)===y).length} ${t==="escola"?"escola(s)":"faculdade(s)"}</span></button>`).join("")}</div>
   <p class="muted small" style="margin:4px 0 10px">${t==="escola"?"Escolas de "+ano+". Toque numa escola para ver as turmas e as planilhas.":"Faculdades de "+ano+". Toque numa faculdade para ver as turmas e os alunos."}</p>
   ${L.map(i=>{const ts=D.turmas.filter(x=>x.inst===i.id);let n=0,g=0;ts.forEach(x=>{const s=stats(x.id);n+=s.n;g+=s.g;});
     return `<button class="item" data-i="${i.id}"><span class="e">${E}</span><div class="grow"><b>${esc(i.nome)}</b><span class="tiny muted">${ts.length} turma(s) · ${n} aluno(s)${n?` · ${Math.round(g/n*100)}% quitados`:""}${i.cidade?" · "+esc(i.cidade):""}</span></div><span class="chev">›</span></button>`;}).join("")||`<p class="empty">Nenhuma ${t==="escola"?"escola":"faculdade"} cadastrada. Toque em ＋.</p>`}
-  <button class="btn full calcbtn" id="lucBtn">💰 Calculadora de lucros</button><button class="fab" id="fab" aria-label="Adicionar">＋</button>`;}
+  <button class="btn full" id="rdBtn" style="margin-top:14px">📷 Ler documento (foto, PDF ou planilha)</button><button class="btn full calcbtn" id="lucBtn">💰 Calculadora de lucros</button><button class="fab" id="fab" aria-label="Adicionar">＋</button>`;}
 function instForm(id,tipo){const i=id?D.inst.find(x=>x.id===id):{tipo,ano:curAno()};let ano=instAno(i);
   sheet(`<div class="grab"></div><h2>${id?"Editar":"Nova"} ${i.tipo==="escola"?"escola":"faculdade"}</h2><label class="fld"><span>Nome</span><input id="iN" maxlength="80" value="${esc(i.nome||"")}"></label><label class="fld"><span>Cidade (opcional)</span><input id="iC" maxlength="50" value="${esc(i.cidade||"")}"></label><div class="fld"><span>Ano das fotos</span><div class="seg" id="iA">${ANOS.map(y=>`<button data-v="${y}" aria-pressed="${y===ano}">${y}</button>`).join("")}</div></div>
   <div class="btns"><button class="btn full" id="iS">Salvar</button>${id?`<button class="btn ghost full" id="iD" style="color:var(--danger)">Excluir</button>`:""}</div>`);
@@ -580,11 +695,11 @@ function instForm(id,tipo){const i=id?D.inst.find(x=>x.id===id):{tipo,ano:curAno
   const d=$("iD");if(d)d.onclick=()=>{if(D.turmas.some(t=>t.inst===id))return toast("⚠️","Exclua as turmas antes","");if(confirm("Excluir?")){B.del("inst",id);closeSheet();back();}};}
 function vInstD(){const i=D.inst.find(x=>x.id===VIEW.id);if(!i)return topBar("Não encontrado")+'<p class="empty">Este item foi excluído.</p>';
   const ts=D.turmas.filter(x=>x.inst===i.id).sort((a,b)=>a.nome.localeCompare(b.nome,"pt",{numeric:true}));
-  on(()=>{qa("[data-tm]").forEach(b=>b.onclick=()=>go({v:"turma",id:b.dataset.tm,t:VIEW.t}));$("fab").onclick=()=>turmaForm(null,i.id);$("iEd").onclick=()=>instForm(i.id);});
+  on(()=>{qa("[data-tm]").forEach(b=>b.onclick=()=>go({v:"turma",id:b.dataset.tm,t:VIEW.t}));$("fab").onclick=()=>turmaForm(null,i.id);$("iEd").onclick=()=>instForm(i.id);$("rdBtn").onclick=()=>leitor({tipo:i.tipo,inst:i.id,ano:instAno(i)});});
   return topBar(esc(i.nome),true,`<button class="back" id="iEd" aria-label="Editar">⋯</button>`)+`<p class="muted small" style="margin:14px 0 10px">Turmas${i.cidade?" · "+esc(i.cidade):""}</p>
   ${ts.map(t=>{const s=stats(t.id);return `<button class="item" data-tm="${t.id}"><span class="e">📋</span><div class="grow"><b>${esc(t.nome)}</b><span class="tiny muted">${t.modelo==="mensal"?"Mensalidades":"Formatura e kits"} · ${s.n} aluno(s)</span>
     <div class="row" style="gap:6px;margin-top:5px"><span class="st g">${s.g}</span><span class="st o">${s.o}</span><span class="st r">${s.r}</span></div></div><span class="chev">›</span></button>`;}).join("")||'<p class="empty">Nenhuma turma. Toque em ＋ para criar a Turma A, B, C…</p>'}
-  <button class="fab" id="fab" aria-label="Nova turma">＋</button>`;}
+  <button class="btn full" id="rdBtn" style="margin-top:12px">📷 Ler lista de alunos (foto, PDF ou planilha)</button><button class="fab" id="fab" aria-label="Nova turma">＋</button>`;}
 const MESES_PAD="Maio, Junho, Julho, Agosto, Setembro, Outubro, Novembro, Dezembro, Janeiro";
 function turmaForm(id,inst){const t=id?D.turmas.find(x=>x.id===id):{inst,modelo:"formatura",meses:MESES_PAD.split(", "),parcela:0};let mod=t.modelo;
   const draw=()=>{sheet(`<div class="grab"></div><h2>${id?"Configurar turma":"Nova turma"}</h2><label class="fld"><span>Nome da turma</span><input id="tN" maxlength="40" value="${esc(t.nome||"")}" placeholder="Ex.: 9º A"></label>
@@ -623,12 +738,12 @@ function vTurma(){const t=D.turmas.find(x=>x.id===VIEW.id);if(!t)return topBar("
   const i=D.inst.find(x=>x.id===t.inst)||{};const q=(VIEW.q||"").toLowerCase();const cols=columns(t);
   const al=D.alunos.filter(a=>a.turma===t.id).sort((a,b)=>(a.nome||"").localeCompare(b.nome||"","pt")).filter(a=>!q||(a.nome||"").toLowerCase().includes(q)||(a.contato||"").includes(q));
   const s=stats(t.id);const sk=cols.findIndex(c=>c.k==="nome");
-  on(()=>{$("q").oninput=e=>{VIEW.q=e.target.value;render();};$("aAdd").onclick=()=>addAlunos(t);$("cols").onclick=()=>colsManager(t);$("tCfg").onclick=()=>turmaForm(t.id);$("csv").onclick=()=>exportMenu(t);
+  on(()=>{$("q").oninput=e=>{VIEW.q=e.target.value;render();};$("aAdd").onclick=()=>addAlunos(t);$("rdT").onclick=()=>leitor({tipo:i.tipo||VIEW.t||"escola",inst:t.inst,turma:t.id,ano:instAno(i)});$("cols").onclick=()=>colsManager(t);$("tCfg").onclick=()=>turmaForm(t.id);$("csv").onclick=()=>exportMenu(t);
     qa(".sh [data-c]").forEach(b=>b.onclick=()=>{const [aid,k]=b.dataset.c.split("|");if(k==="nome"||k==="soma")openRow(t,aid);else editCell(t,aid,k);});});
   return topBar(esc(t.nome),true,`<button class="back" id="tCfg" aria-label="Configurar turma">⚙️</button>`)+`<p class="muted small" style="margin:12px 0 0">${esc(i.nome||"")} · ${t.modelo==="mensal"?`Mensalidades · parcela ${R(t.parcela)}`:"Formatura e kits"}</p>
   <div class="sum"><div><b>${s.n}</b><span>alunos</span></div><div><b>${R(s.pago)}</b><span>arrecadado</span></div><div><b>${R(Math.max(0,s.tot-s.pago))}</b><span>a receber</span></div>
    <div><b><span class="st g">${s.g}</span> <span class="st o">${s.o}</span> <span class="st r">${s.r}</span></b><span>pago · parcial · não pago</span></div></div>
-  <div class="tools"><input id="q" placeholder="🔎 Buscar aluno" value="${esc(VIEW.q||"")}"><button class="btn sm" id="aAdd">＋ Aluno</button><button class="btn ghost sm" id="cols">Colunas</button><button class="btn ghost sm" id="csv">⬇ Baixar</button></div>
+  <div class="tools"><input id="q" placeholder="🔎 Buscar aluno" value="${esc(VIEW.q||"")}"><button class="btn sm" id="rdT">📷 Ler</button><button class="btn ghost sm" id="aAdd">＋ Aluno</button><button class="btn ghost sm" id="cols">Colunas</button><button class="btn ghost sm" id="csv">⬇ Baixar</button></div>
   <div class="wrap"><table class="sh"><thead><tr>${cols.map((c,j)=>`<th class="${j===sk?"c0":""}">${esc(c.n)}</th>`).join("")}</tr></thead>
   <tbody>${al.map(a=>`<tr>${cols.map((c,j)=>{const v=cellView(t,a,c);return `<td class="${j===sk?"c0":""} ${v.c||""}"><button data-c="${a.id}|${c.k}" class="${v.m?"money":""}">${v.h}</button></td>`;}).join("")}</tr>`).join("")}</tbody></table>
   ${al.length?"":'<p class="empty" style="padding:14px">Nenhum aluno. Toque em ＋ Aluno.</p>'}</div>
@@ -708,33 +823,97 @@ function kitsManager(){const ks=kits().slice();const saveK=l=>B.set("config","te
   qa(".sheet [data-k]").forEach(b=>b.onclick=()=>{const k=ks.find(x=>x.id===b.dataset.k);sheet(`<div class="grab"></div><h2>Editar kit</h2><label class="fld"><span>Nome</span><input id="kN2" value="${esc(k.nome)}"></label><label class="fld"><span>Preço de venda (R$)</span><input id="kP2" inputmode="decimal" value="${String(k.preco).replace(".",",")}"></label><label class="fld"><span>Custo do pacote (R$)</span><input id="kC2" inputmode="decimal" value="${String(k.custo||0).replace(".",",")}"></label>
     <div class="btns"><button class="btn full" id="kS2">Salvar</button><button class="btn ghost full" id="kD2" style="color:var(--danger)">Excluir kit</button></div>`);
     $("kS2").onclick=async()=>{k.nome=$("kN2").value.trim()||k.nome;k.preco=money($("kP2").value);k.custo=money($("kC2").value);await saveK(ks);kitsManager();};$("kD2").onclick=async()=>{await saveK(ks.filter(x=>x.id!==k.id));kitsManager();};});}
-/* ---------- missões e avisos ---------- */
-function vMissoes(){const f=VIEW.f||"mim";const t=TODAY();
-  let L=D.missoes.slice();if(f==="mim")L=L.filter(m=>forMe(m)&&m.tipo!=="aviso");else if(f==="env")L=L.filter(m=>m.de===UID);else if(f==="av")L=L.filter(m=>m.tipo==="aviso");
+/* ================= METAS DA EMPRESA ================= */
+const MET={arrecadado:{n:"Arrecadação (R$)",ic:"💰",cat:"Financeiras",money:1,auto:1},lucro:{n:"Lucro aproximado (R$)",ic:"📈",cat:"Financeiras",money:1,auto:1},
+ previsto:{n:"Receita prevista (R$ a receber no total)",ic:"🧾",cat:"Financeiras",money:1,auto:1},quitacao:{n:"% de alunos com pagamento quitado",ic:"✅",cat:"Financeiras",pct:1,auto:1},
+ escolas:{n:"Nº de escolas",ic:"🏫",cat:"Crescimento",auto:1},faculdades:{n:"Nº de faculdades",ic:"🎓",cat:"Crescimento",auto:1},turmas:{n:"Nº de turmas",ic:"📋",cat:"Crescimento",auto:1},
+ alunos:{n:"Nº de alunos cadastrados",ic:"👥",cat:"Crescimento",auto:1},manual:{n:"Meta personalizada (eu atualizo)",ic:"🎯",cat:"Outras"}};
+const metasL=()=>((D.config.find(c=>c.id==="metas")||{}).lista)||[];
+const saveMetas=l=>B.set("config","metas",{lista:l});
+const dias=(a,b)=>Math.round((new Date(b+"T12:00:00")-new Date(a+"T12:00:00"))/864e5);
+function empData(ano){const ins=D.inst.filter(i=>ano==="todos"||instAno(i)===ano),ids=new Set(ins.map(i=>i.id)),ts=D.turmas.filter(t=>ids.has(t.inst));let alunos=0,quit=0,pago=0,prev=0;
+  ts.forEach(t=>{const s=stats(t.id);alunos+=s.n;quit+=s.g;pago+=s.pago;prev+=s.tot;});const lucro=lucroData(ano).reduce((s,x)=>s+x.atual,0);
+  return{escolas:ins.filter(i=>i.tipo==="escola").length,faculdades:ins.filter(i=>i.tipo==="faculdade").length,turmas:ts.length,alunos,quitacao:alunos?quit/alunos*100:0,arrecadado:pago,previsto:prev,lucro};}
+function fmtMeta(m,v){const T=MET[m.tipo]||MET.manual;v=Number(v)||0;if(T.money||(m.tipo==="manual"&&m.un==="R$"))return R(v);if(T.pct)return v.toLocaleString("pt-BR",{maximumFractionDigits:1})+"%";
+  return Math.round(v*100)/100===Math.round(v)?String(Math.round(v)).replace(/\B(?=(\d{3})+(?!\d))/g,"."):v.toLocaleString("pt-BR",{maximumFractionDigits:2})+(m.tipo==="manual"&&m.un?" "+m.un:"");}
+function metaCalc(m,E){const T=MET[m.tipo]||MET.manual,cur=T.auto?(E[m.tipo]||0):(Number(m.atual)||0),alvo=Number(m.alvo)||0,pct=alvo>0?Math.min(100,cur/alvo*100):0,falta=Math.max(0,alvo-cur),t=TODAY();
+  const ini=m.inicio||iso(new Date(m.criado||Date.now())),d=m.prazo?dias(t,m.prazo):null,tot=m.prazo?dias(ini,m.prazo):null;let st="and",esp=null;
+  if(alvo>0&&cur>=alvo)st="ok";else if(m.prazo){if(d<0)st="venc";else{esp=tot>0?alvo*Math.min(1,Math.max(0,dias(ini,t))/tot):alvo;st=cur>=esp*0.9?"ritmo":"risco";}}
+  let ritmo="";if(st!=="ok"&&d!=null&&d>0&&falta>0){let per=falta/(d/7),u="por semana";if(d<14){per=falta/d;u="por dia";}else if(!T.money&&!T.pct&&!(m.un==="R$")&&per<1){per=falta/(d/30);u="por mês";}ritmo=`ritmo necessário: ${fmtMeta(m,T.money||m.un==="R$"?Math.ceil(per*100)/100:Math.ceil(per*10)/10)} ${u}`;}
+  return{cur,alvo,pct,falta,d,st,ritmo};}
+const MST={ok:["g","Meta batida","g"],ritmo:["g","No ritmo","g"],risco:["o","Em risco","o"],venc:["r","Prazo vencido","r"],and:["n","Em andamento",""]};
+function metaCard(m,E){const C=metaCalc(m,E),T=MET[m.tipo]||MET.manual,s=MST[C.st],resp=m.resp?ufirst(m.resp):"";
+  return `<button class="meta" data-mt="${m.id}"><div class="mh"><span style="font-size:1.4rem">${T.ic}</span><div class="grow"><b>${esc(m.titulo)}</b><div class="tiny muted">${esc(T.n)} · ${m.ano==="todos"?"todos os anos":m.ano}${resp?" · "+esc(resp):""}</div></div><span class="st ${s[0]}">${s[1]}</span></div>
+   <div class="mv"><span class="small"><b>${fmtMeta(m,C.cur)}</b> <span class="muted">de ${fmtMeta(m,C.alvo)}</span></span><span class="mp">${Math.round(C.pct)}%</span></div><div class="bar ${s[2]}"><i style="width:${Math.max(C.pct,C.cur>0?2:0)}%"></i></div>
+   <div class="tiny muted" style="margin-top:7px">${C.st==="ok"?"🎉 Meta alcançada.":`Faltam ${fmtMeta(m,C.falta)}`}${m.prazo?` · prazo ${fdate(m.prazo)}${C.d>=0&&C.st!=="ok"?` (${C.d===0?"hoje":C.d+" dia(s)"})`:""}`:""}${C.ritmo&&C.st!=="ok"?` · ${C.ritmo}`:""}</div></button>`;}
+function metasBody(){const ano=VIEW.my||curAno(),E=empData(ano),all=metasL().filter(m=>ano==="todos"||m.ano===ano||m.ano==="todos");
+  const order={venc:0,risco:1,and:2,ritmo:3,ok:4},L=all.map(m=>({m,C:metaCalc(m,E)})).sort((a,b)=>order[a.C.st]-order[b.C.st]);
+  const groups=["Financeiras","Crescimento","Outras"].map(g=>({g,L:L.filter(x=>(MET[x.m.tipo]||MET.manual).cat===g)})).filter(x=>x.L.length);
+  const SUG=[["arrecadado","Arrecadar "+(ano==="2027"?"2027":"2026"),100000],["escolas","Fechar escolas",15],["faculdades","Fechar faculdades",5],["quitacao","Alunos com pagamento quitado",90],["lucro","Lucro do ano",40000]];
+  on(()=>{qa("[data-my]").forEach(b=>b.onclick=()=>{VIEW.my=b.dataset.my;render();});qa("[data-mt]").forEach(b=>b.onclick=()=>openMeta(b.dataset.mt));qa("[data-sg]").forEach(b=>b.onclick=()=>{const s=SUG[+b.dataset.sg];metaForm(null,{tipo:s[0],titulo:s[1],alvo:s[2],ano:ano==="todos"?curAno():ano});});});
+  return `<div class="seg" style="margin:14px 0 10px">${[...ANOS,"todos"].map(y=>`<button data-my="${y}" aria-pressed="${ano===y}">${y==="todos"?"Todos os anos":y}</button>`).join("")}</div>
+  <div class="kpis"><div class="kpi"><span>Arrecadado</span><b>${R(E.arrecadado)}</b></div><div class="kpi"><span>Lucro aproximado</span><b>${R(E.lucro)}</b></div><div class="kpi"><span>A receber</span><b>${R(Math.max(0,E.previsto-E.arrecadado))}</b></div>
+   <div class="kpi"><span>Escolas · faculdades</span><b>${E.escolas} · ${E.faculdades}</b></div><div class="kpi"><span>Turmas · alunos</span><b>${E.turmas} · ${E.alunos}</b></div><div class="kpi"><span>Alunos quitados</span><b>${Math.round(E.quitacao)}%</b></div></div>
+  ${groups.map(x=>`<div class="lbl">${x.g==="Financeiras"?"💰 Metas financeiras":x.g==="Crescimento"?"🌱 Metas de crescimento":"🎯 Outras metas"}</div>${x.L.map(y=>metaCard(y.m,E)).join("")}`).join("")}
+  ${all.length?"":`<div class="card" style="margin-top:14px"><b>Defina as metas da G3</b><p class="small muted" style="margin:4px 0 10px">Metas claras, com valor, prazo e responsável. O progresso é calculado sozinho a partir das planilhas. Comece por uma sugestão:</p><div class="chips">${SUG.map((s,i)=>`<button data-sg="${i}">${MET[s[0]].ic} ${esc(s[1])}</button>`).join("")}</div></div>`}
+  <p class="tiny muted" style="margin-top:12px">O status compara o que já foi feito com o esperado até hoje, em linha reta entre a criação da meta e o prazo.</p>`;}
+function metaForm(id,pre){const m=Object.assign({tipo:"arrecadado",titulo:"",alvo:"",ano:curAno(),prazo:"",resp:"",atual:"",un:""},id?metasL().find(x=>x.id===id):{},pre||{});if(!id&&!m.prazo)m.prazo=(m.ano==="todos"?curAno():m.ano)+"-12-31";
+  const draw=()=>{const T=MET[m.tipo];sheet(`<div class="grab"></div><h2>${id?"Editar":"Nova"} meta</h2>
+   <label class="fld"><span>O que medir</span><select id="gT">${["Financeiras","Crescimento","Outras"].map(c=>`<optgroup label="${c}">${Object.entries(MET).filter(([k,v])=>v.cat===c).map(([k,v])=>`<option value="${k}" ${k===m.tipo?"selected":""}>${v.ic} ${v.n}</option>`).join("")}</optgroup>`).join("")}</select></label>
+   <label class="fld"><span>Nome da meta</span><input id="gN" maxlength="70" value="${esc(m.titulo)}" placeholder="Ex.: Arrecadar R$ 100 mil em 2026"></label>
+   <div class="row" style="gap:8px"><label class="fld grow"><span>Valor da meta${T.pct?" (%)":T.money?" (R$)":""}</span><input id="gA" inputmode="decimal" value="${m.alvo?String(m.alvo).replace(".",","):""}"></label>${m.tipo==="manual"?`<label class="fld grow"><span>Unidade (ex.: contratos, R$)</span><input id="gU" maxlength="14" value="${esc(m.un||"")}"></label>`:""}</div>
+   ${m.tipo==="manual"?`<label class="fld"><span>Quanto já foi feito</span><input id="gC" inputmode="decimal" value="${m.atual?String(m.atual).replace(".",","):""}"></label>`:`<p class="tiny muted" style="margin:0 0 6px">✔ O progresso é calculado automaticamente pelas planilhas.</p>`}
+   <div class="fld"><span>Ano</span><div class="seg" id="gY">${[...ANOS,"todos"].map(y=>`<button data-v="${y}" aria-pressed="${m.ano===y}">${y==="todos"?"Todos":y}</button>`).join("")}</div></div>
+   <div class="row" style="gap:8px"><label class="fld grow"><span>Prazo</span><input id="gP" type="date" value="${m.prazo||""}"></label><label class="fld grow"><span>Responsável</span><select id="gR"><option value="">Toda a equipe</option>${D.users.map(u=>`<option value="${u.id}" ${u.id===m.resp?"selected":""}>${esc(u.nome)}</option>`).join("")}</select></label></div>
+   <div class="btns"><button class="btn full" id="gS">Salvar meta</button>${id?`<button class="btn ghost full danger" id="gD">Excluir meta</button>`:""}</div>`);
+   const sync=()=>{m.titulo=$("gN").value;m.alvo=money($("gA").value);m.prazo=$("gP").value;m.resp=$("gR").value;if($("gU"))m.un=$("gU").value.trim();if($("gC"))m.atual=money($("gC").value);};
+   $("gT").onchange=()=>{sync();m.tipo=$("gT").value;if(!m.titulo)m.titulo="";draw();};$("gY").onclick=e=>{const b=e.target.closest("button");if(!b)return;sync();m.ano=b.dataset.v;draw();};
+   $("gS").onclick=async()=>{sync();m.titulo=m.titulo.trim()||MET[m.tipo].n;if(!(m.alvo>0))return toast("⚠️","Informe o valor da meta","Ex.: 100000 ou 15.");
+     const l=metasL().slice(),rec={id:id||nid(),tipo:m.tipo,titulo:m.titulo,alvo:m.alvo,ano:m.ano,prazo:m.prazo,resp:m.resp,un:m.un||"",atual:m.atual||0,inicio:m.inicio||TODAY(),criado:m.criado||Date.now(),autor:m.autor||UID};
+     if(id)l[l.findIndex(x=>x.id===id)]=rec;else l.push(rec);await saveMetas(l);closeSheet();toast("🎯","Meta salva","A equipe toda já vê.");};
+   const d=$("gD");if(d)d.onclick=async()=>{if(!confirm("Excluir esta meta para toda a equipe?"))return;await saveMetas(metasL().filter(x=>x.id!==id));closeSheet();};};draw();}
+function openMeta(id){const m=metasL().find(x=>x.id===id);if(!m)return;const E=empData(m.ano==="todos"?"todos":m.ano),C=metaCalc(m,E),T=MET[m.tipo]||MET.manual,s=MST[C.st],lig=D.missoes.filter(x=>x.meta===id&&x.tipo!=="aviso");
+  sheet(`<div class="grab"></div><div class="row"><span style="font-size:1.6rem">${T.ic}</span><div class="grow"><h2 style="margin:0">${esc(m.titulo)}</h2><span class="tiny muted">${esc(T.n)} · ${m.ano==="todos"?"todos os anos":m.ano}</span></div><span class="st ${s[0]}">${s[1]}</span></div>
+  <div class="mv" style="display:flex;justify-content:space-between;align-items:baseline;margin:14px 0 6px"><span><b style="font-size:1.4rem">${fmtMeta(m,C.cur)}</b> <span class="muted">de ${fmtMeta(m,C.alvo)}</span></span><b style="font-size:1.2rem">${Math.round(C.pct)}%</b></div><div class="bar ${s[2]}"><i style="width:${Math.max(C.pct,C.cur>0?2:0)}%"></i></div>
+  <div class="kpis" style="margin-top:12px"><div class="kpi"><span>Falta</span><b>${C.st==="ok"?"—":fmtMeta(m,C.falta)}</b></div><div class="kpi"><span>Prazo</span><b>${m.prazo?fdate(m.prazo):"sem prazo"}</b></div><div class="kpi"><span>Dias restantes</span><b>${C.d==null?"—":C.d<0?"vencido":C.d}</b></div></div>
+  ${C.ritmo&&C.st!=="ok"?`<p class="small" style="margin:10px 0 0">📌 ${C.ritmo.charAt(0).toUpperCase()+C.ritmo.slice(1)}.</p>`:""}
+  <p class="tiny muted">${m.resp?"Responsável: "+esc(uname(m.resp))+" · ":""}Criada por ${esc(uname(m.autor))}${T.auto?" · progresso automático":""}</p>
+  ${lig.length?`<div class="lbl">Missões ligadas (${lig.filter(x=>x.status==="feita").length}/${lig.length} concluídas)</div>${lig.map(x=>`<div class="row small" style="padding:4px 0"><span>${x.status==="feita"?"✅":"📌"}</span><span class="grow">${esc(x.titulo)}</span></div>`).join("")}`:""}
+  <div class="btns">${m.tipo==="manual"?`<button class="btn full" id="mtUp">＋ Registrar avanço</button>`:""}<button class="btn ${m.tipo==="manual"?"ghost ":""}full" id="mtMs">✅ Criar missão para esta meta</button><button class="btn ghost full" id="mtEd">✏️ Editar meta</button></div>`);
+  $("mtEd").onclick=()=>metaForm(id);$("mtMs").onclick=()=>newMissao(m.resp&&m.resp!==UID?m.resp:null,{meta:id});
+  const u=$("mtUp");if(u)u.onclick=()=>{sheet(`<div class="grab"></div><h2>Registrar avanço</h2><p class="small muted">${esc(m.titulo)} · agora em ${fmtMeta(m,C.cur)}</p><label class="fld"><span>Somar ao que já foi feito</span><input id="mtV" inputmode="decimal" placeholder="Ex.: 2"></label><div class="btns"><button class="btn full" id="mtS">Somar</button></div>`);
+    $("mtS").onclick=async()=>{const v=money($("mtV").value);if(!v)return;const l=metasL().map(x=>x.id===id?Object.assign({},x,{atual:Math.round(((Number(x.atual)||0)+v)*100)/100}):x);await saveMetas(l);closeSheet();toast("🎯","Avanço registrado","");};};}
+/* ---------- metas, missões e avisos ---------- */
+function vMissoes(){const sec=VIEW.sec||"metas",f=VIEW.f||"mim",t=TODAY();
+  const hd=topBar("Metas e missões")+`<div class="seg" id="mSec" style="margin:14px 0 4px">${[["metas","🎯 Metas"],["miss","✅ Missões"],["av","📣 Avisos"]].map(([v,l])=>`<button data-v="${v}" aria-pressed="${sec===v}">${l}</button>`).join("")}</div>`;
+  const common=()=>{qa("#mSec button").forEach(b=>b.onclick=()=>{VIEW.sec=b.dataset.v;render();});};
+  if(sec==="metas"){on(()=>{common();$("fab").onclick=()=>metaForm(null);});return hd+metasBody()+`<button class="fab" id="fab" aria-label="Nova meta">＋</button>`;}
+  let L=D.missoes.slice();if(sec==="av")L=L.filter(m=>m.tipo==="aviso");else{L=L.filter(m=>m.tipo!=="aviso");if(f==="mim")L=L.filter(forMe);else if(f==="env")L=L.filter(m=>m.de===UID);}
   L.sort((a,b)=>(a.status==="feita")-(b.status==="feita")||(a.prazo||"9").localeCompare(b.prazo||"9")||(b.criado-a.criado));
-  on(()=>{qa("#mF button").forEach(b=>b.onclick=()=>{VIEW.f=b.dataset.v;render();});qa("[data-m]").forEach(b=>b.onclick=()=>openMissao(b.dataset.m));$("fab").onclick=()=>newMissao();});
-  return topBar("Missões e avisos")+`<div class="seg" id="mF" style="margin:14px 0 10px">${[["mim","Para mim"],["env","Enviadas"],["todas","Todas"],["av","Avisos"]].map(([v,l])=>`<button data-v="${v}" aria-pressed="${f===v}">${l}</button>`).join("")}</div>
-  ${L.map(m=>`<button class="item" data-m="${m.id}"><span class="e">${m.tipo==="aviso"?"📣":m.status==="feita"?"✅":m.prazo&&m.prazo<t?"⏰":"📌"}</span><div class="grow"><b>${esc(m.titulo)}</b>
-   <span class="tiny muted">${esc(ufirst(m.de))} → ${(m.para||[]).includes("todos")?"todos":(m.para||[]).map(ufirst).map(esc).join(", ")}${m.prazo?` · ${m.prazo===t?"hoje":m.prazo<t&&m.status!=="feita"?`<span style="color:var(--danger)">atrasada (${fdate(m.prazo)})</span>`:fdate(m.prazo)}`:""}</span></div>${m.tipo==="aviso"?"":stChip(m.status)}</button>`).join("")||'<p class="empty">Nada por aqui.</p>'}
-  <button class="fab" id="fab" aria-label="Nova missão">＋</button>`;}
-function newMissao(pre){let tipo="missao",para=pre?[pre]:[];
+  on(()=>{common();qa("#mF button").forEach(b=>b.onclick=()=>{VIEW.f=b.dataset.v;render();});qa("[data-m]").forEach(b=>b.onclick=()=>openMissao(b.dataset.m));$("fab").onclick=()=>newMissao(null,{tipo:sec==="av"?"aviso":"missao"});});
+  return hd+(sec==="miss"?`<div class="seg" id="mF" style="margin:8px 0 10px">${[["mim","Para mim"],["env","Enviadas"],["todas","Todas"]].map(([v,l])=>`<button data-v="${v}" aria-pressed="${f===v}">${l}</button>`).join("")}</div>`:`<div style="height:10px"></div>`)+
+  (L.map(m=>{const mt=m.meta?metasL().find(x=>x.id===m.meta):null;return `<button class="item" data-m="${m.id}"><span class="e">${m.tipo==="aviso"?"📣":m.status==="feita"?"✅":m.prazo&&m.prazo<t?"⏰":"📌"}</span><div class="grow"><b>${esc(m.titulo)}</b>
+   <span class="tiny muted">${esc(ufirst(m.de))} → ${(m.para||[]).includes("todos")?"todos":(m.para||[]).map(ufirst).map(esc).join(", ")}${m.prazo?` · ${m.prazo===t?"hoje":m.prazo<t&&m.status!=="feita"?`<span style="color:var(--danger)">atrasada (${fdate(m.prazo)})</span>`:fdate(m.prazo)}`:""}${mt?` · 🎯 ${esc(mt.titulo)}`:""}</span></div>${m.tipo==="aviso"?"":stChip(m.status)}</button>`;}).join("")||'<p class="empty">Nada por aqui.</p>')+
+  `<button class="fab" id="fab" aria-label="${sec==="av"?"Novo aviso":"Nova missão"}">＋</button>`;}
+function newMissao(pre,opts){opts=opts||{};let tipo=opts.tipo||"missao",para=pre?[pre]:[],metaId=opts.meta||"";
   const draw=()=>{const others=D.users.filter(u=>u.id!==UID);sheet(`<div class="grab"></div><h2>Nova ${tipo==="aviso"?"mensagem de aviso":"missão"}</h2>
    <div class="seg" id="nTp"><button data-v="missao" aria-pressed="${tipo==="missao"}">✅ Missão (tarefa)</button><button data-v="aviso" aria-pressed="${tipo==="aviso"}">📣 Aviso</button></div>
    <label class="fld"><span>Título</span><input id="mT" maxlength="100" placeholder="${tipo==="aviso"?"Ex.: Reunião amanhã às 8h":"Ex.: Confirmar fotos da placa do 9º B"}"></label>
    <label class="fld"><span>Detalhes (até 250 caracteres)</span><textarea id="mD" maxlength="250"></textarea><div class="cnt" id="mC">0/250</div></label>
+   ${tipo==="missao"&&metasL().length?`<label class="fld"><span>🎯 Ligada a uma meta (opcional)</span><select id="mMt"><option value="">Nenhuma</option>${metasL().map(g=>`<option value="${g.id}" ${g.id===metaId?"selected":""}>${esc(g.titulo)}</option>`).join("")}</select></label>`:""}
    <div class="fld"><span>Para</span><div class="seg" id="mP"><button data-v="todos" aria-pressed="${para.includes("todos")}">👥 Todos</button>${others.map(u=>`<button data-v="${u.id}" aria-pressed="${para.includes(u.id)}">${esc(u.nome)}</button>`).join("")}</div></div>
    ${tipo==="missao"?`<label class="fld"><span>Prazo</span><input id="mPz" type="date" value="${TODAY()}"></label><div class="seg" id="mQ"><button data-d="0">Hoje</button><button data-d="1">Amanhã</button><button data-d="7">Em 1 semana</button></div>`:""}
    <div class="btns"><button class="btn full" id="mS">Enviar</button></div>`);
-   $("nTp").onclick=e=>{const b=e.target.closest("button");if(!b)return;tipo=b.dataset.v;draw();};
+   $("nTp").onclick=e=>{const b=e.target.closest("button");if(!b)return;const mm=$("mMt");if(mm)metaId=mm.value;tipo=b.dataset.v;draw();};
    $("mP").onclick=e=>{const b=e.target.closest("button");if(!b)return;const v=b.dataset.v;if(v==="todos")para=para.includes("todos")?[]:["todos"];else{para=para.filter(x=>x!=="todos");para=para.includes(v)?para.filter(x=>x!==v):para.concat(v);}qa("#mP button").forEach(x=>x.setAttribute("aria-pressed",para.includes(x.dataset.v)));};
    const q=$("mQ");if(q)q.onclick=e=>{const b=e.target.closest("button");if(b)$("mPz").value=addDays(TODAY(),+b.dataset.d);};
    $("mD").oninput=()=>$("mC").textContent=$("mD").value.length+"/250";
    $("mS").onclick=async()=>{const ti=$("mT").value.trim();if(!ti)return toast("⚠️","Escreva o título","");if(!para.length)return toast("⚠️","Escolha para quem enviar","");
-     const v={tipo,titulo:ti,desc:$("mD").value.slice(0,250),para,de:UID,criado:Date.now()};if(tipo==="missao"){v.prazo=$("mPz").value||TODAY();v.status="pendente";}
+     const v={tipo,titulo:ti,desc:$("mD").value.slice(0,250),para,de:UID,criado:Date.now()};if(tipo==="missao"){v.prazo=$("mPz").value||TODAY();v.status="pendente";const mm=$("mMt");if(mm&&mm.value)v.meta=mm.value;}
      await B.add("missoes",v);closeSheet();toast(tipo==="aviso"?"📣":"✅",tipo==="aviso"?"Aviso enviado":"Missão enviada",para.includes("todos")?"Para toda a equipe":para.map(ufirst).join(", "));};};draw();}
 function openMissao(id){const m=D.missoes.find(x=>x.id===id);if(!m)return;const can=forMe(m)||m.de===UID;
   sheet(`<div class="grab"></div><div class="row">${avatar(m.de)}<div class="grow"><span class="tiny muted">${m.tipo==="aviso"?"Aviso":"Missão"} de ${esc(uname(m.de))} · ${ago(m.criado)}</span><h2 style="margin:2px 0 0">${esc(m.titulo)}</h2></div></div>
-  ${m.desc?`<p class="small" style="white-space:pre-wrap">${esc(m.desc)}</p>`:""}<p class="tiny muted">Para: ${(m.para||[]).includes("todos")?"toda a equipe":(m.para||[]).map(uname).map(esc).join(", ")}${m.prazo?" · prazo "+fdate(m.prazo):""}</p>
+  ${m.desc?`<p class="small" style="white-space:pre-wrap">${esc(m.desc)}</p>`:""}<p class="tiny muted">Para: ${(m.para||[]).includes("todos")?"toda a equipe":(m.para||[]).map(uname).map(esc).join(", ")}${m.prazo?" · prazo "+fdate(m.prazo):""}</p>${m.meta&&metasL().find(g=>g.id===m.meta)?`<p class="small">🎯 Meta: <b>${esc(metasL().find(g=>g.id===m.meta).titulo)}</b></p>`:""}
   ${m.tipo!=="aviso"&&can?`<div class="lbl">Status</div><div class="btns" style="margin-top:0">${[["pendente","Pendente","r"],["andamento","Em andamento","o"],["feita","Concluída","g"]].map(([v,l,c])=>`<button class="opt ${m.status===v?"on":""}" data-s="${v}"><span class="dot ${c}"></span>${l}</button>`).join("")}</div>
    ${m.feitaPor?`<p class="tiny muted">Concluída por ${esc(uname(m.feitaPor))}</p>`:""}`:""}
   <div class="btns">${m.de===UID?`<button class="btn ghost full" id="mDel" style="color:var(--danger)">Excluir</button>`:""}</div>`);
@@ -751,14 +930,130 @@ function vAjustes(){on(()=>{$("aPf").onclick=()=>{sheet(`<div class="grab"></div
     const n=$("aNt");if(n)n.onclick=enableNotif;$("aTh").onclick=e=>{const b=e.target.closest("button");if(b)setTheme(b.dataset.v);};$("aOut").onclick=()=>{if(confirm("Sair da conta neste aparelho?")){STARTED=false;B.signOut();}};});
   const np="Notification" in window?Notification.permission:"unsupported";
   return topBar("Perfil e ajustes")+`<div class="card row" style="margin-top:14px">${avatar(UID,"ava lg")}<div class="grow"><b style="font-size:1.1rem">${esc(uname(UID))}</b><div class="muted small">${esc(ME.tel||"")}</div></div><button class="btn ghost sm" id="aPf">Editar</button></div>
-  <div class="lbl">Aparência</div><div class="seg" id="aTh">${[["light","☀️ Modo dia"],["dark","🌙 Modo noite"],["auto","📱 Automático"]].map(([v,l])=>`<button data-v="${v}" aria-pressed="${THEME()===v}">${l}</button>`).join("")}</div>
+  <div class="lbl">Aparência</div><div class="seg" id="aTh">${[["leve","☁️ Leve"],["light","☀️ Dia"],["dark","🌙 Noite"],["auto","📱 Auto"]].map(([v,l])=>`<button data-v="${v}" aria-pressed="${THEME()===v}">${l}</button>`).join("")}</div>
   <div class="lbl">Equipe e planilhas</div><button class="item" id="aKit"><span class="e">🎁</span><div class="grow"><b>Kits</b><span class="tiny muted">${kits().length} kit(s) cadastrados</span></div><span class="chev">›</span></button>
   <button class="item" id="aEq"><span class="e">👥</span><div class="grow"><b>Equipe</b><span class="tiny muted">${D.users.length} membro(s)</span></div><span class="chev">›</span></button>
   <div class="lbl">Notificações</div><div class="card small">${np==="granted"?"🔔 Ativadas neste aparelho.":np==="denied"?"🔕 Bloqueadas. Libere nas configurações do celular.":np==="unsupported"?"Este navegador não suporta notificações.":`<button class="btn full" id="aNt">🔔 Ativar notificações</button>`}
    <p class="tiny muted" style="margin:8px 0 0">${!B.demo&&CFG.vapidKey?"Avisos chegam mesmo com o app fechado.":"Os avisos chegam com o app aberto ou em segundo plano."}</p></div>
   <div class="lbl">Conta</div><button class="btn ghost full" id="aOut">Sair da conta</button>
   ${B.demo?`<div class="demo">Modo demonstração: dados só neste aparelho.</div>`:""}
-  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 1.2</p>`;}
+  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 1.3</p>`;}
+/* ================= LEITOR DE DOCUMENTOS ================= */
+const U_TESS="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js",U_PDFJS="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js",U_PDFW="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+const nrm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9 ]+/g," ").replace(/\s+/g," ").trim();
+const MABR=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
+function mesIdx(s){const n=nrm(s).replace(/\d+/g,"").trim();if(!n)return -1;let i=MES.findIndex(m=>nrm(m)===n);if(i<0&&n.length>=3&&n.length<=4)i=MABR.indexOf(n.slice(0,3));return i;}
+const HK=[["nome",/^(nome|aluno|alunos|estudante|estudantes)\b/],["contato",/^(contato|telefone|tel|fone|celular|whatsapp|whats|zap)\b/],["kit",/^(kit|pacote|plano)\b/],["pago",/^(pago|valor pago|total pago|recebido|pagamento)$/],
+ ["total",/^(total|total a pagar|valor|valor total|a pagar)$/],["obs",/^(obs|observacao|observacoes|anotacoes)\b/],["turma",/^turma$/],["n",/^(n|no|num|numero|item|seq)$/]];
+const NOTNAME=/\b(escola|colegio|turma|faculdade|universidade|lista|relacao|frequencia|presenca|professor|professora|prof|serie|periodo|turno|data|assinatura|total|pagina|ano letivo|nome|aluno|alunos|contato|telefone|observacoes|kit|pago|status|manha|tarde|noite|cidade|sala)\b/;
+const PHONE=/(?:\+?55\s*)?\(?\d{2}\)?[\s.-]*9?[\s.-]*\d{4}[\s.-]?\d{4}/,MONEYRX=/(?:R\$\s*)?\d{1,3}(?:\.\d{3})*,\d{2}/g;
+const SMALLW=new Set(["de","da","do","das","dos","e"]);
+function tcase(s){if(s!==s.toUpperCase()&&s!==s.toLowerCase())return s;return s.toLowerCase().split(" ").map((w,i)=>i&&SMALLW.has(w)?w:w.charAt(0).toUpperCase()+w.slice(1)).join(" ");}
+const NOMESD=new Set(("ana maria joao jose pedro lucas gabriel davi lucca luca laura lara sofia helena isabella isabela isabelle beatriz eduarda eduardo henrique matheus mateus arthur artur vitoria victor vitor miguel heitor bernardo rafael gustavo felipe guilherme leonardo daniel enzo nicolas samuel bruno caio carlos francisco antonio marcos paulo luiz luis luiza luisa julia juliana camila larissa leticia livia manuela alice valentina cecilia clara rafaela amanda bianca fernanda gabriela giovanna giovana mariana natalia thais yasmin emanuelly emilly ester raquel rebeca sara vanessa kauan kaua ryan ian igor joaquim lorenzo murilo otavio renan thiago tiago wesley yago emanuel emanuele lorena melissa mirella milena nicole pietra stella stefany sophia vera rita rosa cristina cristiano claudia claudio fabio flavia flavio geovana hugo ingrid iago jessica joana jonas kaique kevin lais leila marcelo marcia mario monica nathalia patricia paula rodrigo sabrina sergio sandra silvia tatiana tereza vinicius wellington "+
+ "silva santos oliveira souza sousa lima pereira costa ferreira rodrigues almeida nascimento alves carvalho gomes martins araujo ribeiro mendes nogueira bezerra barbosa rocha dias moreira cavalcante cardoso teixeira correia cunha freitas castro melo monteiro pinto vieira fernandes lopes batista andrade machado ramos farias fonseca pires moura paiva matos mesquita praciano frota aguiar vasconcelos siqueira uchoa lopes gonçalves goncalves reis azevedo medeiros sampaio holanda coelho xavier duarte miranda soares tavares viana neto filho junior sobrinho "+
+ "de da do das dos").split(" "));
+const semAc=c=>c.normalize("NFD").charAt(0).toLowerCase();
+function quebraTok(t){const L=t.replace(/[^A-Za-zÀ-ÿ]/g,"");if(L.length<9||L.length!==t.length)return t;const n=[...t].map(semAc).join(""),best=Array(n.length+1).fill(null);best[0]=[];
+  for(let i=0;i<n.length;i++){if(!best[i])continue;for(let j=i+2;j<=n.length;j++){if(NOMESD.has(n.slice(i,j))){const c=best[i].concat([[i,j]]);if(!best[j]||c.length<best[j].length)best[j]=c;}}}
+  const r=best[n.length];return r&&r.length>1?r.map(([i,j])=>t.slice(i,j)).join(" "):t;}
+function limparNome(s){s=String(s||"").replace(/[|_¦\[\]{}()<>*=~^`"“”—–]+/g," ").replace(/^\s*[0-9OoIl|]{1,4}\s*[.\-)°º]*\s+(?=\S)/,"").replace(/^\s*[A-Za-z]\s+(?=\S)/,"").replace(/[0-9]+/g," ").replace(/[^A-Za-zÀ-ÿ'’.\- ]+/g," ").replace(/\s[.\-'’]+\s/g," ").replace(/\s+/g," ").trim();
+  s=s.replace(/^[.\-'’ ]+|[.\-'’ ]+$/g,"");s=s.split(" ").map(quebraTok).join(" ");return tcase(s);}
+function nomeValido(s){if(!s)return false;const n=nrm(s),w=n.split(" ").filter(Boolean);if(n.length<3||w.length>9||!w.some(x=>x.length>=3))return false;if(NOTNAME.test(n))return false;
+  if(/^(sim|nao|pago|parcial|r)$/.test(n))return false;return s.replace(/[^A-Za-zÀ-ÿ]/g,"").length/s.length>=0.7;}
+function achaCabecalho(rows){for(let i=0;i<Math.min(rows.length,14);i++){const map={};let achou=false;rows[i].forEach((c,j)=>{const n=nrm(c);if(!n)return;if(mesIdx(c)>=0){map[j]={f:"mes",mes:nrm(c).replace(/\d+/g,"").trim(),idx:mesIdx(c)};return;}
+    for(const [f,rx] of HK){if(rx.test(n)&&!Object.values(map).some(x=>x.f===f)){map[j]={f};if(f==="nome")achou=true;break;}}});if(achou)return{i,map};}return null;}
+function interpretar(rows){rows=rows.map(r=>r.map(c=>String(c==null?"":c).replace(/\s+/g," ").trim())).filter(r=>r.some(c=>c));
+  const topo=rows.slice(0,8).map(r=>r.join(" ")),titulo=topo.join(" · "),H=achaCabecalho(rows),items=[],seen=new Set();let meses=[];
+  const push=it=>{it.nome=limparNome(it.nome);if(!nomeValido(it.nome))return;const k=nrm(it.nome);if(seen.has(k))return;seen.add(k);items.push(it);};
+  if(H){meses=Object.values(H.map).filter(x=>x.f==="mes").sort((a,b)=>a.idx-b.idx).map(x=>x.mes);
+    rows.slice(H.i+1).forEach(r=>{const it={nome:"",contato:"",pago:0,total:0,kit:"",obs:"",mes:{}};let nome="";
+      Object.entries(H.map).forEach(([j,d])=>{const c=r[+j]||"";if(!c)return;if(d.f==="nome")nome=c;else if(d.f==="contato"){const dg=c.replace(/\D/g,"");if(dg.length>=10&&dg.length<=13&&!/,\d{2}\s*$/.test(c)&&!/R\$/.test(c))it.contato=c.replace(/[^\d()+\-\s]/g,"").trim();else if(/,\d{2}\s*$|R\$/.test(c)&&!it.total)it.total=money(c);}else if(d.f==="pago")it.pago=money(c);else if(d.f==="total")it.total=money(c);
+        else if(d.f==="kit")it.kit=c;else if(d.f==="obs")it.obs=c;else if(d.f==="mes"){const v=money(c);if(v)it.mes[d.mes]=v;}});it.nome=nome;push(it);});}
+  else rows.forEach(r=>{const j=r.join("  ");const ph=j.match(PHONE),ms=j.match(MONEYRX)||[];let cand=r.map(c=>c.replace(PHONE,"").replace(MONEYRX,"")).map(limparNome).filter(c=>c&&nomeValido(c));
+    if(!cand.length)return;cand.sort((a,b)=>b.length-a.length);const it={nome:cand[0],contato:ph&&ph[0].replace(/\D/g,"").replace(/^55(?=\d{10,11}$)/,"").length>=10?ph[0].trim():"",pago:0,total:0,kit:"",obs:"",mes:{}};
+    if(ms.length>=2){it.pago=money(ms[0]);it.total=money(ms[1]);}else if(ms.length===1)it.total=money(ms[0]);push(it);});
+  let escolaGuess="",turmaGuess="";const mt=titulo.match(/(?:escola|col[eé]gio|faculdade|universidade|instituto|centro educacional)\s+(?:municipal\s+|estadual\s+)?(?:de\s+)?(.+?)(?=\s+turma\b|\s+\d+\s*[ºo°ª]|\s*[-–|,;:·]\s|$)/i);if(mt)escolaGuess=tcase(mt[1].trim());
+  const a=titulo.match(/(\d{1,2}\s*[ºo°ª]\s*(?:ano|s[eé]rie)?\s*[A-Za-z])\b/i),b=titulo.match(/turma\s*[:\-–]?\s*([A-Za-z0-9ºª°]{1,4})\b/i);if(a)turmaGuess=a[1].replace(/\s+/g," ").replace(/o\b/i,"º").toUpperCase().replace("ANO","ano");else if(b)turmaGuess="Turma "+b[1].toUpperCase();
+  return{items,meses,titulo,escolaGuess,turmaGuess,header:!!H};}
+function guessInst(res,insts){const T=nrm(res.titulo),STOP=new Set(["escola","colegio","municipal","estadual","professor","professora","prof","de","da","do","dos","das","e","ee","eef","emef","centro","educacional","instituto"]);let best=null,bs=0;
+  insts.forEach(i=>{const tk=nrm(i.nome).split(" ").filter(w=>w.length>=3&&!STOP.has(w));if(!tk.length)return;if(tk.every(w=>T.includes(w))&&tk.length>=bs){bs=tk.length;best=i.id;}});return best;}
+function guessTurma(ts,g){if(!g)return"";const n=nrm(g);let t=ts.find(x=>nrm(x.nome)===n);if(t)return t.id;const last=n.split(" ").pop();if(last.length<=2){t=ts.find(x=>nrm(x.nome).split(" ").pop()===last&&nrm(x.nome).split(" ").slice(0,-1).join(" ")===n.split(" ").slice(0,-1).join(" "))||ts.find(x=>nrm(x.nome).split(" ").pop()===last);if(t)return t.id;}return"";}
+/* ---- leitura de arquivos → linhas de células ---- */
+function textoParaLinhas(txt){return txt.split(/\r?\n/).map(l=>l.trim()).filter(Boolean).map(l=>l.split(/\s{2,}|\t/).map(c=>c.trim()).filter(Boolean));}
+function parseCSVTxt(txt){const first=txt.split(/\r?\n/).find(l=>l.trim())||"",d=[";","\t",","].map(x=>[x,first.split(x).length]).sort((a,b)=>b[1]-a[1])[0][0],rows=[];let r=[],c="",q=false;
+  for(let i=0;i<txt.length;i++){const ch=txt[i];if(q){if(ch==='"'){if(txt[i+1]==='"'){c+='"';i++;}else q=false;}else c+=ch;}else if(ch==='"')q=true;else if(ch===d){r.push(c);c="";}else if(ch==="\n"||ch==="\r"){if(ch==="\r"&&txt[i+1]==="\n")i++;r.push(c);rows.push(r);r=[];c="";}else c+=ch;}
+  if(c||r.length){r.push(c);rows.push(r);}return rows;}
+async function prepararImagem(src){let bmp;try{bmp=await createImageBitmap(src,{imageOrientation:"from-image"});}catch(e){bmp=await new Promise((ok,no)=>{const im=new Image();const u=src instanceof Blob?URL.createObjectURL(src):"";im.onload=()=>ok(im);im.onerror=no;im.src=u;});}
+  const w0=bmp.width||bmp.naturalWidth,h0=bmp.height||bmp.naturalHeight,k=Math.min(2600/Math.max(w0,h0),Math.max(1,1500/Math.min(w0,h0)));const cv=document.createElement("canvas");cv.width=Math.round(w0*k);cv.height=Math.round(h0*k);const x=cv.getContext("2d",{willReadFrequently:true});x.drawImage(bmp,0,0,cv.width,cv.height);
+  const id=x.getImageData(0,0,cv.width,cv.height),d=id.data,hist=new Uint32Array(256);for(let i=0;i<d.length;i+=4){const g=(d[i]*299+d[i+1]*587+d[i+2]*114)/1000|0;d[i]=d[i+1]=d[i+2]=g;hist[g]++;}
+  const n=cv.width*cv.height;let a=0,lo=0,hi=255;for(let g=0;g<256;g++){a+=hist[g];if(a>=n*.02){lo=g;break;}}a=0;for(let g=255;g>=0;g--){a+=hist[g];if(a>=n*.02){hi=g;break;}}
+  if(hi-lo>20){const s=255/(hi-lo);for(let i=0;i<d.length;i+=4){const v=Math.max(0,Math.min(255,((d[i]-lo)*s)|0));d[i]=d[i+1]=d[i+2]=v;}}x.putImageData(id,0,0);return cv;}
+const comTempo=(p,ms)=>Promise.race([p,new Promise((_,no)=>setTimeout(()=>no(new Error("offline")),ms))]);
+async function ocrCanvas(cv,prog){await loadLib(U_TESS);let w=null;try{w=await comTempo(Tesseract.createWorker("por",1,{logger:m=>{if(m.status==="recognizing text")prog("Lendo o texto…",m.progress);else if(/load|init/.test(m.status||""))prog("Preparando leitura…",.05);}}),60000);
+  try{await w.setParameters({tessedit_pageseg_mode:"6",preserve_interword_spaces:"1"});}catch(e){}const {data}=await comTempo(w.recognize(cv),240000);return linhasOcr(data);}
+  finally{if(w)try{w.terminate();}catch(e){}}}
+function linhasOcr(data){const out=[];if(data&&Array.isArray(data.lines)&&data.lines.length){data.lines.forEach(L=>{const ws=(L.words||[]).filter(w=>w.text&&w.text.trim());if(!ws.length){const t=(L.text||"").trim();if(t)out.push([t]);return;}
+    ws.sort((a,b)=>a.bbox.x0-b.bbox.x0);const h=Math.max(10,(L.bbox?L.bbox.y1-L.bbox.y0:20)),cells=[];let cur=ws[0].text;for(let i=1;i<ws.length;i++){const gap=ws[i].bbox.x0-ws[i-1].bbox.x1;if(gap>h*2.2){cells.push(cur);cur=ws[i].text;}else cur+=" "+ws[i].text;}cells.push(cur);out.push(cells);});return out;}
+  return textoParaLinhas((data&&data.text)||"");}
+async function rowsDePdf(file,prog){await loadLib(U_PDFJS);pdfjsLib.GlobalWorkerOptions.workerSrc=U_PDFW;const pdf=await pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise,out=[],N=Math.min(pdf.numPages,20);
+  for(let p=1;p<=N;p++){prog(`Página ${p} de ${N}`,(p-1)/N);const pg=await pdf.getPage(p),tc=await pg.getTextContent(),its=tc.items.filter(i=>i.str&&i.str.trim());const chars=its.reduce((s,i)=>s+i.str.trim().length,0);
+    if(chars>=20){const lines=[];its.forEach(i=>{const y=i.transform[5],h=i.height||8;let L=lines.find(l=>Math.abs(l.y-y)<=h*.5);if(!L){L={y,its:[]};lines.push(L);}L.its.push({x:i.transform[4],w:i.width,s:i.str,h});});
+      lines.sort((a,b)=>b.y-a.y).forEach(L=>{L.its.sort((a,b)=>a.x-b.x);const cells=[];let cur="",end=null;L.its.forEach(t=>{if(end!=null&&t.x-end>Math.max(8,t.h*1.3)){cells.push(cur);cur=t.s;}else cur+=(cur&&end!=null&&t.x-end>1?" ":"")+t.s;end=t.x+t.w;});if(cur.trim())cells.push(cur);out.push(cells);});}
+    else{const vp0=pg.getViewport({scale:1}),vp=pg.getViewport({scale:Math.min(3,2200/vp0.width)}),cv=document.createElement("canvas");cv.width=vp.width;cv.height=vp.height;await pg.render({canvasContext:cv.getContext("2d"),viewport:vp}).promise;
+      out.push(...await ocrCanvas(cv,(t,q)=>prog(`Página ${p} de ${N}: ${t}`,(p-1+q)/N)));}}return out;}
+async function rowsDeArquivo(f,prog){const nm=(f.name||"").toLowerCase(),ty=f.type||"";
+  if(/\.(xlsx|xls|ods|xlsm)$/.test(nm)){prog("Abrindo planilha…",.3);await loadLib(U_XL);const wb=XLSX.read(await f.arrayBuffer(),{type:"array"});let best=[];wb.SheetNames.forEach(s=>{const r=XLSX.utils.sheet_to_json(wb.Sheets[s],{header:1,raw:false,defval:""});if(r.length>best.length)best=r;});return best;}
+  if(/\.(csv|tsv|txt)$/.test(nm)||/text\//.test(ty)){prog("Lendo arquivo…",.3);const t=await f.text();return /\.txt$/.test(nm)&&!/[;\t,]/.test(t.slice(0,300))?textoParaLinhas(t):parseCSVTxt(t);}
+  if(/\.pdf$/.test(nm)||ty==="application/pdf")return rowsDePdf(f,prog);
+  if(/^image\//.test(ty)||/\.(jpe?g|png|webp|heic|heif|bmp|gif)$/.test(nm)){prog("Ajustando a imagem…",.1);const cv=await prepararImagem(f);return ocrCanvas(cv,prog);}
+  throw new Error("Tipo de arquivo não suportado: "+(f.name||""));}
+/* ---- telas ---- */
+let RD={};
+function leitor(ctx){RD={ctx:ctx||{}};sheet(`<div class="grab"></div><h2>📷 Ler documento</h2><p class="small muted">Fotografe a lista ou anexe o arquivo. O G3 lê os nomes e monta a lista para você conferir antes de salvar. A leitura das fotos acontece no seu aparelho.</p>
+  <div class="btns"><label class="btn full">📷 Tirar foto agora<input type="file" id="rdCam" accept="image/*" capture="environment" hidden></label>
+  <label class="btn ghost full">🖼️ Escolher foto(s) da galeria<input type="file" id="rdImg" accept="image/*" multiple hidden></label>
+  <label class="btn ghost full">📎 Anexar PDF, Excel ou CSV<input type="file" id="rdDoc" accept=".pdf,.xlsx,.xls,.ods,.csv,.tsv,.txt,application/pdf,text/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" multiple hidden></label></div>
+  <p class="tiny muted">Dica: foto reta, bem iluminada, pegando a folha inteira. Lista com várias páginas? Escolha todas de uma vez. Texto impresso funciona melhor que letra de mão.</p>`);
+  ["rdCam","rdImg","rdDoc"].forEach(id=>$(id).onchange=e=>{const fs=[...e.target.files];if(fs.length)lerArquivos(fs);});}
+async function lerArquivos(fs){const prog=(t,p)=>{const el=$("rdP");if(!el)return;el.querySelector("span").textContent=t;el.querySelector(".bar i").style.width=Math.max(3,Math.round((p||0)*100))+"%";};
+  sheet(`<div class="grab"></div><h2>Lendo documento…</h2><div id="rdP"><p class="small muted"><span>Preparando…</span></p><div class="bar"><i style="width:3%"></i></div></div><p class="tiny muted">Na primeira foto o app baixa o reconhecimento de texto (alguns segundos, com internet). Depois fica mais rápido.</p>`);
+  let rows=[];try{for(let i=0;i<fs.length;i++)rows=rows.concat(await rowsDeArquivo(fs[i],(t,p)=>prog((fs.length>1?`Arquivo ${i+1}/${fs.length} · `:"")+t,(i+(p||0))/fs.length)));}
+  catch(e){console.warn(e);const off=/offline|Failed to fetch|NetworkError|Load failed/i.test((e&&e.message)||"");toast("⚠️","Não consegui ler o arquivo",off?"Conecte-se à internet para ler fotos e PDFs.":(e&&e.message)||"Tente outra foto ou arquivo.");return leitor(RD.ctx);}
+  const res=interpretar(rows);res.arquivos=fs.map(f=>f.name).filter(Boolean).join(", ");if(!res.items.length){toast("🔍","Não encontrei nomes","Tente uma foto mais reta e nítida, ou um PDF/planilha.");return leitor(RD.ctx);}reviewLeitura(res);}
+function reviewLeitura(res){const ctx=RD.ctx,tipo=ctx.tipo||"escola",ano=ctx.ano||curAno();const insts=D.inst.filter(i=>i.tipo===tipo&&instAno(i)===ano).sort(byName);
+  if(!RD.dest){const inst=ctx.inst||guessInst(res,insts)||"",ts=D.turmas.filter(t=>t.inst===inst);RD.dest={inst,newInst:res.escolaGuess||"",turma:ctx.turma||(inst?guessTurma(ts,res.turmaGuess):""),newTurma:res.turmaGuess||"",modelo:res.meses.length>=2?"mensal":"formatura"};}
+  RD.res=res;if(!RD.items)RD.items=res.items.map(x=>Object.assign({on:true},x));
+  const d=RD.dest,sync=()=>{qa("[data-ck]").forEach(c=>{const it=RD.items[+c.dataset.ck];it.on=c.checked;});qa("[data-nm]").forEach(i=>RD.items[+i.dataset.nm].nome=i.value);qa("[data-ct]").forEach(i=>RD.items[+i.dataset.ct].contato=i.value);
+    if($("rdI"))d.inst=$("rdI").value;if($("rdNI"))d.newInst=$("rdNI").value;if($("rdT"))d.turma=$("rdT").value;if($("rdNT"))d.newTurma=$("rdNT").value;};
+  const draw=()=>{const ts=D.turmas.filter(t=>t.inst===d.inst).sort((a,b)=>a.nome.localeCompare(b.nome,"pt",{numeric:true})),tur=d.turma?D.turmas.find(t=>t.id===d.turma):null,ex=tur?D.alunos.filter(a=>a.turma===tur.id):[],exm=new Map(ex.map(a=>[nrm(a.nome),a]));
+    RD.items.forEach(it=>{const nd=exm.has(nrm(it.nome))?exm.get(nrm(it.nome)).id:"";if(it._d===undefined||it._d!==!!nd)it.on=!nd;it._d=!!nd;it.dup=nd;});const nN=RD.items.filter(i=>i.on&&!i.dup).length,nU=RD.items.filter(i=>i.on&&i.dup).length,nd=RD.items.filter(i=>i.dup).length;
+    sheet(`<div class="grab"></div><h2>Conferir a lista</h2><p class="small muted" style="margin:0 0 8px">${RD.items.length} nome(s) encontrados${res.arquivos?" em "+esc(res.arquivos):""}${nd?` · ${nd} já na turma`:""}. Corrija o que precisar antes de salvar.</p>
+     ${ctx.turma?`<div class="card small">Turma: <b>${esc(tur?tur.nome:"")}</b></div>`:`${ctx.inst?"":`<label class="fld"><span>${tipo==="escola"?"Escola":"Faculdade"}</span><select id="rdI">${insts.map(i=>`<option value="${i.id}" ${i.id===d.inst?"selected":""}>${esc(i.nome)}</option>`).join("")}<option value="" ${!d.inst?"selected":""}>＋ Nova ${tipo==="escola"?"escola":"faculdade"}</option></select></label>${d.inst?"":`<label class="fld"><span>Nome da nova ${tipo==="escola"?"escola":"faculdade"}</span><input id="rdNI" maxlength="80" value="${esc(d.newInst)}"></label>`}`}
+      <label class="fld"><span>Turma</span><select id="rdT">${ts.map(t=>`<option value="${t.id}" ${t.id===d.turma?"selected":""}>${esc(t.nome)}</option>`).join("")}<option value="" ${!d.turma?"selected":""}>＋ Nova turma</option></select></label>
+      ${d.turma?"":`<label class="fld"><span>Nome da nova turma</span><input id="rdNT" maxlength="40" value="${esc(d.newTurma)}" placeholder="Ex.: Turma B"></label><div class="fld"><span>Modelo da planilha</span><div class="seg" id="rdM"><button data-v="formatura" aria-pressed="${d.modelo==="formatura"}">Formatura e kits</button><button data-v="mensal" aria-pressed="${d.modelo==="mensal"}">Mensalidades</button></div></div>`}`}
+     <div class="row" style="margin:6px 0 2px"><button class="link" id="rdAll">Marcar todos</button><button class="link" id="rdNone">Desmarcar todos</button></div>
+     ${RD.items.map((it,i)=>`<div class="rdr ${it.dup?"dup":""}"><input type="checkbox" data-ck="${i}" ${it.on?"checked":""} aria-label="Incluir"><input type="text" data-nm="${i}" value="${esc(it.nome)}" aria-label="Nome">
+       <div class="sub"><input type="text" data-ct="${i}" value="${esc(it.contato)}" placeholder="contato (opcional)" inputmode="tel">${it.dup?'<span class="st o">já existe · marque para atualizar</span>':""}${it.total?`<span class="st n">total ${R(it.total)}</span>`:""}${it.pago?`<span class="st g">pago ${R(it.pago)}</span>`:""}${it.kit?`<span class="st n">${esc(it.kit)}</span>`:""}</div></div>`).join("")}
+     <div class="btns" style="position:sticky;bottom:0;background:var(--sf);padding-top:8px"><button class="btn full" id="rdGo" ${nN+nU?"":"disabled"}>${nN?`Adicionar ${nN} aluno(s)`:""}${nN&&nU?" e ":""}${nU?`${nN?"atualizar":"Atualizar"} ${nU}`:""}${nN+nU?"":"Nenhum nome marcado"}</button><button class="btn ghost full" id="rdBack">Ler outro arquivo</button></div>`);
+    const re=()=>{sync();draw();};const g=id=>$(id);if(g("rdI"))g("rdI").onchange=()=>{sync();d.turma=guessTurma(D.turmas.filter(t=>t.inst===d.inst),res.turmaGuess);draw();};
+    if(g("rdT"))g("rdT").onchange=re;if(g("rdM"))g("rdM").onclick=e=>{const b=e.target.closest("button");if(!b)return;sync();d.modelo=b.dataset.v;draw();};
+    qa("[data-ck]").forEach(c=>c.onchange=()=>{sync();const nn=RD.items.filter(i=>i.on&&!i.dup).length,nu=RD.items.filter(i=>i.on&&i.dup).length;$("rdGo").disabled=!(nn+nu);$("rdGo").textContent=nn+nu?`${nn?`Adicionar ${nn} aluno(s)`:""}${nn&&nu?" e ":""}${nu?`${nn?"atualizar":"Atualizar"} ${nu}`:""}`:"Nenhum nome marcado";});
+    $("rdAll").onclick=()=>{sync();RD.items.forEach(i=>i.on=true);draw();};$("rdNone").onclick=()=>{sync();RD.items.forEach(i=>i.on=false);draw();};$("rdBack").onclick=()=>{RD.items=null;RD.dest=null;leitor(ctx);};$("rdGo").onclick=()=>{sync();salvarLeitura();};};draw();}
+async function salvarLeitura(){const ctx=RD.ctx,d=RD.dest,res=RD.res,tipo=ctx.tipo||"escola",ano=ctx.ano||curAno();const btn=$("rdGo");if(btn)btn.disabled=true;
+  try{let inst=ctx.inst||d.inst;if(!inst){const nm=(d.newInst||"").trim();if(!nm){if(btn)btn.disabled=false;return toast("⚠️","Dê um nome à "+(tipo==="escola"?"escola":"faculdade"),"");}inst=await B.add("inst",{nome:nm,tipo,ano,cidade:"",autor:UID,criado:Date.now()});}
+    let t,turma=ctx.turma||d.turma;if(turma)t=D.turmas.find(x=>x.id===turma);
+    if(!t){const nm=(d.newTurma||"").trim();if(!nm){if(btn)btn.disabled=false;return toast("⚠️","Dê um nome à turma","");}const tv={nome:nm,inst,modelo:d.modelo,cols:[],hide:[],criado:Date.now(),autor:UID};
+      if(d.modelo==="mensal"){tv.meses=res.meses.length?res.meses.map(m=>MES[mesIdx(m)]?MES[mesIdx(m)].charAt(0).toUpperCase()+MES[mesIdx(m)].slice(1):m):MESES_PAD.split(", ");tv.parcela=0;tv.custoAluno=0;}
+      turma=await B.add("turmas",tv);t=Object.assign({id:turma},tv);}
+    const ex=new Map(D.alunos.filter(a=>a.turma===t.id).map(a=>[nrm(a.nome),a])),ks=kits();let nA=0,nU=0;
+    for(const it of RD.items){if(!it.on)continue;const nome=limparNome(it.nome)||it.nome.trim();if(!nome)continue;const old=ex.get(nrm(nome));const extra={};
+      if(it.contato&&it.contato.trim())extra.contato=it.contato.trim();if(it.obs)extra.obs=it.obs;
+      if(t.modelo==="mensal"){const mm={};(t.meses||[]).forEach((m,i)=>{const v=it.mes[nrm(m)]||it.mes[nrm(m).slice(0,3)];if(v)mm["m"+i]=v;});if(Object.keys(mm).length)extra.mes=mm;}
+      else{if(it.pago)extra.pago=it.pago;if(it.total)extra.total=it.total;const k=it.kit?ks.find(x=>nrm(x.nome)===nrm(it.kit)):null;if(k){extra.kit=k.id;if(!extra.total)extra.total=k.preco;}}
+      if(old){if(Object.keys(extra).length){await B.update("alunos",old.id,extra);nU++;}}
+      else{const v={turma:t.id,nome,contato:"",criado:Date.now(),autor:UID};if(t.modelo!=="mensal")Object.assign(v,{pago:0,total:0,envio:"Não enviado",placa:"",obs:"",kit:""});else Object.assign(v,{mes:{},obs:""});await B.add("alunos",Object.assign(v,extra));nA++;ex.set(nrm(nome),{id:"x"});}}
+    closeSheet();RD={};toast("✅",`${nA} aluno(s) adicionado(s)${nU?` · ${nU} atualizado(s)`:""}`,`Turma ${t.nome}`);if(!ctx.turma)go({v:"turma",id:t.id,t:tipo});}
+  catch(e){console.warn(e);if(btn)btn.disabled=false;toast("⚠️","Não foi possível salvar",(e&&e.message)||"Tente de novo.");}}
 /* ================= FOLHA, AVISOS ================= */
 function sheet(h,after){$("sheet").innerHTML=`<div class="in" role="dialog" aria-modal="true">${h}</div>`;$("sheet").classList.remove("hidden");guard();if(after)after();}
 function closeSheet(){$("sheet").classList.add("hidden");$("sheet").innerHTML="";}

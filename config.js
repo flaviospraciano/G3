@@ -9,5 +9,8 @@ window.G3_CONFIG = {
     appId: "1:944770234706:web:6efacc4f8919200e3e628b"
   },
   // Opcional: chave para notificações com o app fechado (exige plano Blaze).
-  vapidKey: ""
+  vapidKey: "",
+  // Opcional: endereço (https) que devolve as taxas do dia da maquininha em JSON.
+  // Formato em exemplo-taxas.json. Também pode ser definido no app: Taxas > Editar taxas.
+  ratesUrl: ""
 };
