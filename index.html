@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#FBFCFF">
 <meta name="color-scheme" content="light dark">
 <script>try{if(localStorage.getItem("g3_theme_ver")!=="3"){localStorage.setItem("g3_theme","leve");localStorage.setItem("g3_theme_ver","3");}var _t=localStorage.getItem("g3_theme")||"leve";if(_t==="auto")_t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"leve";if(_t!=="dark")_t="leve";document.documentElement.dataset.theme=_t;}catch(e){}</script>
-<meta name="g3-version" content="1.6.0">
+<meta name="g3-version" content="1.7.0">
 <link rel="manifest" href="g3-app-v1.webmanifest">
 <link rel="icon" type="image/png" href="g3-icon-192.png">
 <link rel="apple-touch-icon" href="g3-apple-touch.png">
@@ -175,7 +175,6 @@ table.tax td{padding:8px 14px;border-bottom:1px solid var(--line);font-weight:70
 [data-theme=leve] .bar i{background:linear-gradient(90deg,#FFD966,#FFBE55)}
 [data-theme=leve] .bar.g i{background:linear-gradient(90deg,#3CC98A,#7BE0B3)}[data-theme=leve] .bar.o i{background:linear-gradient(90deg,#FFA64D,#FFC888)}[data-theme=leve] .bar.r i{background:linear-gradient(90deg,#F26B7B,#FF9DA8)}
 [data-theme=leve] .kpi:nth-child(1){background:#FFF9E6;border-color:#FFEDB8}[data-theme=leve] .kpi:nth-child(2){background:#EEFBF4;border-color:#CDF2DF}[data-theme=leve] .kpi:nth-child(3){background:#F0F5FF;border-color:#D7E3FF}
-[data-theme=leve] .foot .flat{background:transparent;filter:brightness(0)}
 [data-theme=leve] .item.pinned{background:#FFFBEC}
 [data-theme=leve] .cobrar{background:linear-gradient(135deg,#FFF8DC,#FFEFC9);border-color:#FFE19A}
 /* ===== BOTOES DISCRETOS + GRADE DE ESCOLAS ===== */
@@ -979,7 +978,7 @@ function vAjustes(){on(()=>{$("aPf").onclick=()=>{sheet(`<div class="grab"></div
    <p class="tiny muted" style="margin:8px 0 0">${!B.demo&&CFG.vapidKey?"Avisos chegam mesmo com o app fechado.":"Os avisos chegam com o app aberto ou em segundo plano."}</p></div>
   <div class="lbl">Conta</div><button class="btn ghost full" id="aOut">Sair da conta</button>
   ${B.demo?`<div class="demo">Modo demonstração: dados só neste aparelho.</div>`:""}
-  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 1.6</p>`;}
+  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 1.7</p>`;}
 /* ================= LEITOR DE DOCUMENTOS ================= */
 const U_TESS="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js",U_PDFJS="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js",U_PDFW="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 const nrm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9 ]+/g," ").replace(/\s+/g," ").trim();
