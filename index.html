@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#FBFCFF">
 <meta name="color-scheme" content="light dark">
 <script>try{if(localStorage.getItem("g3_theme_ver")!=="3"){localStorage.setItem("g3_theme","leve");localStorage.setItem("g3_theme_ver","3");}var _t=localStorage.getItem("g3_theme")||"leve";if(_t==="auto")_t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"leve";if(_t!=="dark")_t="leve";document.documentElement.dataset.theme=_t;}catch(e){}</script>
-<meta name="g3-version" content="2.5.0">
+<meta name="g3-version" content="2.6.0">
 <link rel="manifest" href="g3-app-v1.webmanifest">
 <link rel="icon" type="image/png" href="g3-icon-192.png">
 <link rel="apple-touch-icon" href="g3-apple-touch.png">
@@ -283,6 +283,10 @@ body.net-on .top{top:34px}body.net-on #view{padding-top:34px}
  .cal[data-sz=lg] .hn{display:-webkit-box}
  .ferlist .row,.ferlist .row b{font-size:min(1.55rem,calc(var(--ch,48px)*.42))!important}
 }
+.arr{border-bottom:1px solid var(--line)}.arr:last-child{border-bottom:0}
+.arr summary{display:flex;align-items:center;gap:10px;padding:11px 0;cursor:pointer;list-style:none}.arr summary::-webkit-details-marker{display:none}
+.arr .chv{flex:none;transition:transform .2s;color:var(--faint)}.arr[open] .chv{transform:rotate(180deg)}
+.arrt{display:flex;gap:10px;align-items:center;padding:7px 0 7px 12px;border-top:1px dashed var(--line);font-size:.92rem}
 </style>
 </head>
 <body>
@@ -1127,20 +1131,26 @@ function metaCard(m,E){const C=metaCalc(m,E),T=MET[m.tipo]||MET.manual,s=MST[C.s
   return `<button class="meta" data-mt="${m.id}"><div class="mh"><span style="font-size:1.4rem">${T.ic}</span><div class="grow"><b>${esc(m.titulo)}</b><div class="tiny muted">${esc(T.n)} · ${m.ano==="todos"?"todos os anos":m.ano}${resp?" · "+esc(resp):""}</div></div><span class="st ${s[0]}">${s[1]}</span></div>
    <div class="mv"><span class="small"><b>${fmtMeta(m,C.cur)}</b> <span class="muted">de ${fmtMeta(m,C.alvo)}</span></span><span class="mp">${Math.round(C.pct)}%</span></div><div class="bar ${s[2]}"><i style="width:${Math.max(C.pct,C.cur>0?2:0)}%"></i></div>
    <div class="tiny muted" style="margin-top:7px">${C.st==="ok"?"🎉 Meta alcançada.":`Faltam ${fmtMeta(m,C.falta)}`}${m.prazo?` · prazo ${fdate(m.prazo)}${C.d>=0&&C.st!=="ok"?` (${C.d===0?"hoje":C.d+" dia(s)"})`:""}`:""}${C.ritmo&&C.st!=="ok"?` · ${C.ritmo}`:""}</div></button>`;}
+function arrPorEscola(ano){const L=D.inst.filter(i=>ano==="todos"||instAno(i)===ano).sort(byName).map(i=>{const rows=D.turmas.filter(t=>t.inst===i.id).sort((a,b)=>a.nome.localeCompare(b.nome,"pt",{numeric:true})).map(t=>({t,s:stats(t.id)}));return{i,rows,pago:rows.reduce((a,x)=>a+x.s.pago,0),tot:rows.reduce((a,x)=>a+x.s.tot,0),n:rows.reduce((a,x)=>a+x.s.n,0)};});
+  if(!L.length)return"";const pc=(a,b)=>b>0?Math.min(100,Math.round(a/b*100)):0;
+  on(()=>qa("details.arr").forEach(d=>d.ontoggle=()=>{VIEW.ao=VIEW.ao||{};VIEW.ao[d.dataset.i]=d.open;}));
+  return `<div class="lbl">${ic("wallet")} Arrecadado por escola e turma</div><div class="card" style="padding:2px 12px">${L.map(x=>`<details class="arr" data-i="${x.i.id}" ${(VIEW.ao||{})[x.i.id]?"open":""}><summary><div class="grow"><b>${esc(x.i.nome)}</b><div class="tiny muted">${x.rows.length} turma(s) · ${x.n} aluno(s) · ${pc(x.pago,x.tot)}% recebido</div></div><div style="text-align:right"><b>${R(x.pago)}</b><div class="tiny muted">de ${R(x.tot)}</div></div><span class="chv">${ic("chevron-down")}</span></summary>
+   ${x.rows.map(r=>`<div class="arrt"><div class="grow"><b>${esc(r.t.nome)}</b><div class="bar ${pc(r.s.pago,r.s.tot)>=100?"g":""}" style="margin-top:4px"><i style="width:${pc(r.s.pago,r.s.tot)}%"></i></div></div><div style="text-align:right"><b>${R(r.s.pago)}</b><div class="tiny muted">de ${R(r.s.tot)} · ${r.s.n} aluno(s)</div></div></div>`).join("")||'<p class="tiny muted" style="margin:0 0 10px">Nenhuma turma ainda.</p>'}</details>`).join("")}</div>`;}
 function metasBody(){const ano=VIEW.my||curAno(),E=empData(ano),all=metasL().filter(m=>ano==="todos"||m.ano===ano||m.ano==="todos");
   const order={venc:0,risco:1,and:2,ritmo:3,ok:4},L=all.map(m=>({m,C:metaCalc(m,E)})).sort((a,b)=>order[a.C.st]-order[b.C.st]);
   const groups=["Financeiras","Crescimento","Outras"].map(g=>({g,L:L.filter(x=>(MET[x.m.tipo]||MET.manual).cat===g)})).filter(x=>x.L.length);
-  const SUG=[["arrecadado","Arrecadar "+(ano==="2027"?"2027":"2026"),100000],["escolas","Fechar escolas",15],["faculdades","Fechar faculdades",5],["quitacao","Alunos com pagamento quitado",90],["lucro","Lucro do ano",40000]];
+  const SUG=[["arrecadado","Arrecadar "+(ano==="2027"?"2027":"2026"),100000],["escolas","Fechar escolas",15],["faculdades","Fechar faculdades",5],["quitacao","Alunos com pagamento quitado",90]];
   on(()=>{qa("[data-my]").forEach(b=>b.onclick=()=>{VIEW.my=b.dataset.my;render();});qa("[data-mt]").forEach(b=>b.onclick=()=>openMeta(b.dataset.mt));qa("[data-sg]").forEach(b=>b.onclick=()=>{const s=SUG[+b.dataset.sg];metaForm(null,{tipo:s[0],titulo:s[1],alvo:s[2],ano:ano==="todos"?curAno():ano});});});
   return `<div class="seg" style="margin:14px 0 10px">${[...ANOS,"todos"].map(y=>`<button data-my="${y}" aria-pressed="${ano===y}">${y==="todos"?"Todos os anos":y}</button>`).join("")}</div>
-  <div class="kpis"><div class="kpi"><span>Arrecadado</span><b>${R(E.arrecadado)}</b></div><div class="kpi"><span>Lucro realizado</span><b>${R(E.lucro)}</b></div><div class="kpi"><span>A receber</span><b>${R(Math.max(0,E.previsto-E.arrecadado))}</b></div>
+  <div class="kpis"><div class="kpi"><span>Arrecadado</span><b>${R(E.arrecadado)}</b></div><div class="kpi"><span>Previsto (total a pagar)</span><b>${R(E.previsto)}</b></div><div class="kpi"><span>A receber</span><b>${R(Math.max(0,E.previsto-E.arrecadado))}</b></div>
    <div class="kpi"><span>Escolas · faculdades</span><b>${E.escolas} · ${E.faculdades}</b></div><div class="kpi"><span>Turmas · alunos</span><b>${E.turmas} · ${E.alunos}</b></div><div class="kpi"><span>Alunos quitados</span><b>${Math.round(E.quitacao)}%</b></div></div>
+  ${arrPorEscola(ano)}
   ${groups.map(x=>`<div class="lbl">${x.g==="Financeiras"?"💰 Metas financeiras":x.g==="Crescimento"?"🌱 Metas de crescimento":"🎯 Outras metas"}</div>${x.L.map(y=>metaCard(y.m,E)).join("")}`).join("")}
   ${all.length?"":`<div class="card" style="margin-top:14px"><b>Defina as metas da G3</b><p class="small muted" style="margin:4px 0 10px">Metas claras, com valor, prazo e responsável. O progresso é calculado sozinho a partir das planilhas. Comece por uma sugestão:</p><div class="chips">${SUG.map((s,i)=>`<button data-sg="${i}">${MET[s[0]].ic} ${esc(s[1])}</button>`).join("")}</div></div>`}
   <p class="tiny muted" style="margin-top:12px">O status compara o que já foi feito com o esperado até hoje, em linha reta entre a criação da meta e o prazo.</p>`;}
 function metaForm(id,pre){const m=Object.assign({tipo:"arrecadado",titulo:"",alvo:"",ano:curAno(),prazo:"",resp:"",atual:"",un:""},id?metasL().find(x=>x.id===id):{},pre||{});if(!id&&!m.prazo)m.prazo=(m.ano==="todos"?curAno():m.ano)+"-12-31";
   const draw=()=>{const T=MET[m.tipo];sheet(`<div class="grab"></div><h2>${id?"Editar":"Nova"} meta</h2>
-   <label class="fld"><span>O que medir</span><select id="gT">${["Financeiras","Crescimento","Outras"].map(c=>`<optgroup label="${c}">${Object.entries(MET).filter(([k,v])=>v.cat===c).map(([k,v])=>`<option value="${k}" ${k===m.tipo?"selected":""}>${v.ic} ${v.n}</option>`).join("")}</optgroup>`).join("")}</select></label>
+   <label class="fld"><span>O que medir</span><select id="gT">${["Financeiras","Crescimento","Outras"].map(c=>`<optgroup label="${c}">${Object.entries(MET).filter(([k,v])=>v.cat===c&&(k!=="lucro"||m.tipo==="lucro")).map(([k,v])=>`<option value="${k}" ${k===m.tipo?"selected":""}>${v.ic} ${v.n}</option>`).join("")}</optgroup>`).join("")}</select></label>
    <label class="fld"><span>Nome da meta</span><input id="gN" maxlength="70" value="${esc(m.titulo)}" placeholder="Ex.: Arrecadar R$ 100 mil em 2026"></label>
    <div class="row" style="gap:8px"><label class="fld grow"><span>Valor da meta${T.pct?" (%)":T.money?" (R$)":""}</span><input id="gA" inputmode="decimal" value="${m.alvo?String(m.alvo).replace(".",","):""}"></label>${m.tipo==="manual"?`<label class="fld grow"><span>Unidade (ex.: contratos, R$)</span><input id="gU" maxlength="14" value="${esc(m.un||"")}"></label>`:""}</div>
    ${m.tipo==="manual"?`<label class="fld"><span>Quanto já foi feito</span><input id="gC" inputmode="decimal" value="${m.atual?String(m.atual).replace(".",","):""}"></label>`:`<p class="tiny muted" style="margin:0 0 6px">✔ O progresso é calculado automaticamente pelas planilhas.</p>`}
@@ -1218,7 +1228,7 @@ function vAjustes(){on(()=>{$("aPf").onclick=()=>{sheet(`<div class="grab"></div
    <p class="tiny muted" style="margin:8px 0 0">${!B.demo&&CFG.vapidKey?"Avisos chegam mesmo com o app fechado.":"Os avisos chegam com o app aberto ou em segundo plano."}</p></div>
   <div class="lbl">Conta</div><button class="btn ghost full" id="aOut">Sair da conta</button>
   ${B.demo?`<div class="demo">Modo demonstração: dados só neste aparelho.</div>`:""}
-  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 2.5</p>`;}
+  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 2.6</p>`;}
 /* ================= LEITOR DE DOCUMENTOS ================= */
 const U_TESS="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js",U_PDFJS="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js",U_PDFW="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 const nrm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9 ]+/g," ").replace(/\s+/g," ").trim();
