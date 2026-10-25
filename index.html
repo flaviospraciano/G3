@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#FBFCFF">
 <meta name="color-scheme" content="light dark">
 <script>try{if(localStorage.getItem("g3_theme_ver")!=="3"){localStorage.setItem("g3_theme","leve");localStorage.setItem("g3_theme_ver","3");}var _t=localStorage.getItem("g3_theme")||"leve";if(_t==="auto")_t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"leve";if(_t!=="dark")_t="leve";document.documentElement.dataset.theme=_t;}catch(e){}</script>
-<meta name="g3-version" content="2.7.0">
+<meta name="g3-version" content="2.9.0">
 <link rel="manifest" href="g3-app-v1.webmanifest">
 <link rel="icon" type="image/png" href="g3-icon-192.png">
 <link rel="apple-touch-icon" href="g3-apple-touch.png">
@@ -287,6 +287,11 @@ body.net-on .top{top:34px}body.net-on #view{padding-top:34px}
 .arr summary{display:flex;align-items:center;gap:10px;padding:11px 0;cursor:pointer;list-style:none}.arr summary::-webkit-details-marker{display:none}
 .arr .chv{flex:none;transition:transform .2s;color:var(--faint)}.arr[open] .chv{transform:rotate(180deg)}
 .arrt{display:flex;gap:10px;align-items:center;padding:7px 0 7px 12px;border-top:1px dashed var(--line);font-size:.92rem}
+/* ===== CELULAR: logo e nome do rodapé ficam brancos (como antes) ===== */
+@media (hover:none) and (pointer:coarse){
+ :root[data-theme="leve"] .foot .flat{filter:drop-shadow(0 0 1px rgba(0,0,0,.85)) drop-shadow(0 1px 3px rgba(0,0,0,.35))}
+ :root[data-theme="leve"] .foot,:root[data-theme="leve"] .foot b{color:#fff;text-shadow:0 0 1px rgba(0,0,0,.85),0 1px 3px rgba(0,0,0,.35)}
+}
 </style>
 </head>
 <body>
@@ -1136,7 +1141,7 @@ function pendItem(x){const w=waLink(x.a.contato);return `<div class="task"><div 
 function vFinanceiro(){const ano=VIEW.fy||curAno(),sec=VIEW.fs||"resumo",E=empData(ano),F=relData(ano),pc=(a,b)=>b>0?Math.round(a/b*100):0;
   on(()=>{qa("[data-fy]").forEach(b=>b.onclick=()=>{VIEW.fy=b.dataset.fy;render();});qa("[data-fs]").forEach(b=>b.onclick=()=>{VIEW.fs=b.dataset.fs;render();});
     const q=$("fq");if(q)q.oninput=e=>{VIEW.fq=e.target.value;render();};qa("[data-ff]").forEach(b=>b.onclick=()=>{VIEW.ff=b.dataset.ff;render();});
-    qa("[data-gof]").forEach(b=>b.onclick=()=>go({v:b.dataset.gof}));const vp=$("fVp");if(vp)vp.onclick=()=>{VIEW.fs="pend";render();};const f=$("fab");if(f)f.onclick=()=>metaForm(null);});
+    const vp=$("fVp");if(vp)vp.onclick=()=>{VIEW.fs="pend";render();};const f=$("fab");if(f)f.onclick=()=>metaForm(null);});
   const head=topBar("Financeiro",false)+`<div class="seg" style="margin:14px 0 8px">${[...ANOS,"todos"].map(y=>`<button data-fy="${y}" aria-pressed="${ano===y}">${y==="todos"?"Todos os anos":y}</button>`).join("")}</div>
    <div class="seg" style="margin:0 0 12px">${[["resumo","Resumo"],["pend","Pendências"],["metas","Metas"]].map(([v,l])=>`<button data-fs="${v}" aria-pressed="${sec===v}">${l}${v==="pend"&&F.pend.length?` (${F.pend.length})`:""}</button>`).join("")}</div>`;
   if(sec==="metas")return head+metasLista(ano,E)+`<button class="fab" id="fab" aria-label="Nova meta">＋</button>`;
@@ -1153,7 +1158,6 @@ function vFinanceiro(){const ano=VIEW.fy||curAno(),sec=VIEW.fs||"resumo",E=empDa
    <div class="kpi"><span>Inadimplência</span><b>${F.inadV.toFixed(1).replace(".",",")}%</b><small class="tiny muted">do valor · ${F.inadA.toFixed(0)}% dos alunos</small></div>
    <div class="kpi"><span>Alunos quitados</span><b>${F.quit} de ${F.n}</b><small class="tiny muted">${F.parc} parcial · ${F.nada} sem pagar</small></div>
    <div class="kpi"><span>Projeção prudente</span><b>${R(F.proj)}</b><small class="tiny muted">arrecadado + a receber de quem já começou a pagar</small></div></div>
-  <div class="row" style="gap:8px;margin:12px 0 0;flex-wrap:wrap"><button class="btn ghost sm" data-gof="lucros">${ic("calculator")} Calculadora de lucros</button><button class="btn ghost sm" data-gof="taxas">${ic("credit-card")} Taxas da maquininha</button></div>
   ${arrPorEscola(ano)}
   <div class="lbl">${ic("triangle-alert")} Maiores pendências</div><div class="card" style="padding:4px 12px">${F.pend.slice(0,5).map(pendItem).join("")||'<p class="empty">Nenhuma pendência. 🎉</p>'}${F.pend.length>5?`<button class="link" id="fVp" style="margin:8px 0">Ver todas (${F.pend.length}) ›</button>`:""}</div>`;}
 function metaForm(id,pre){const m=Object.assign({tipo:"arrecadado",titulo:"",alvo:"",ano:curAno(),prazo:"",resp:"",atual:"",un:""},id?metasL().find(x=>x.id===id):{},pre||{});if(!id&&!m.prazo)m.prazo=(m.ano==="todos"?curAno():m.ano)+"-12-31";
@@ -1234,7 +1238,7 @@ function vAjustes(){on(()=>{$("aPf").onclick=()=>{sheet(`<div class="grab"></div
    <p class="tiny muted" style="margin:8px 0 0">${!B.demo&&CFG.vapidKey?"Avisos chegam mesmo com o app fechado.":"Os avisos chegam com o app aberto ou em segundo plano."}</p></div>
   <div class="lbl">Conta</div><button class="btn ghost full" id="aOut">Sair da conta</button>
   ${B.demo?`<div class="demo">Modo demonstração: dados só neste aparelho.</div>`:""}
-  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 2.7</p>`;}
+  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 2.9</p>`;}
 /* ================= LEITOR DE DOCUMENTOS ================= */
 const U_TESS="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js",U_PDFJS="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js",U_PDFW="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 const nrm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9 ]+/g," ").replace(/\s+/g," ").trim();
