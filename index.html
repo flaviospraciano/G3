@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#FBFCFF">
 <meta name="color-scheme" content="light dark">
 <script>try{if(localStorage.getItem("g3_theme_ver")!=="3"){localStorage.setItem("g3_theme","leve");localStorage.setItem("g3_theme_ver","3");}var _t=localStorage.getItem("g3_theme")||"leve";if(_t==="auto")_t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"leve";if(_t!=="dark")_t="leve";document.documentElement.dataset.theme=_t;}catch(e){}</script>
-<meta name="g3-version" content="2.4.0">
+<meta name="g3-version" content="2.5.0">
 <link rel="manifest" href="g3-app-v1.webmanifest">
 <link rel="icon" type="image/png" href="g3-icon-192.png">
 <link rel="apple-touch-icon" href="g3-apple-touch.png">
@@ -263,7 +263,7 @@ body.net-on .top{top:34px}body.net-on #view{padding-top:34px}
 @media (hover:hover) and (pointer:fine){
  .cal{gap:3px}
  .cal button{aspect-ratio:auto;height:var(--ch,48px);border-radius:10px;font-size:min(1.55rem,calc(var(--ch,48px)*.42));font-weight:800;gap:1px;padding:0;line-height:1.1}
- .cal .dots{height:4px}.cal .h{line-height:1.2}
+ .cal .dots{height:4px}.cal .h{line-height:1.2;font-size:min(1.55rem,calc(var(--ch,48px)*.42));font-weight:800}
  .cal[data-sz=xs] .dots,.cal[data-sz=xs] .hn,.cal[data-sz=sm] .hn{display:none}
  }
 /* ===== BLOCOS EM ESCOLAS ===== */
@@ -776,9 +776,10 @@ function feriadosDe(y){if(_fer[y])return _fer[y];const F={},add=(m,d,n)=>{F[y+"-
   off(-48,"Carnaval (ponto facultativo)");off(-47,"Carnaval (ponto facultativo)");off(-2,"Sexta-feira Santa");off(0,"Páscoa");off(60,"Corpus Christi (ponto facultativo)");return(_fer[y]=F);}
 const feriado=k=>feriadosDe(+k.slice(0,4))[k]||"";
 /* No computador, o calendário se ajusta ao espaço livre da tela (qualquer zoom) para mostrar sempre o mês inteiro. */
-function fitCal(){const c=document.querySelector(".cal");if(!c||!matchMedia("(hover:hover) and (pointer:fine)").matches){if(c){c.style.removeProperty("--ch");if(c.parentElement)c.parentElement.style.removeProperty("--ch");}return;}
-  const nav=document.getElementById("nav"),navTop=nav&&getComputedStyle(nav).display!=="none"?nav.getBoundingClientRect().top:innerHeight,top=c.getBoundingClientRect().top,hh=(c.querySelector(".h")||{getBoundingClientRect:()=>({height:18})}).getBoundingClientRect().height;
-  const h=Math.max(16,Math.floor((navTop-top-hh-6*3-10)/6));c.style.setProperty("--ch",h+"px");if(c.parentElement)c.parentElement.style.setProperty("--ch",h+"px");c.dataset.sz=h<30?"xs":h<46?"sm":h<60?"md":"lg";}
+function fitCal(){const c=document.querySelector(".cal");if(!c)return;if(!matchMedia("(hover:hover) and (pointer:fine)").matches){c.style.removeProperty("--ch");if(c.parentElement)c.parentElement.style.removeProperty("--ch");return;}
+  const nav=document.getElementById("nav"),navTop=nav&&getComputedStyle(nav).display!=="none"?nav.getBoundingClientRect().top:innerHeight;
+  for(let k=0;k<4;k++){const top=c.getBoundingClientRect().top,hh=(c.querySelector(".h")||{getBoundingClientRect:()=>({height:18})}).getBoundingClientRect().height;
+    const h=Math.max(16,Math.floor((navTop-top-hh-6*3-10)/6));c.style.setProperty("--ch",h+"px");if(c.parentElement)c.parentElement.style.setProperty("--ch",h+"px");c.dataset.sz=h<30?"xs":h<46?"sm":h<60?"md":"lg";}}
 window.addEventListener("resize",()=>requestAnimationFrame(fitCal));
 function vAgenda(){const t=TODAY();if(!CAL){const d=new Date();CAL={y:d.getFullYear(),m:d.getMonth(),sel:t};}
   const first=new Date(CAL.y,CAL.m,1),start=new Date(first);start.setDate(1-first.getDay());const by={};D.events.forEach(e=>(by[e.data]=by[e.data]||[]).push(e));
@@ -1217,7 +1218,7 @@ function vAjustes(){on(()=>{$("aPf").onclick=()=>{sheet(`<div class="grab"></div
    <p class="tiny muted" style="margin:8px 0 0">${!B.demo&&CFG.vapidKey?"Avisos chegam mesmo com o app fechado.":"Os avisos chegam com o app aberto ou em segundo plano."}</p></div>
   <div class="lbl">Conta</div><button class="btn ghost full" id="aOut">Sair da conta</button>
   ${B.demo?`<div class="demo">Modo demonstração: dados só neste aparelho.</div>`:""}
-  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 2.4</p>`;}
+  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 2.5</p>`;}
 /* ================= LEITOR DE DOCUMENTOS ================= */
 const U_TESS="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js",U_PDFJS="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js",U_PDFW="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 const nrm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9 ]+/g," ").replace(/\s+/g," ").trim();
