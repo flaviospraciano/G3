@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#FBFCFF">
 <meta name="color-scheme" content="light dark">
 <script>try{if(localStorage.getItem("g3_theme_ver")!=="3"){localStorage.setItem("g3_theme","leve");localStorage.setItem("g3_theme_ver","3");}var _t=localStorage.getItem("g3_theme")||"leve";if(_t==="auto")_t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"leve";if(_t!=="dark")_t="leve";document.documentElement.dataset.theme=_t;}catch(e){}</script>
-<meta name="g3-version" content="2.6.0">
+<meta name="g3-version" content="2.7.0">
 <link rel="manifest" href="g3-app-v1.webmanifest">
 <link rel="icon" type="image/png" href="g3-icon-192.png">
 <link rel="apple-touch-icon" href="g3-apple-touch.png">
@@ -724,17 +724,17 @@ function exitAsk(){if($("exitM"))return;const d=document.createElement("div");d.
   d.innerHTML=`<div class="box" role="dialog" aria-modal="true"><img src="${LOGO}" alt="" style="width:72px;height:72px"><h2>Tem certeza que deseja sair do aplicativo?</h2><p class="small muted" style="margin:0">Seus dados continuam salvos.</p>
   <div class="btns"><button class="btn full" id="exNo">Ficar no G3</button><button class="btn ghost full" id="exYes">Sair do app</button></div></div>`;document.body.appendChild(d);
   $("exNo").onclick=()=>d.remove();$("exYes").onclick=()=>{d.remove();window._leave=true;try{window.close();}catch(e){}history.go(-2);};}
-const NAV=[["home","🏠","Início"],["agenda","📅","Agenda"],["clientes",ic("graduation-cap"),"Escolas"],["missoes","🎯","Metas"],["fixas",ic("message-square-text"),"Mensagens"]];
+const NAV=[["home","🏠","Início"],["agenda","📅","Agenda"],["clientes",ic("graduation-cap"),"Escolas"],["financeiro",ic("wallet"),"Financeiro"],["fixas",ic("message-square-text"),"Mensagens"]];
 function renderNav(){const pend=D.missoes.filter(m=>forMe(m)&&m.tipo!=="aviso"&&m.status!=="feita").length;
-  $("navIn").innerHTML=NAV.map(([k,i,n])=>{const [v,t]=k.split(":");const on=VIEW.v===v&&(!t||VIEW.t===t)||(t&&["instd","turma"].includes(VIEW.v)&&VIEW.t===t)||(!t&&v==="fixas"&&VIEW.v==="taxas")||(v==="clientes"&&["clianos","inst","instd","turma"].includes(VIEW.v));
-    return `<button data-k="${k}" aria-current="${!!on}"><span class="i">${i}</span>${n}${k==="missoes"&&pend?`<span class="bd">${pend}</span>`:""}</button>`;}).join("");
+  $("navIn").innerHTML=NAV.map(([k,i,n])=>{const [v,t]=k.split(":");const on=VIEW.v===v&&(!t||VIEW.t===t)||(t&&["instd","turma"].includes(VIEW.v)&&VIEW.t===t)||(!t&&v==="fixas"&&VIEW.v==="taxas")||(v==="clientes"&&["clianos","inst","instd","turma"].includes(VIEW.v))||(v==="financeiro"&&["lucros","relatorio"].includes(VIEW.v));
+    return `<button data-k="${k}" aria-current="${!!on}"><span class="i">${i}</span>${n}${k==="home"&&pend?`<span class="bd">${pend}</span>`:""}</button>`;}).join("");
   qa("#navIn button").forEach(b=>b.onclick=()=>{const [v,t]=b.dataset.k.split(":");tab(t?{v,t}:{v});});}
 function topBar(title,backable=true,extra=""){return `<header class="top">${backable?`<button class="back" id="bk" aria-label="Voltar">‹</button><img src="${LOGO}" class="logo sm" alt="G3">`:`<img src="${LOGO}" class="logo" alt="G3">`}<h1>${title}</h1>${extra}<button class="theme" id="thB" aria-label="Mudar para ${nextTheme()[2].toLowerCase()}" title="${nextTheme()[2]}">${nextTheme()[1]}</button><button class="back" id="me" aria-label="Perfil e ajustes" style="padding:0;overflow:hidden">${avatar(UID,"ava")}</button></header>`;}
 function bindTop(){const b=$("bk");if(b)b.onclick=()=>STACK.length?back():tab({v:"home"});$("me").onclick=()=>go({v:"ajustes"});$("thB").onclick=()=>{const n=nextTheme();setTheme(n[0]);toast(n[1],n[2],"Toque de novo para trocar. Automático em Perfil e ajustes.");};}
 /* ================= RENDER ================= */
 function render(){if(!UID||!ME)return;if(!window._g0){window._g0=1;guard();}try{padronizarTudo();}catch(e){}const fa=document.activeElement,fid=fa&&fa.id,sel=fa&&fa.selectionStart;const w=qa(".wrap")[0],sl=w?[w.scrollLeft,w.scrollTop]:null,sy=window.scrollY;
-  const f={home:vHome,agenda:vAgenda,notas:vNotas,inst:vInst,instd:vInstD,turma:vTurma,missoes:vMissoes,equipe:vEquipe,ajustes:vAjustes,lucros:vLucros,fixas:vFixas,taxas:vTaxas,clientes:vClientes,clianos:vCliAnos,relatorio:vRelatorio,equip:vEquip,fornec:vFornec}[VIEW.v]||vHome;
-  $("view").innerHTML=f()+FOOT();$("view").classList.toggle("wide",["turma","lucros","relatorio"].includes(VIEW.v));bindTop();BIND.forEach(fn=>fn());BIND=[];renderNav();
+  const f={home:vHome,agenda:vAgenda,notas:vNotas,inst:vInst,instd:vInstD,turma:vTurma,missoes:vMissoes,equipe:vEquipe,ajustes:vAjustes,lucros:vLucros,fixas:vFixas,taxas:vTaxas,clientes:vClientes,clianos:vCliAnos,financeiro:vFinanceiro,relatorio:vFinanceiro,equip:vEquip,fornec:vFornec}[VIEW.v]||vHome;
+  $("view").innerHTML=f()+FOOT();$("view").classList.toggle("wide",["turma","lucros","relatorio","financeiro"].includes(VIEW.v));bindTop();BIND.forEach(fn=>fn());BIND=[];renderNav();
   const w2=qa(".wrap")[0];if(w2&&sl&&VIEW._keep){w2.scrollLeft=sl[0];w2.scrollTop=sl[1];}if(VIEW._keep)window.scrollTo(0,sy);
   if(fid&&$(fid)){$(fid).focus();try{$(fid).setSelectionRange(sel,sel);}catch(e){}}}
 let BIND=[];const on=fn=>BIND.push(fn);
@@ -758,7 +758,7 @@ function vHome(){QUOTE=QUOTE||frase();const t=TODAY(),wk=addDays(t,7);
   <div class="lbl">📆 Esta semana <span class="st o">${sem.length+evS.length}</span></div><div class="card">${hS||'<p class="empty">Nada marcado para os próximos 7 dias.</p>'}</div>
   ${avisos.length?`<div class="lbl">📣 Avisos recentes</div><div class="card">${avisos.map(a=>`<button class="task" style="width:100%;background:none;border:0;text-align:left;color:inherit" data-m="${a.id}"><span class="ic">📣</span><div class="grow"><b>${esc(a.titulo)}</b><div class="tiny muted">de ${esc(ufirst(a.de))} · ${ago(a.criado)}</div></div></button>`).join("")}</div>`:""}
   <div class="lbl">Ferramentas</div><div class="menu">
-   <button class="mi" data-go="relatorio" style="--ic:#3B82F6"><span class="e">${ic("chart-column")}</span><b>Relatórios e financeiro</b></button>
+   <button class="mi" data-go="missoes" style="--ic:#EF4444">${mine.length?`<span class="bd">${mine.length}</span>`:""}<span class="e">${ic("list-checks")}</span><b>Missões e avisos</b></button>
    <button class="mi" data-go="lucros" style="--ic:#16A34A"><span class="e">${ic("calculator")}</span><b>Calculadora de lucros</b></button>
    <button class="mi" data-go="equip" style="--ic:#F59E0B"><span class="e">${ic("clipboard-check")}</span><b>Equipamentos e checklists</b></button>
    <button class="mi" data-go="fornec" style="--ic:#8B5CF6"><span class="e">${ic("handshake")}</span><b>Fornecedores e parceiros</b></button>
@@ -1045,19 +1045,6 @@ function relData(ano){const ins=D.inst.filter(i=>ano==="todos"||instAno(i)===ano
     if(tot>0){n++;it+=tot;prev+=tot;if(pg>=tot)quit++;else if(pg>0)parc++;else nada++;const rec=Math.max(0,tot-pg);if(rec>0){pend.push({a,t,i,rec,pg,tot});if(pg>0)prud+=rec;}}}));if(ia)por.push({i,ip,it,ia});});
   const aRec=pend.reduce((s,x)=>s+x.rec,0);pend.sort((a,b)=>b.rec-a.rec);
   return{prev,pago,aRec,n,quit,parc,nada,prud,por,pend,inadV:prev?aRec/prev*100:0,inadA:n?(parc+nada)/n*100:0,proj:pago+prud};}
-function vRelatorio(){const ano=VIEW.ry||curAno(),E=relData(ano),all=!!VIEW.all,lista=all?E.pend:E.pend.slice(0,15);
-  on(()=>{qa("[data-ry]").forEach(b=>b.onclick=()=>{VIEW.ry=b.dataset.ry;render();});const m=$("rAll");if(m)m.onclick=()=>{VIEW.all=!VIEW.all;render();};});
-  const pc=(a,b)=>b>0?Math.round(a/b*100):0;
-  return topBar("Relatórios")+`<div class="seg" style="margin:14px 0 10px">${[...ANOS,"todos"].map(y=>`<button data-ry="${y}" aria-pressed="${ano===y}">${y==="todos"?"Todos os anos":y}</button>`).join("")}</div>
-  <div class="kpis">
-   <div class="kpi"><span>Faturamento previsto</span><b>${R(E.prev)}</b></div>
-   <div class="kpi"><span>Entradas (arrecadado)</span><b>${R(E.pago)}</b><small class="tiny muted">${pc(E.pago,E.prev)}% do previsto</small></div>
-   <div class="kpi"><span>Pendente a receber</span><b>${R(E.aRec)}</b><small class="tiny muted">${E.pend.length} aluno(s)</small></div>
-   <div class="kpi"><span>Inadimplência</span><b>${E.inadV.toFixed(1).replace(".",",")}%</b><small class="tiny muted">do valor · ${E.inadA.toFixed(0)}% dos alunos</small></div>
-   <div class="kpi"><span>Alunos quitados</span><b>${E.quit} de ${E.n}</b><small class="tiny muted">${E.parc} parcial · ${E.nada} sem pagar</small></div>
-   <div class="kpi"><span>Projeção prudente</span><b>${R(E.proj)}</b><small class="tiny muted">arrecadado + a receber de quem já começou a pagar</small></div></div>
-  <div class="lbl">${ic("chart-column")} Por ${"escola e faculdade"}</div><div class="card">${E.por.map(x=>{const p=pc(x.ip,x.it);return `<div style="margin-bottom:12px"><div class="row small"><b class="grow">${esc(x.i.nome)}</b><span>${R(x.ip)} <span class="muted">de ${R(x.it)}</span></span></div><div class="bar ${p>=100?"g":p>=50?"":"o"}" style="margin-top:5px"><i style="width:${Math.min(100,p)}%"></i></div><div class="tiny muted" style="margin-top:3px">${p}% recebido · falta ${R(Math.max(0,x.it-x.ip))}</div></div>`;}).join("")||'<p class="empty">Sem dados neste ano.</p>'}</div>
-  <div class="lbl">${ic("triangle-alert")} Pagamentos pendentes</div><div class="card" style="padding:4px 12px">${lista.map(x=>{const w=waLink(x.a.contato);return `<div class="task"><div class="grow"><b>${esc(x.a.nome)}</b><div class="tiny muted">${esc(x.i.nome)} · ${esc(x.t.nome)}</div></div><div style="text-align:right"><b style="color:var(--danger)">${R(x.rec)}</b><div class="tiny muted">${x.pg>0?"parcial":"sem pagar"}</div></div>${w?`<a class="btn ghost sm" href="${w}" target="_blank" rel="noopener" aria-label="Cobrar no WhatsApp">${ic("message-circle")}</a>`:""}</div>`;}).join("")||'<p class="empty">Nenhuma pendência. 🎉</p>'}${E.pend.length>15?`<button class="link" id="rAll" style="margin:8px 0">${all?"Mostrar menos":"Ver todos ("+E.pend.length+")"}</button>`:""}</div>`;}
 /* ================= EQUIPAMENTOS E CHECKLISTS ================= */
 const chkPad=()=>{let n=0;const mk=(p,cat,arr)=>arr.map(t=>({id:p+"-"+(n++),t,cat,ok:false}));
   const base=p=>[...mk(p,"Câmeras e lentes",["Corpos de câmera (principal e reserva)","Lentes: objetiva, tele e grande-angular","Alça, protetor de lente e flanela de limpeza"]),...mk(p,"Energia",["Baterias carregadas","Carregadores, extensão e benjamim"]),...mk(p,"Cartões e backup",["Cartões de memória formatados","Leitor de cartão e HD externo"]),...mk(p,"Iluminação",["Flash / tochas e gatilhos","Softbox ou rebatedor","Tripés e suportes"]),...mk(p,"Cenários",["Fundos e painéis do cenário","Adereços: becas, capelos e faixas"]),...mk(p,"Materiais necessários",["Lista de alunos impressa","Prancheta e canetas","Água e lanche da equipe"])];
@@ -1136,18 +1123,39 @@ function arrPorEscola(ano){const L=D.inst.filter(i=>ano==="todos"||instAno(i)===
   on(()=>qa("details.arr").forEach(d=>d.ontoggle=()=>{VIEW.ao=VIEW.ao||{};VIEW.ao[d.dataset.i]=d.open;}));
   return `<div class="lbl">${ic("wallet")} Arrecadado por escola e turma</div><div class="card" style="padding:2px 12px">${L.map(x=>`<details class="arr" data-i="${x.i.id}" ${(VIEW.ao||{})[x.i.id]?"open":""}><summary><div class="grow"><b>${esc(x.i.nome)}</b><div class="tiny muted">${x.rows.length} turma(s) · ${x.n} aluno(s) · ${pc(x.pago,x.tot)}% recebido</div></div><div style="text-align:right"><b>${R(x.pago)}</b><div class="tiny muted">de ${R(x.tot)}</div></div><span class="chv">${ic("chevron-down")}</span></summary>
    ${x.rows.map(r=>`<div class="arrt"><div class="grow"><b>${esc(r.t.nome)}</b><div class="bar ${pc(r.s.pago,r.s.tot)>=100?"g":""}" style="margin-top:4px"><i style="width:${pc(r.s.pago,r.s.tot)}%"></i></div></div><div style="text-align:right"><b>${R(r.s.pago)}</b><div class="tiny muted">de ${R(r.s.tot)} · ${r.s.n} aluno(s)</div></div></div>`).join("")||'<p class="tiny muted" style="margin:0 0 10px">Nenhuma turma ainda.</p>'}</details>`).join("")}</div>`;}
-function metasBody(){const ano=VIEW.my||curAno(),E=empData(ano),all=metasL().filter(m=>ano==="todos"||m.ano===ano||m.ano==="todos");
-  const order={venc:0,risco:1,and:2,ritmo:3,ok:4},L=all.map(m=>({m,C:metaCalc(m,E)})).sort((a,b)=>order[a.C.st]-order[b.C.st]);
+/* ================= FINANCEIRO (resumo + pendências + metas) ================= */
+function metasLista(ano,E){const all=metasL().filter(m=>ano==="todos"||m.ano===ano||m.ano==="todos"),order={venc:0,risco:1,and:2,ritmo:3,ok:4},L=all.map(m=>({m,C:metaCalc(m,E)})).sort((a,b)=>order[a.C.st]-order[b.C.st]);
   const groups=["Financeiras","Crescimento","Outras"].map(g=>({g,L:L.filter(x=>(MET[x.m.tipo]||MET.manual).cat===g)})).filter(x=>x.L.length);
   const SUG=[["arrecadado","Arrecadar "+(ano==="2027"?"2027":"2026"),100000],["escolas","Fechar escolas",15],["faculdades","Fechar faculdades",5],["quitacao","Alunos com pagamento quitado",90]];
-  on(()=>{qa("[data-my]").forEach(b=>b.onclick=()=>{VIEW.my=b.dataset.my;render();});qa("[data-mt]").forEach(b=>b.onclick=()=>openMeta(b.dataset.mt));qa("[data-sg]").forEach(b=>b.onclick=()=>{const s=SUG[+b.dataset.sg];metaForm(null,{tipo:s[0],titulo:s[1],alvo:s[2],ano:ano==="todos"?curAno():ano});});});
-  return `<div class="seg" style="margin:14px 0 10px">${[...ANOS,"todos"].map(y=>`<button data-my="${y}" aria-pressed="${ano===y}">${y==="todos"?"Todos os anos":y}</button>`).join("")}</div>
-  <div class="kpis"><div class="kpi"><span>Arrecadado</span><b>${R(E.arrecadado)}</b></div><div class="kpi"><span>Previsto (total a pagar)</span><b>${R(E.previsto)}</b></div><div class="kpi"><span>A receber</span><b>${R(Math.max(0,E.previsto-E.arrecadado))}</b></div>
-   <div class="kpi"><span>Escolas · faculdades</span><b>${E.escolas} · ${E.faculdades}</b></div><div class="kpi"><span>Turmas · alunos</span><b>${E.turmas} · ${E.alunos}</b></div><div class="kpi"><span>Alunos quitados</span><b>${Math.round(E.quitacao)}%</b></div></div>
-  ${arrPorEscola(ano)}
+  on(()=>{qa("[data-mt]").forEach(b=>b.onclick=()=>openMeta(b.dataset.mt));qa("[data-sg]").forEach(b=>b.onclick=()=>{const s=SUG[+b.dataset.sg];metaForm(null,{tipo:s[0],titulo:s[1],alvo:s[2],ano:ano==="todos"?curAno():ano});});});
+  return `<div class="kpis" style="margin-top:12px"><div class="kpi"><span>Escolas · faculdades</span><b>${E.escolas} · ${E.faculdades}</b></div><div class="kpi"><span>Turmas · alunos</span><b>${E.turmas} · ${E.alunos}</b></div><div class="kpi"><span>Alunos quitados</span><b>${Math.round(E.quitacao)}%</b></div></div>
   ${groups.map(x=>`<div class="lbl">${x.g==="Financeiras"?"💰 Metas financeiras":x.g==="Crescimento"?"🌱 Metas de crescimento":"🎯 Outras metas"}</div>${x.L.map(y=>metaCard(y.m,E)).join("")}`).join("")}
   ${all.length?"":`<div class="card" style="margin-top:14px"><b>Defina as metas da G3</b><p class="small muted" style="margin:4px 0 10px">Metas claras, com valor, prazo e responsável. O progresso é calculado sozinho a partir das planilhas. Comece por uma sugestão:</p><div class="chips">${SUG.map((s,i)=>`<button data-sg="${i}">${MET[s[0]].ic} ${esc(s[1])}</button>`).join("")}</div></div>`}
   <p class="tiny muted" style="margin-top:12px">O status compara o que já foi feito com o esperado até hoje, em linha reta entre a criação da meta e o prazo.</p>`;}
+function pendItem(x){const w=waLink(x.a.contato);return `<div class="task"><div class="grow"><b>${esc(x.a.nome)}</b><div class="tiny muted">${esc(x.i.nome)} · ${esc(x.t.nome)}</div></div><div style="text-align:right"><b style="color:var(--danger)">${R(x.rec)}</b><div class="tiny muted">${x.pg>0?"parcial · pagou "+R(x.pg):"sem pagar"}</div></div>${w?`<a class="btn ghost sm" href="${w}" target="_blank" rel="noopener" aria-label="Cobrar no WhatsApp">${ic("message-circle")}</a>`:""}</div>`;}
+function vFinanceiro(){const ano=VIEW.fy||curAno(),sec=VIEW.fs||"resumo",E=empData(ano),F=relData(ano),pc=(a,b)=>b>0?Math.round(a/b*100):0;
+  on(()=>{qa("[data-fy]").forEach(b=>b.onclick=()=>{VIEW.fy=b.dataset.fy;render();});qa("[data-fs]").forEach(b=>b.onclick=()=>{VIEW.fs=b.dataset.fs;render();});
+    const q=$("fq");if(q)q.oninput=e=>{VIEW.fq=e.target.value;render();};qa("[data-ff]").forEach(b=>b.onclick=()=>{VIEW.ff=b.dataset.ff;render();});
+    qa("[data-gof]").forEach(b=>b.onclick=()=>go({v:b.dataset.gof}));const vp=$("fVp");if(vp)vp.onclick=()=>{VIEW.fs="pend";render();};const f=$("fab");if(f)f.onclick=()=>metaForm(null);});
+  const head=topBar("Financeiro",false)+`<div class="seg" style="margin:14px 0 8px">${[...ANOS,"todos"].map(y=>`<button data-fy="${y}" aria-pressed="${ano===y}">${y==="todos"?"Todos os anos":y}</button>`).join("")}</div>
+   <div class="seg" style="margin:0 0 12px">${[["resumo","Resumo"],["pend","Pendências"],["metas","Metas"]].map(([v,l])=>`<button data-fs="${v}" aria-pressed="${sec===v}">${l}${v==="pend"&&F.pend.length?` (${F.pend.length})`:""}</button>`).join("")}</div>`;
+  if(sec==="metas")return head+metasLista(ano,E)+`<button class="fab" id="fab" aria-label="Nova meta">＋</button>`;
+  if(sec==="pend"){const q=(VIEW.fq||"").toLowerCase(),f=VIEW.ff||"todos";let L=F.pend.filter(x=>(f==="todos"||(f==="sem"?x.pg<=0:x.pg>0))&&(!q||(x.a.nome||"").toLowerCase().includes(q)||(x.i.nome||"").toLowerCase().includes(q)||(x.t.nome||"").toLowerCase().includes(q)));
+    const tot=L.reduce((s,x)=>s+x.rec,0);
+    return head+`<div class="tools"><input id="fq" placeholder="Buscar aluno, turma ou escola" value="${esc(VIEW.fq||"")}"></div>
+     <div class="chips" style="margin:10px 0">${[["todos","Todos"],["sem","Sem pagar"],["parc","Pagaram parte"]].map(([v,l])=>`<button data-ff="${v}" style="${f===v?"background:var(--btn);border-style:solid":""}">${l}</button>`).join("")}</div>
+     <div class="card" style="padding:10px 12px"><div class="row small"><b class="grow">${L.length} aluno(s) com pagamento pendente</b><b style="color:var(--danger)">${R(tot)}</b></div></div>
+     <div class="card" style="padding:4px 12px;margin-top:8px">${L.map(pendItem).join("")||'<p class="empty">Nenhuma pendência. 🎉</p>'}</div>`;}
+  return head+`<div class="kpis">
+   <div class="kpi"><span>Faturamento previsto</span><b>${R(F.prev)}</b></div>
+   <div class="kpi"><span>Entradas (arrecadado)</span><b>${R(F.pago)}</b><small class="tiny muted">${pc(F.pago,F.prev)}% do previsto</small></div>
+   <div class="kpi"><span>Pendente a receber</span><b>${R(F.aRec)}</b><small class="tiny muted">${F.pend.length} aluno(s)</small></div>
+   <div class="kpi"><span>Inadimplência</span><b>${F.inadV.toFixed(1).replace(".",",")}%</b><small class="tiny muted">do valor · ${F.inadA.toFixed(0)}% dos alunos</small></div>
+   <div class="kpi"><span>Alunos quitados</span><b>${F.quit} de ${F.n}</b><small class="tiny muted">${F.parc} parcial · ${F.nada} sem pagar</small></div>
+   <div class="kpi"><span>Projeção prudente</span><b>${R(F.proj)}</b><small class="tiny muted">arrecadado + a receber de quem já começou a pagar</small></div></div>
+  <div class="row" style="gap:8px;margin:12px 0 0;flex-wrap:wrap"><button class="btn ghost sm" data-gof="lucros">${ic("calculator")} Calculadora de lucros</button><button class="btn ghost sm" data-gof="taxas">${ic("credit-card")} Taxas da maquininha</button></div>
+  ${arrPorEscola(ano)}
+  <div class="lbl">${ic("triangle-alert")} Maiores pendências</div><div class="card" style="padding:4px 12px">${F.pend.slice(0,5).map(pendItem).join("")||'<p class="empty">Nenhuma pendência. 🎉</p>'}${F.pend.length>5?`<button class="link" id="fVp" style="margin:8px 0">Ver todas (${F.pend.length}) ›</button>`:""}</div>`;}
 function metaForm(id,pre){const m=Object.assign({tipo:"arrecadado",titulo:"",alvo:"",ano:curAno(),prazo:"",resp:"",atual:"",un:""},id?metasL().find(x=>x.id===id):{},pre||{});if(!id&&!m.prazo)m.prazo=(m.ano==="todos"?curAno():m.ano)+"-12-31";
   const draw=()=>{const T=MET[m.tipo];sheet(`<div class="grab"></div><h2>${id?"Editar":"Nova"} meta</h2>
    <label class="fld"><span>O que medir</span><select id="gT">${["Financeiras","Crescimento","Outras"].map(c=>`<optgroup label="${c}">${Object.entries(MET).filter(([k,v])=>v.cat===c&&(k!=="lucro"||m.tipo==="lucro")).map(([k,v])=>`<option value="${k}" ${k===m.tipo?"selected":""}>${v.ic} ${v.n}</option>`).join("")}</optgroup>`).join("")}</select></label>
@@ -1175,13 +1183,11 @@ function openMeta(id){const m=metasL().find(x=>x.id===id);if(!m)return;const E=e
   const u=$("mtUp");if(u)u.onclick=()=>{sheet(`<div class="grab"></div><h2>Registrar avanço</h2><p class="small muted">${esc(m.titulo)} · agora em ${fmtMeta(m,C.cur)}</p><label class="fld"><span>Somar ao que já foi feito</span><input id="mtV" inputmode="decimal" placeholder="Ex.: 2"></label><div class="btns"><button class="btn full" id="mtS">Somar</button></div>`);
     $("mtS").onclick=async()=>{const v=money($("mtV").value);if(!v)return;const l=metasL().map(x=>x.id===id?Object.assign({},x,{atual:Math.round(((Number(x.atual)||0)+v)*100)/100}):x);await saveMetas(l);closeSheet();toast("🎯","Avanço registrado","");};};}
 /* ---------- metas, missões e avisos ---------- */
-function vMissoes(){const sec=VIEW.sec||"metas",f=VIEW.f||"mim",t=TODAY();
-  const hd=topBar("Metas e missões")+`<div class="seg" id="mSec" style="margin:14px 0 4px">${[["metas","🎯 Metas"],["miss","✅ Missões"],["av","📣 Avisos"]].map(([v,l])=>`<button data-v="${v}" aria-pressed="${sec===v}">${l}</button>`).join("")}</div>`;
-  const common=()=>{qa("#mSec button").forEach(b=>b.onclick=()=>{VIEW.sec=b.dataset.v;render();});};
-  if(sec==="metas"){on(()=>{common();$("fab").onclick=()=>metaForm(null);});return hd+metasBody()+`<button class="fab" id="fab" aria-label="Nova meta">＋</button>`;}
+function vMissoes(){const sec=VIEW.sec==="av"?"av":"miss",f=VIEW.f||"mim",t=TODAY();
+  const hd=topBar("Missões e avisos")+`<div class="seg" id="mSec" style="margin:14px 0 4px">${[["miss","✅ Missões"],["av","📣 Avisos"]].map(([v,l])=>`<button data-v="${v}" aria-pressed="${sec===v}">${l}</button>`).join("")}</div>`;
   let L=D.missoes.slice();if(sec==="av")L=L.filter(m=>m.tipo==="aviso");else{L=L.filter(m=>m.tipo!=="aviso");if(f==="mim")L=L.filter(forMe);else if(f==="env")L=L.filter(m=>m.de===UID);}
   L.sort((a,b)=>(a.status==="feita")-(b.status==="feita")||(a.prazo||"9").localeCompare(b.prazo||"9")||(b.criado-a.criado));
-  on(()=>{common();qa("#mF button").forEach(b=>b.onclick=()=>{VIEW.f=b.dataset.v;render();});qa("[data-m]").forEach(b=>b.onclick=()=>openMissao(b.dataset.m));$("fab").onclick=()=>newMissao(null,{tipo:sec==="av"?"aviso":"missao"});});
+  on(()=>{qa("#mSec button").forEach(b=>b.onclick=()=>{VIEW.sec=b.dataset.v;render();});qa("#mF button").forEach(b=>b.onclick=()=>{VIEW.f=b.dataset.v;render();});qa("[data-m]").forEach(b=>b.onclick=()=>openMissao(b.dataset.m));$("fab").onclick=()=>newMissao(null,{tipo:sec==="av"?"aviso":"missao"});});
   return hd+(sec==="miss"?`<div class="seg" id="mF" style="margin:8px 0 10px">${[["mim","Para mim"],["env","Enviadas"],["todas","Todas"]].map(([v,l])=>`<button data-v="${v}" aria-pressed="${f===v}">${l}</button>`).join("")}</div>`:`<div style="height:10px"></div>`)+
   (L.map(m=>{const mt=m.meta?metasL().find(x=>x.id===m.meta):null;return `<button class="item" data-m="${m.id}"><span class="e">${m.tipo==="aviso"?"📣":m.status==="feita"?"✅":m.prazo&&m.prazo<t?"⏰":"📌"}</span><div class="grow"><b>${esc(m.titulo)}</b>
    <span class="tiny muted">${esc(ufirst(m.de))} → ${(m.para||[]).includes("todos")?"todos":(m.para||[]).map(ufirst).map(esc).join(", ")}${m.prazo?` · ${m.prazo===t?"hoje":m.prazo<t&&m.status!=="feita"?`<span style="color:var(--danger)">atrasada (${fdate(m.prazo)})</span>`:fdate(m.prazo)}`:""}${mt?` · 🎯 ${esc(mt.titulo)}`:""}</span></div>${m.tipo==="aviso"?"":stChip(m.status)}</button>`;}).join("")||'<p class="empty">Nada por aqui.</p>')+
@@ -1228,7 +1234,7 @@ function vAjustes(){on(()=>{$("aPf").onclick=()=>{sheet(`<div class="grab"></div
    <p class="tiny muted" style="margin:8px 0 0">${!B.demo&&CFG.vapidKey?"Avisos chegam mesmo com o app fechado.":"Os avisos chegam com o app aberto ou em segundo plano."}</p></div>
   <div class="lbl">Conta</div><button class="btn ghost full" id="aOut">Sair da conta</button>
   ${B.demo?`<div class="demo">Modo demonstração: dados só neste aparelho.</div>`:""}
-  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 2.6</p>`;}
+  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 2.7</p>`;}
 /* ================= LEITOR DE DOCUMENTOS ================= */
 const U_TESS="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js",U_PDFJS="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js",U_PDFW="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 const nrm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9 ]+/g," ").replace(/\s+/g," ").trim();
