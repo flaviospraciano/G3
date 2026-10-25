@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#FBFCFF">
 <meta name="color-scheme" content="light dark">
 <script>try{if(localStorage.getItem("g3_theme_ver")!=="3"){localStorage.setItem("g3_theme","leve");localStorage.setItem("g3_theme_ver","3");}var _t=localStorage.getItem("g3_theme")||"leve";if(_t==="auto")_t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"leve";if(_t!=="dark")_t="leve";document.documentElement.dataset.theme=_t;}catch(e){}</script>
-<meta name="g3-version" content="2.2.0">
+<meta name="g3-version" content="2.3.0">
 <link rel="manifest" href="g3-app-v1.webmanifest">
 <link rel="icon" type="image/png" href="g3-icon-192.png">
 <link rel="apple-touch-icon" href="g3-apple-touch.png">
@@ -259,10 +259,10 @@ body.net-on .top{top:34px}body.net-on #view{padding-top:34px}
 /* ===== CALENDÁRIO: feriados e tamanho fixo no computador ===== */
 .cal button.fer{color:var(--danger);background:var(--cr)}
 .cal button.fer.sel{background:var(--btn);color:var(--btntx)}
-.cal .hn{display:none;font-size:.58rem;font-weight:700;line-height:1.05;max-width:94%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cal .hn{display:none;font-size:.62rem;font-weight:700;line-height:1.05;max-width:94%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media (hover:hover) and (pointer:fine){
  .cal{gap:3px}
- .cal button{aspect-ratio:auto;height:var(--ch,48px);border-radius:10px;font-size:min(.88rem,calc(var(--ch,48px)*.46));gap:1px;padding:0}
+ .cal button{aspect-ratio:auto;height:var(--ch,48px);border-radius:10px;font-size:min(1.55rem,calc(var(--ch,48px)*.42));font-weight:800;gap:1px;padding:0;line-height:1.1}
  .cal .dots{height:4px}.cal .h{line-height:1.2}
  .cal[data-sz=xs] .dots,.cal[data-sz=xs] .hn,.cal[data-sz=sm] .hn{display:none}
  .cal[data-sz=md] .hn{display:block}
@@ -1211,7 +1211,7 @@ function vAjustes(){on(()=>{$("aPf").onclick=()=>{sheet(`<div class="grab"></div
    <p class="tiny muted" style="margin:8px 0 0">${!B.demo&&CFG.vapidKey?"Avisos chegam mesmo com o app fechado.":"Os avisos chegam com o app aberto ou em segundo plano."}</p></div>
   <div class="lbl">Conta</div><button class="btn ghost full" id="aOut">Sair da conta</button>
   ${B.demo?`<div class="demo">Modo demonstração: dados só neste aparelho.</div>`:""}
-  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 2.2</p>`;}
+  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 2.3</p>`;}
 /* ================= LEITOR DE DOCUMENTOS ================= */
 const U_TESS="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js",U_PDFJS="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js",U_PDFW="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 const nrm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9 ]+/g," ").replace(/\s+/g," ").trim();
