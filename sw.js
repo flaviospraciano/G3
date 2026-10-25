@@ -1,5 +1,5 @@
 // Service worker do G3: funcionamento offline e notificações.
-const CACHE = "g3-v21";
+const CACHE = "g3-v22";
 const ARQUIVOS = ["./","index.html","config.js","g3-app-v1.webmanifest","g3-logo.png","g3-logo-flat.png","g3-logo-white.png","g3-icon-192.png","g3-icon-512.png","g3-maskable-512.png","g3-apple-touch.png"];
 try {
   importScripts("config.js");

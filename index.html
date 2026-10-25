@@ -7,8 +7,8 @@
 <meta name="description" content="G3 Formatura: agenda, planilhas das escolas e faculdades, notas e missões da equipe. Produzido por Flávio S. Praciano.">
 <meta name="theme-color" content="#FBFCFF">
 <meta name="color-scheme" content="light dark">
-<script>try{if(localStorage.getItem("g3_theme_ver")!=="3"){localStorage.setItem("g3_theme","leve");localStorage.setItem("g3_theme_ver","3");}var _t=localStorage.getItem("g3_theme")||"leve";if(_t==="auto")_t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"leve";if(_t!=="dark")_t="leve";document.documentElement.dataset.theme=_t;}catch(e){}</script>
-<meta name="g3-version" content="2.9.0">
+<script>try{if(localStorage.getItem("g3_theme_ver")!=="4"){localStorage.setItem("g3_theme","auto");localStorage.setItem("g3_theme_ver","4");}var _t=localStorage.getItem("g3_theme")||"auto";if(_t==="auto")_t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"leve";if(_t!=="dark")_t="leve";document.documentElement.dataset.theme=_t;}catch(e){}</script>
+<meta name="g3-version" content="3.0.0">
 <link rel="manifest" href="g3-app-v1.webmanifest">
 <link rel="icon" type="image/png" href="g3-icon-192.png">
 <link rel="apple-touch-icon" href="g3-apple-touch.png">
@@ -292,6 +292,8 @@ body.net-on .top{top:34px}body.net-on #view{padding-top:34px}
  :root[data-theme="leve"] .foot .flat{filter:drop-shadow(0 0 1px rgba(0,0,0,.85)) drop-shadow(0 1px 3px rgba(0,0,0,.35))}
  :root[data-theme="leve"] .foot,:root[data-theme="leve"] .foot b{color:#fff;text-shadow:0 0 1px rgba(0,0,0,.85),0 1px 3px rgba(0,0,0,.35)}
 }
+.wa3{background:var(--grn);color:#fff;border:0;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;flex:none;text-decoration:none;margin-left:8px;box-shadow:0 3px 8px rgba(22,179,100,.3)}
+.wa3 .lu{width:23px;height:23px}.wa3.off{background:var(--sf2);color:var(--faint);border:1px dashed var(--ghostbd);box-shadow:none}
 </style>
 </head>
 <body>
@@ -590,7 +592,7 @@ const AUTHOR="Flávio S. Praciano";
 const CFG=window.G3_CONFIG||{};
 const DEMO=!(CFG.firebase&&CFG.firebase.apiKey&&!/COLE/i.test(CFG.firebase.apiKey)&&window.firebase);
 const COLS=["users","events","folders","notes","inst","turmas","alunos","missoes","config"];
-const THEME=()=>localStorage.getItem("g3_theme")||"leve";
+const THEME=()=>localStorage.getItem("g3_theme")||"auto";
 const THEMES=[["leve","☀️","Modo claro"],["dark","🌙","Modo escuro"]];
 function curTheme(){const t=THEME();if(t==="auto")return matchMedia("(prefers-color-scheme: dark)").matches?"dark":"leve";return t==="dark"?"dark":"leve";}
 function isDark(){return curTheme()==="dark";}
@@ -1137,10 +1139,12 @@ function metasLista(ano,E){const all=metasL().filter(m=>ano==="todos"||m.ano===a
   ${groups.map(x=>`<div class="lbl">${x.g==="Financeiras"?"💰 Metas financeiras":x.g==="Crescimento"?"🌱 Metas de crescimento":"🎯 Outras metas"}</div>${x.L.map(y=>metaCard(y.m,E)).join("")}`).join("")}
   ${all.length?"":`<div class="card" style="margin-top:14px"><b>Defina as metas da G3</b><p class="small muted" style="margin:4px 0 10px">Metas claras, com valor, prazo e responsável. O progresso é calculado sozinho a partir das planilhas. Comece por uma sugestão:</p><div class="chips">${SUG.map((s,i)=>`<button data-sg="${i}">${MET[s[0]].ic} ${esc(s[1])}</button>`).join("")}</div></div>`}
   <p class="tiny muted" style="margin-top:12px">O status compara o que já foi feito com o esperado até hoje, em linha reta entre a criação da meta e o prazo.</p>`;}
-function pendItem(x){const w=waLink(x.a.contato);return `<div class="task"><div class="grow"><b>${esc(x.a.nome)}</b><div class="tiny muted">${esc(x.i.nome)} · ${esc(x.t.nome)}</div></div><div style="text-align:right"><b style="color:var(--danger)">${R(x.rec)}</b><div class="tiny muted">${x.pg>0?"parcial · pagou "+R(x.pg):"sem pagar"}</div></div>${w?`<a class="btn ghost sm" href="${w}" target="_blank" rel="noopener" aria-label="Cobrar no WhatsApp">${ic("message-circle")}</a>`:""}</div>`;}
+function pendItem(x){const w=waLink(x.a.contato),fone=fmtFone(x.a.contato),msg=`Olá! Tudo bem? Aqui é da G3 Formatura. Passando para lembrar do pagamento da formatura de ${x.a.nome}: falta ${R(x.rec)}. Qualquer dúvida é só responder esta mensagem.`;
+  return `<div class="task" style="align-items:center"><div class="grow"><b>${esc(x.a.nome)}</b><div class="tiny muted">${esc(x.i.nome)} · ${esc(x.t.nome)}</div>${w?`<div class="tiny" style="color:var(--grn);font-weight:700">${esc(fone)}</div>`:`<div class="tiny muted">sem contato cadastrado</div>`}</div><div style="text-align:right"><b style="color:var(--danger)">${R(x.rec)}</b><div class="tiny muted">${x.pg>0?"parcial · pagou "+R(x.pg):"sem pagar"}</div></div>
+   ${w?`<a class="wa3" href="${w}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener" aria-label="Cobrar ${esc(x.a.nome)} no WhatsApp" title="Cobrar no WhatsApp">${ic("message-circle")}</a>`:`<button class="wa3 off" data-pc="${x.t.id}|${x.a.id}" aria-label="Adicionar contato" title="Adicionar contato">${ic("phone")}</button>`}</div>`;}
 function vFinanceiro(){const ano=VIEW.fy||curAno(),sec=VIEW.fs||"resumo",E=empData(ano),F=relData(ano),pc=(a,b)=>b>0?Math.round(a/b*100):0;
   on(()=>{qa("[data-fy]").forEach(b=>b.onclick=()=>{VIEW.fy=b.dataset.fy;render();});qa("[data-fs]").forEach(b=>b.onclick=()=>{VIEW.fs=b.dataset.fs;render();});
-    const q=$("fq");if(q)q.oninput=e=>{VIEW.fq=e.target.value;render();};qa("[data-ff]").forEach(b=>b.onclick=()=>{VIEW.ff=b.dataset.ff;render();});
+    const q=$("fq");if(q)q.oninput=e=>{VIEW.fq=e.target.value;render();};qa("[data-ff]").forEach(b=>b.onclick=()=>{VIEW.ff=b.dataset.ff;render();});qa("[data-pc]").forEach(b=>b.onclick=()=>{const [tid,aid]=b.dataset.pc.split("|");editCell(D.turmas.find(t=>t.id===tid),aid,"contato");});
     const vp=$("fVp");if(vp)vp.onclick=()=>{VIEW.fs="pend";render();};const f=$("fab");if(f)f.onclick=()=>metaForm(null);});
   const head=topBar("Financeiro",false)+`<div class="seg" style="margin:14px 0 8px">${[...ANOS,"todos"].map(y=>`<button data-fy="${y}" aria-pressed="${ano===y}">${y==="todos"?"Todos os anos":y}</button>`).join("")}</div>
    <div class="seg" style="margin:0 0 12px">${[["resumo","Resumo"],["pend","Pendências"],["metas","Metas"]].map(([v,l])=>`<button data-fs="${v}" aria-pressed="${sec===v}">${l}${v==="pend"&&F.pend.length?` (${F.pend.length})`:""}</button>`).join("")}</div>`;
@@ -1238,7 +1242,7 @@ function vAjustes(){on(()=>{$("aPf").onclick=()=>{sheet(`<div class="grab"></div
    <p class="tiny muted" style="margin:8px 0 0">${!B.demo&&CFG.vapidKey?"Avisos chegam mesmo com o app fechado.":"Os avisos chegam com o app aberto ou em segundo plano."}</p></div>
   <div class="lbl">Conta</div><button class="btn ghost full" id="aOut">Sair da conta</button>
   ${B.demo?`<div class="demo">Modo demonstração: dados só neste aparelho.</div>`:""}
-  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 2.9</p>`;}
+  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 3.0</p>`;}
 /* ================= LEITOR DE DOCUMENTOS ================= */
 const U_TESS="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js",U_PDFJS="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js",U_PDFW="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 const nrm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9 ]+/g," ").replace(/\s+/g," ").trim();
