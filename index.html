@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#FBFCFF">
 <meta name="color-scheme" content="light dark">
 <script>try{if(localStorage.getItem("g3_theme_ver")!=="3"){localStorage.setItem("g3_theme","leve");localStorage.setItem("g3_theme_ver","3");}var _t=localStorage.getItem("g3_theme")||"leve";if(_t==="auto")_t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"leve";if(_t!=="dark")_t="leve";document.documentElement.dataset.theme=_t;}catch(e){}</script>
-<meta name="g3-version" content="2.3.0">
+<meta name="g3-version" content="2.4.0">
 <link rel="manifest" href="g3-app-v1.webmanifest">
 <link rel="icon" type="image/png" href="g3-icon-192.png">
 <link rel="apple-touch-icon" href="g3-apple-touch.png">
@@ -265,8 +265,7 @@ body.net-on .top{top:34px}body.net-on #view{padding-top:34px}
  .cal button{aspect-ratio:auto;height:var(--ch,48px);border-radius:10px;font-size:min(1.55rem,calc(var(--ch,48px)*.42));font-weight:800;gap:1px;padding:0;line-height:1.1}
  .cal .dots{height:4px}.cal .h{line-height:1.2}
  .cal[data-sz=xs] .dots,.cal[data-sz=xs] .hn,.cal[data-sz=sm] .hn{display:none}
- .cal[data-sz=md] .hn{display:block}
-}
+ }
 /* ===== BLOCOS EM ESCOLAS ===== */
 .mvb{right:70px!important}
 /* ===== LOGO E NOME DO RODAPÉ: preto no fundo claro, claro no escuro ===== */
@@ -276,6 +275,13 @@ body.net-on .top{top:34px}body.net-on #view{padding-top:34px}
  .top{padding-top:2px;padding-bottom:2px}.top h1{font-size:.8rem}.back,.theme{width:26px!important;height:26px!important}.top .logo,.top img{width:22px;height:22px}
  .calhd{margin:2px 0 3px!important}.calhd h2{font-size:.85rem!important}
  .nav button{font-size:.55rem;padding:1px 0;gap:0}.nav button .i .lu{width:15px;height:15px}
+}
+@media (hover:hover) and (pointer:fine){
+ .calhd h2{font-size:min(1.55rem,calc(var(--ch,48px)*.42))!important;font-weight:800!important;line-height:1.1}
+ .cal .hn{white-space:normal;line-height:1.05;font-size:min(.9rem,calc(var(--ch,48px)*.2));font-weight:700;display:none;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-wrap:balance}
+ .cal[data-sz=md] .hn{display:block;white-space:nowrap;text-overflow:ellipsis;font-size:min(.8rem,calc(var(--ch,48px)*.2))}
+ .cal[data-sz=lg] .hn{display:-webkit-box}
+ .ferlist .row,.ferlist .row b{font-size:min(1.55rem,calc(var(--ch,48px)*.42))!important}
 }
 </style>
 </head>
@@ -770,9 +776,9 @@ function feriadosDe(y){if(_fer[y])return _fer[y];const F={},add=(m,d,n)=>{F[y+"-
   off(-48,"Carnaval (ponto facultativo)");off(-47,"Carnaval (ponto facultativo)");off(-2,"Sexta-feira Santa");off(0,"Páscoa");off(60,"Corpus Christi (ponto facultativo)");return(_fer[y]=F);}
 const feriado=k=>feriadosDe(+k.slice(0,4))[k]||"";
 /* No computador, o calendário se ajusta ao espaço livre da tela (qualquer zoom) para mostrar sempre o mês inteiro. */
-function fitCal(){const c=document.querySelector(".cal");if(!c||!matchMedia("(hover:hover) and (pointer:fine)").matches){if(c)c.style.removeProperty("--ch");return;}
+function fitCal(){const c=document.querySelector(".cal");if(!c||!matchMedia("(hover:hover) and (pointer:fine)").matches){if(c){c.style.removeProperty("--ch");if(c.parentElement)c.parentElement.style.removeProperty("--ch");}return;}
   const nav=document.getElementById("nav"),navTop=nav&&getComputedStyle(nav).display!=="none"?nav.getBoundingClientRect().top:innerHeight,top=c.getBoundingClientRect().top,hh=(c.querySelector(".h")||{getBoundingClientRect:()=>({height:18})}).getBoundingClientRect().height;
-  const h=Math.max(16,Math.floor((navTop-top-hh-6*3-10)/6));c.style.setProperty("--ch",h+"px");c.dataset.sz=h<30?"xs":h<46?"sm":"md";}
+  const h=Math.max(16,Math.floor((navTop-top-hh-6*3-10)/6));c.style.setProperty("--ch",h+"px");if(c.parentElement)c.parentElement.style.setProperty("--ch",h+"px");c.dataset.sz=h<30?"xs":h<46?"sm":h<60?"md":"lg";}
 window.addEventListener("resize",()=>requestAnimationFrame(fitCal));
 function vAgenda(){const t=TODAY();if(!CAL){const d=new Date();CAL={y:d.getFullYear(),m:d.getMonth(),sel:t};}
   const first=new Date(CAL.y,CAL.m,1),start=new Date(first);start.setDate(1-first.getDay());const by={};D.events.forEach(e=>(by[e.data]=by[e.data]||[]).push(e));
@@ -787,7 +793,7 @@ function vAgenda(){const t=TODAY();if(!CAL){const d=new Date();CAL={y:d.getFullY
   return topBar("Agenda da G3")+`<div class="row calhd" style="margin:14px 0 8px"><button class="back" id="cP">‹</button><h2 class="grow" style="text-align:center;margin:0;font:700 1.1rem var(--body);text-transform:capitalize">${MES[CAL.m]} ${CAL.y}</h2><button class="back" id="cN">›</button></div>
   <div class="cal">${"DSTQQSS".split("").map(x=>`<span class="h">${x}</span>`).join("")}${cells}</div>
   <div class="lbl">${flong(CAL.sel)}${feriado(CAL.sel)?` · <span style="color:var(--danger)">${ic("flag")} ${esc(feriado(CAL.sel))}</span>`:""}</div>${day.length?day.map(evb).join(""):'<p class="empty">Nenhum compromisso neste dia.</p>'}
-  ${ferMes.length?`<div class="lbl">${ic("flag")} Feriados de ${MES[CAL.m]}</div><div class="card" style="padding:4px 12px">${ferMes.map(([k,n])=>`<div class="row small" style="padding:6px 0;gap:10px"><b style="min-width:26px;color:var(--danger)">${+k.slice(8)}</b><span>${esc(n)}</span></div>`).join("")}</div>`:""}
+  ${ferMes.length?`<div class="lbl">${ic("flag")} Feriados de ${MES[CAL.m]}</div><div class="card ferlist" style="padding:4px 12px">${ferMes.map(([k,n])=>`<div class="row small" style="padding:6px 0;gap:10px"><b style="min-width:26px;color:var(--danger)">${+k.slice(8)}</b><span>${esc(n)}</span></div>`).join("")}</div>`:""}
   <div class="lbl">Próximos compromissos</div>${next.length?next.map(evb).join(""):'<p class="empty">Nenhum compromisso futuro.</p>'}
   <button class="fab" id="fab" aria-label="Novo compromisso">＋</button>`;}
 function gcal(e){const d=e.data.replace(/-/g,"");let dates;if(e.hi){const hf=e.hf||((+e.hi.slice(0,2)+1)%24+"").padStart(2,"0")+e.hi.slice(2);dates=d+"T"+e.hi.replace(":","")+"00/"+d+"T"+hf.replace(":","")+"00";}else dates=d+"/"+addDays(e.data,1).replace(/-/g,"");
@@ -1211,7 +1217,7 @@ function vAjustes(){on(()=>{$("aPf").onclick=()=>{sheet(`<div class="grab"></div
    <p class="tiny muted" style="margin:8px 0 0">${!B.demo&&CFG.vapidKey?"Avisos chegam mesmo com o app fechado.":"Os avisos chegam com o app aberto ou em segundo plano."}</p></div>
   <div class="lbl">Conta</div><button class="btn ghost full" id="aOut">Sair da conta</button>
   ${B.demo?`<div class="demo">Modo demonstração: dados só neste aparelho.</div>`:""}
-  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 2.3</p>`;}
+  <p class="tiny muted" style="text-align:center;margin-top:18px">G3 Formatura · versão 2.4</p>`;}
 /* ================= LEITOR DE DOCUMENTOS ================= */
 const U_TESS="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js",U_PDFJS="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js",U_PDFW="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 const nrm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9 ]+/g," ").replace(/\s+/g," ").trim();
